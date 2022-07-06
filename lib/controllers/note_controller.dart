@@ -8,4 +8,10 @@ class NoteController extends GetxController {
   final FocusNode noteFocusNode = FocusNode();
 
   var notes = <NoteModel>[].obs;
+
+  @override
+  void onInit() {
+    noteFocusNode.requestFocus();
+    super.onInit();
+  }
 }
