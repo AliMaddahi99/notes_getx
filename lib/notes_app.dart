@@ -7,9 +7,12 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: "Notes Getx",
-      home: Home(),
+      theme: ThemeData(
+        primarySwatch: Colors.amber,
+      ),
+      home: const Home(),
     );
   }
 }
