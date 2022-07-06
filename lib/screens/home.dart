@@ -9,6 +9,10 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Notes Getx"),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
