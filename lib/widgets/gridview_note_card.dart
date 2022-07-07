@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note_controller.dart';
-import 'package:notes_getx/screens/edit_todo.dart';
+import 'package:notes_getx/screens/edit_note.dart';
 
 class GridViewNoteCard extends StatelessWidget {
   GridViewNoteCard({Key? key}) : super(key: key);
