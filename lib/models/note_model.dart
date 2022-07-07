@@ -10,4 +10,14 @@ class NoteModel {
     required this.note,
     required this.dateTime,
   });
+
+  factory NoteModel.fromJson(Map<String, dynamic> json) => NoteModel(
+        id: json["id"],
+        title: json["title"],
+        note: json["note"],
+        dateTime: json["dateTime"],
+      );
+
+  Map<String, dynamic> toJson() =>
+      {"id": id, "title": title, "note": note, "dateTime": dateTime};
 }
