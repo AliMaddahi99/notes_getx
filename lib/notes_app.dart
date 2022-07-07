@@ -13,7 +13,7 @@ class NotesApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: const Home(),
+      home: Home(),
     );
   }
 }
