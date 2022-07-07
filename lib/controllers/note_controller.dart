@@ -9,6 +9,7 @@ class NoteController extends GetxController {
 
   var notes = <NoteModel>[].obs;
   int _noteId = 0;
+  var isGridView = false.obs;
 
   void addNote({String? title, required String note}) {
     titleTextController.clear();
@@ -29,11 +30,5 @@ class NoteController extends GetxController {
     }
 
     noteFocusNode.requestFocus();
-  }
-
-  @override
-  void onInit() {
-    noteFocusNode.requestFocus();
-    super.onInit();
   }
 }
