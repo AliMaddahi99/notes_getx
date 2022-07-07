@@ -21,7 +21,7 @@ class EditNote extends StatelessWidget {
                 var edited = controller.notes[editNoteController.args];
                 edited.title = editNoteController.titleTextController.text;
                 edited.note = editNoteController.noteTextController.text;
-                edited.dateTime = DateTime.now();
+                edited.dateTime = DateTime.now().toString();
                 controller.notes[editNoteController.args] = edited;
               },
               icon: const Icon(Icons.done),

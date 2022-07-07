@@ -29,7 +29,7 @@ class NoteController extends GetxController {
           id: _noteId,
           note: note,
           title: title,
-          dateTime: DateTime.now(),
+          dateTime: DateTime.now().toString(),
         ),
       );
       _noteId++;

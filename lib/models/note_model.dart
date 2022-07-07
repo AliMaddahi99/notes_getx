@@ -2,7 +2,7 @@ class NoteModel {
   int id;
   String? title;
   String note;
-  DateTime dateTime;
+  String dateTime;
 
   NoteModel({
     required this.id,
