@@ -23,9 +23,14 @@ class NoteController extends GetxController {
       );
     } else {
       notes.insert(
-          0,
-          NoteModel(
-              id: _noteId, note: note, title: title, dateTime: DateTime.now()));
+        0,
+        NoteModel(
+          id: _noteId,
+          note: note,
+          title: title,
+          dateTime: DateTime.now(),
+        ),
+      );
       _noteId++;
     }
 
