@@ -38,6 +38,10 @@ class NoteController extends GetxController {
     noteFocusNode.requestFocus();
   }
 
+  void deleteNote(int index) {
+    notes.removeAt(index);
+  }
+
   @override
   void onInit() {
     var storedNotes = GetStorage().read<List>("notes");

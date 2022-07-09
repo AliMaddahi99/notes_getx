@@ -20,7 +20,7 @@ class DeleteDialog extends StatelessWidget {
               onPrimary: Colors.white,
             ),
             onPressed: () {
-              controller.notes.removeAt(index);
+              controller.deleteNote(index);
               Get.back();
             },
             child: const Text("Delete"),
