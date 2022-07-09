@@ -13,7 +13,7 @@ class EditNoteController extends GetxController {
     var edited = controller.notes[args];
     edited.title = titleTextController.text;
     edited.note = noteTextController.text;
-    edited.dateTime = DateTime.now().toString();
+    edited.dateTime = controller.dateTimeNowStringify();
     controller.notes[args] = edited;
   }
 

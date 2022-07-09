@@ -29,7 +29,7 @@ class NoteController extends GetxController {
           id: _noteId,
           note: note,
           title: title,
-          dateTime: DateTime.now().toString(),
+          dateTime: dateTimeNowStringify(),
         ),
       );
       _noteId++;
@@ -40,6 +40,10 @@ class NoteController extends GetxController {
 
   void deleteNote(int index) {
     notes.removeAt(index);
+  }
+
+  String dateTimeNowStringify() {
+    return DateTime.now().toString().substring(0, 16).replaceAll("-", "/");
   }
 
   @override
