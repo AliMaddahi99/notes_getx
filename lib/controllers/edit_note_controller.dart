@@ -9,6 +9,14 @@ class EditNoteController extends GetxController {
   final NoteController controller = Get.find();
   var args = Get.arguments;
 
+  void editNote() {
+    var edited = controller.notes[args];
+    edited.title = titleTextController.text;
+    edited.note = noteTextController.text;
+    edited.dateTime = DateTime.now().toString();
+    controller.notes[args] = edited;
+  }
+
   @override
   void onInit() {
     titleTextController.text = controller.notes[args].title!;

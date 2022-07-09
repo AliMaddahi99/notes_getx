@@ -18,11 +18,12 @@ class EditNote extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
               onPressed: () {
-                var edited = controller.notes[editNoteController.args];
-                edited.title = editNoteController.titleTextController.text;
-                edited.note = editNoteController.noteTextController.text;
-                edited.dateTime = DateTime.now().toString();
-                controller.notes[editNoteController.args] = edited;
+                // var edited = controller.notes[editNoteController.args];
+                // edited.title = editNoteController.titleTextController.text;
+                // edited.note = editNoteController.noteTextController.text;
+                // edited.dateTime = DateTime.now().toString();
+                // controller.notes[editNoteController.args] = edited;
+                editNoteController.editNote();
               },
               icon: const Icon(Icons.done),
               tooltip: "Save",
