@@ -48,13 +48,22 @@ class NoteController extends GetxController {
 
   @override
   void onInit() {
+    // Save and read notes
     var storedNotes = GetStorage().read<List>("notes");
     if (storedNotes != null) {
       notes = storedNotes.map((e) => NoteModel.fromJson(e)).toList().obs;
     }
-
     ever(notes, (_) {
       GetStorage().write("notes", notes.toList());
+    });
+
+    // Save and read Layout mode, Gridview/Listview
+    var layoutIsGridView = GetStorage().read("layout");
+    if (layoutIsGridView != null) {
+      isGridView.value = layoutIsGridView;
+    }
+    ever(isGridView, (_) {
+      GetStorage().write("layout", isGridView.value);
     });
 
     super.onInit();
