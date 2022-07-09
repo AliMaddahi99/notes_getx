@@ -34,13 +34,9 @@ class Home extends StatelessWidget {
         ],
       ),
       body: Obx(
-        () => controller.notes.isNotEmpty
-            ? Container(
-                child: controller.isGridView.value
-                    ? GridViewNoteCard()
-                    : ListViewNoteCard(),
-              )
-            : const SizedBox.shrink(),
+        () => controller.isGridView.value
+            ? GridViewNoteCard()
+            : ListViewNoteCard(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
