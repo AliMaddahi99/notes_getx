@@ -29,10 +29,10 @@ class GridViewNoteCard extends StatelessWidget {
               },
               child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,28 +45,36 @@ class GridViewNoteCard extends StatelessWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             )
                           : const SizedBox.shrink(),
                       controller.notes[index].note.isNotEmpty
                           ? Expanded(
-                              child: Text(
-                                controller.notes[index].note,
-                                maxLines: 4,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Colors.black54,
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  controller.notes[index].note,
+                                  maxLines: 4,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black54,
+                                  ),
                                 ),
                               ),
                             )
                           : const SizedBox.shrink(),
                       Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
+                        padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
                           controller.notes[index].dateTime.toString(),
                           style: const TextStyle(
-                              fontSize: 10.0, color: Colors.black45),
+                            fontSize: 12.0,
+                            color: Colors.black45,
+                          ),
                         ),
                       ),
                     ],
