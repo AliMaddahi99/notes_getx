@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note_controller.dart';
 import 'package:notes_getx/screens/edit_note.dart';
+import 'package:notes_getx/widgets/delete_dialog.dart';
 
 class ListViewNoteCard extends StatelessWidget {
   ListViewNoteCard({Key? key}) : super(key: key);
@@ -21,28 +22,7 @@ class ListViewNoteCard extends StatelessWidget {
                 Get.to(() => EditNote(), arguments: index);
               },
               onLongPress: () {
-                Get.dialog(AlertDialog(
-                    title: const Text("Delete"),
-                    content: const Text("Do you want delete this note?"),
-                    actions: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                          onPrimary: Colors.white,
-                        ),
-                        onPressed: () {
-                          controller.notes.removeAt(index);
-                          Get.back();
-                        },
-                        child: const Text("Delete"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        child: const Text("Cancel"),
-                      ),
-                    ]));
+                Get.dialog(DeleteDialog(index: index));
               },
               child: Card(
                 shape: RoundedRectangleBorder(
