@@ -52,8 +52,8 @@ class NoteController extends GetxController {
 
   String getSelectedNotesCount() {
     return selectedNote.length == 1
-        ? "${selectedNote.length} item selected"
-        : "${selectedNote.length} items selected";
+        ? "${selectedNote.length} item"
+        : "${selectedNote.length} items";
   }
 
   @override
