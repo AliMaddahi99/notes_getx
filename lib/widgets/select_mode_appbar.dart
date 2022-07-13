@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note_controller.dart';
+import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 
 class SelectModeAppBar extends StatelessWidget {
   SelectModeAppBar({Key? key}) : super(key: key);
@@ -14,18 +15,22 @@ class SelectModeAppBar extends StatelessWidget {
         () => Text(
           _controller.selectedNote.isEmpty
               ? "Select items"
-              : _controller.getSelectedNotesCount(),
+              : "${_controller.getSelectedNotesCount()} selected",
         ),
       ),
       centerTitle: true,
       leading: IconButton(
         icon: const Icon(Icons.delete_rounded),
         onPressed: () {
-          for (var n in _controller.selectedNote) {
-            _controller.deleteNote(n);
-          }
-          _controller.selectedNote.clear();
-          _controller.isSelectMode.value = false;
+          Get.bottomSheet(
+            DeleteBottomSheet(),
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(20.0),
+              ),
+            ),
+          );
         },
       ),
       actions: [
