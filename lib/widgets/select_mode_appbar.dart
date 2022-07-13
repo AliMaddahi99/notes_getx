@@ -19,19 +19,23 @@ class SelectModeAppBar extends StatelessWidget {
         ),
       ),
       centerTitle: true,
-      leading: IconButton(
-        icon: const Icon(Icons.delete_rounded),
-        onPressed: () {
-          Get.bottomSheet(
-            DeleteBottomSheet(),
-            backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20.0),
-              ),
-            ),
-          );
-        },
+      leading: Obx(
+        () => IconButton(
+          icon: const Icon(Icons.delete_rounded),
+          onPressed: _controller.selectedNote.isNotEmpty
+              ? () {
+                  Get.bottomSheet(
+                    DeleteBottomSheet(),
+                    backgroundColor: Colors.white,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20.0),
+                      ),
+                    ),
+                  );
+                }
+              : null,
+        ),
       ),
       actions: [
         IconButton(
