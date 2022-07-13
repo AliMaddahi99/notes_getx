@@ -9,8 +9,9 @@ class NoteController extends GetxController {
   final FocusNode noteFocusNode = FocusNode();
 
   var notes = <NoteModel>[].obs;
-  int _noteId = 0;
   var isGridView = false.obs;
+  var selectedNote = [].obs;
+  var isSelectMode = false.obs;
 
   void addNote({String? title, required String note}) {
     titleTextController.clear();
@@ -26,24 +27,33 @@ class NoteController extends GetxController {
       notes.insert(
         0,
         NoteModel(
-          id: _noteId,
+          id: DateTime.now().microsecondsSinceEpoch,
           note: note,
           title: title,
           dateTime: dateTimeNowStringify(),
         ),
       );
-      _noteId++;
     }
 
     noteFocusNode.requestFocus();
   }
 
-  void deleteNote(int index) {
-    notes.removeAt(index);
+  void deleteNote(int id) {
+    notes.removeWhere((note) => note.id == id);
   }
 
   String dateTimeNowStringify() {
     return DateTime.now().toString().substring(0, 16).replaceAll("-", "/");
+  }
+
+  void selectNote(int id) {
+    selectedNote.contains(id) ? selectedNote.remove(id) : selectedNote.add(id);
+  }
+
+  String getSelectedNotesCount() {
+    return selectedNote.length == 1
+        ? "${selectedNote.length} item selected"
+        : "${selectedNote.length} items selected";
   }
 
   @override
