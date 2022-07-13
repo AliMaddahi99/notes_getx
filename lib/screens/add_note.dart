@@ -5,7 +5,7 @@ import 'package:notes_getx/controllers/note_controller.dart';
 class AddNote extends StatelessWidget {
   AddNote({Key? key}) : super(key: key);
 
-  final NoteController controller = Get.find();
+  final NoteController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,9 @@ class AddNote extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
               onPressed: () {
-                controller.addNote(
-                    title: controller.titleTextController.text,
-                    note: controller.noteTextController.text);
+                _controller.addNote(
+                    title: _controller.titleTextController.text,
+                    note: _controller.noteTextController.text);
               },
               icon: const Icon(Icons.done),
               tooltip: "Save",
@@ -32,7 +32,7 @@ class AddNote extends StatelessWidget {
         child: Column(
           children: [
             TextField(
-              controller: controller.titleTextController,
+              controller: _controller.titleTextController,
               decoration: const InputDecoration(
                 hintText: "Title",
                 border: InputBorder.none,
@@ -44,8 +44,8 @@ class AddNote extends StatelessWidget {
                 expands: true,
                 minLines: null,
                 maxLines: null,
-                controller: controller.noteTextController,
-                focusNode: controller.noteFocusNode,
+                controller: _controller.noteTextController,
+                focusNode: _controller.noteFocusNode,
                 decoration: const InputDecoration(
                   hintText: "Type your note...",
                   border: InputBorder.none,

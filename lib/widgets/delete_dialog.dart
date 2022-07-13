@@ -6,7 +6,7 @@ class DeleteDialog extends StatelessWidget {
   final int index;
   DeleteDialog({Key? key, required this.index}) : super(key: key);
 
-  final NoteController controller = Get.find();
+  final NoteController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class DeleteDialog extends StatelessWidget {
               onPrimary: Colors.white,
             ),
             onPressed: () {
-              controller.deleteNote(index);
+              _controller.deleteNote(index);
               Get.back();
             },
             child: const Text("Delete"),
