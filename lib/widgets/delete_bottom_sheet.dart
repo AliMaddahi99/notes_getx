@@ -10,7 +10,7 @@ class DeleteBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150.0,
+      height: 200.0,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -34,10 +34,10 @@ class DeleteBottomSheet extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 50.0,
-                    vertical: 20.0,
+                    vertical: 15.0,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(50.0),
                   ),
                 ),
                 onPressed: () {
@@ -57,10 +57,10 @@ class DeleteBottomSheet extends StatelessWidget {
                   onPrimary: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 50.0,
-                    vertical: 20.0,
+                    vertical: 15.0,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(50.0),
                   ),
                 ),
                 onPressed: () {
