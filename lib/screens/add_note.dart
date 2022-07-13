@@ -28,10 +28,12 @@ class AddNote extends StatelessWidget {
         title: const Text("Insert your note"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
           children: [
             TextField(
+              minLines: 1,
+              maxLines: 4000000000,
               controller: _controller.titleTextController,
               decoration: const InputDecoration(
                 hintText: "Title",
@@ -39,17 +41,14 @@ class AddNote extends StatelessWidget {
               ),
               style: const TextStyle(fontSize: 24.0),
             ),
-            Expanded(
-              child: TextField(
-                expands: true,
-                minLines: null,
-                maxLines: null,
-                controller: _controller.noteTextController,
-                focusNode: _controller.noteFocusNode,
-                decoration: const InputDecoration(
-                  hintText: "Type your note...",
-                  border: InputBorder.none,
-                ),
+            TextField(
+              minLines: 1,
+              maxLines: 4000000000,
+              controller: _controller.noteTextController,
+              focusNode: _controller.noteFocusNode,
+              decoration: const InputDecoration(
+                hintText: "Type your note...",
+                border: InputBorder.none,
               ),
             ),
           ],
