@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note_controller.dart';
 import 'package:notes_getx/screens/edit_note.dart';
-import 'package:notes_getx/widgets/delete_dialog.dart';
 
 class NoteCard extends StatelessWidget {
   final int index;
@@ -26,7 +25,6 @@ class NoteCard extends StatelessWidget {
                 : Get.to(() => EditNote(), arguments: index);
           },
           onLongPress: () {
-            // Get.dialog(DeleteDialog(index: index));
             _controller.isSelectMode.value = true;
             _controller.selectNote(_controller.notes[index].id);
           },
