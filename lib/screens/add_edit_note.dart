@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/add_edit_note_controller.dart';
+import 'package:notes_getx/controllers/note_controller.dart';
 import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 
 class AddEditNote extends StatelessWidget {
@@ -8,6 +9,7 @@ class AddEditNote extends StatelessWidget {
 
   final AddEditNoteController _addEditNoteController =
       Get.put(AddEditNoteController());
+  final NoteController _controller = Get.find();
 
   void toggleSaveButtonVisibility() {
     _addEditNoteController.saveButtonVisibility()
@@ -26,6 +28,7 @@ class AddEditNote extends StatelessWidget {
         } else {
           _addEditNoteController.editNote();
         }
+        _controller.selectedNote.clear();
         return true;
       },
       child: Scaffold(
