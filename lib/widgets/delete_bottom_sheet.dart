@@ -70,6 +70,13 @@ class DeleteBottomSheet extends StatelessWidget {
                   }
                   _controller.selectedNote.clear();
                   _controller.isSelectMode.value = false;
+                  // Two backs for deletion in add_edit_note
+                  // just one back cuase error in add_edit_note on deletion
+                  // because index of deleted item still is there,
+                  // but there is nothing to build a list item
+                  // therefore must go back to the list page and then delete
+                  // then it works fine
+                  Get.back();
                   Get.back();
                 },
                 child: const Text(
