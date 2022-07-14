@@ -59,7 +59,9 @@ class AddEditNote extends StatelessWidget {
                 switch (value) {
                   case "Delete":
                     Get.bottomSheet(
-                      DeleteBottomSheet(),
+                      DeleteBottomSheet(
+                        message: "Delete this note?",
+                      ),
                       backgroundColor: Colors.white,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(

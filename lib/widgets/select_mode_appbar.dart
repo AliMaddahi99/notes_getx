@@ -25,7 +25,9 @@ class SelectModeAppBar extends StatelessWidget {
           onPressed: _controller.selectedNote.isNotEmpty
               ? () {
                   Get.bottomSheet(
-                    DeleteBottomSheet(),
+                    DeleteBottomSheet(
+                      message: "Delete ${_controller.getSelectedNotesCount()}?",
+                    ),
                     backgroundColor: Colors.white,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
