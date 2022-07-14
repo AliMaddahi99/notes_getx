@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note_controller.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
-  DeleteBottomSheet({Key? key}) : super(key: key);
+  final String message;
+  DeleteBottomSheet({Key? key, required this.message}) : super(key: key);
 
   final NoteController _controller = Get.find();
 
@@ -22,7 +23,7 @@ class DeleteBottomSheet extends StatelessWidget {
             ),
           ),
           Text(
-            "Delete ${_controller.getSelectedNotesCount()}?",
+            message,
             style: const TextStyle(
               fontSize: 18.0,
             ),
