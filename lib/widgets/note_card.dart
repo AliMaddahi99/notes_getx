@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note_controller.dart';
-import 'package:notes_getx/screens/edit_note.dart';
+import 'package:notes_getx/screens/add_edit_note.dart';
 
 class NoteCard extends StatelessWidget {
   final int index;
@@ -20,9 +20,13 @@ class NoteCard extends StatelessWidget {
           mouseCursor: SystemMouseCursors.click,
           borderRadius: BorderRadius.circular(16.0),
           onTap: () {
-            _controller.isSelectMode.value
-                ? _controller.selectNote(_controller.notes[index].id)
-                : Get.to(() => EditNote(), arguments: index);
+            if (_controller.isSelectMode.value) {
+              _controller.selectNote(_controller.notes[index].id);
+            } else {
+              _controller.selectedNote.clear();
+              _controller.selectNote(_controller.notes[index].id);
+              Get.to(() => AddEditNote(), arguments: index);
+            }
           },
           onLongPress: () {
             _controller.isSelectMode.value = true;
@@ -33,13 +37,13 @@ class NoteCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _controller.notes[index].title!.isNotEmpty
+                _controller.notes[index].title.isNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.only(
                           bottom: 8.0,
                         ),
                         child: Text(
-                          _controller.notes[index].title!,
+                          _controller.notes[index].title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
