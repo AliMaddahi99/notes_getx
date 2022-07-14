@@ -58,6 +58,10 @@ class AddEditNote extends StatelessWidget {
               ),
             ),
             PopupMenuButton<String>(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              tooltip: "Options",
               onSelected: (value) {
                 switch (value) {
                   case "Delete":
