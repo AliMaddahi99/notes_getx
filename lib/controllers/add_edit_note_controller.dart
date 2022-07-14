@@ -13,8 +13,8 @@ class AddEditNoteController extends GetxController {
 
   final NoteController _controller = Get.find();
 
-  void addNote({String? title, required String note}) {
-    if ((title != null || title != "") && note.isNotEmpty) {
+  void addNote({required String title, required String note}) {
+    if (title.isNotEmpty || note.isNotEmpty) {
       _controller.notes.insert(
         0,
         NoteModel(
@@ -52,7 +52,7 @@ class AddEditNoteController extends GetxController {
   @override
   void onInit() {
     if (args != null) {
-      titleTextController.text = _controller.notes[args].title!;
+      titleTextController.text = _controller.notes[args].title;
       noteTextController.text = _controller.notes[args].note;
       isSaveButtonVisible.value = true;
     } else {
