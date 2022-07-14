@@ -6,25 +6,25 @@ import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 class AddEditNote extends StatelessWidget {
   AddEditNote({Key? key}) : super(key: key);
 
-  final AddEditNoteController _editNoteController =
+  final AddEditNoteController _addEditNoteController =
       Get.put(AddEditNoteController());
 
   void toggleSaveButtonVisibility() {
-    _editNoteController.saveButtonVisibility()
-        ? _editNoteController.isSaveButtonVisible.value = true
-        : _editNoteController.isSaveButtonVisible.value = false;
+    _addEditNoteController.saveButtonVisibility()
+        ? _addEditNoteController.isSaveButtonVisible.value = true
+        : _addEditNoteController.isSaveButtonVisible.value = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (_editNoteController.args == null) {
-          _editNoteController.addNote(
-              title: _editNoteController.titleTextController.text,
-              note: _editNoteController.noteTextController.text);
+        if (_addEditNoteController.args == null) {
+          _addEditNoteController.addNote(
+              title: _addEditNoteController.titleTextController.text,
+              note: _addEditNoteController.noteTextController.text);
         } else {
-          _editNoteController.editNote();
+          _addEditNoteController.editNote();
         }
         return true;
       },
@@ -35,15 +35,17 @@ class AddEditNote extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10.0),
               child: Obx(
                 () => Visibility(
-                  visible: _editNoteController.isSaveButtonVisible.value,
+                  visible: _addEditNoteController.isSaveButtonVisible.value,
                   child: IconButton(
                     onPressed: () {
-                      if (_editNoteController.args == null) {
-                        _editNoteController.addNote(
-                            title: _editNoteController.titleTextController.text,
-                            note: _editNoteController.noteTextController.text);
+                      if (_addEditNoteController.args == null) {
+                        _addEditNoteController.addNote(
+                            title:
+                                _addEditNoteController.titleTextController.text,
+                            note:
+                                _addEditNoteController.noteTextController.text);
                       } else {
-                        _editNoteController.editNote();
+                        _addEditNoteController.editNote();
                       }
                     },
                     icon: const Icon(Icons.done),
@@ -79,7 +81,9 @@ class AddEditNote extends StatelessWidget {
             ),
           ],
           title: Text(
-            _editNoteController.args == null ? "Insert your note" : "Edit note",
+            _addEditNoteController.args == null
+                ? "Insert your note"
+                : "Edit note",
           ),
         ),
         body: Padding(
@@ -89,7 +93,7 @@ class AddEditNote extends StatelessWidget {
               TextField(
                 minLines: 1,
                 maxLines: 4000000000,
-                controller: _editNoteController.titleTextController,
+                controller: _addEditNoteController.titleTextController,
                 decoration: const InputDecoration(
                   hintText: "Title",
                   border: InputBorder.none,
@@ -102,8 +106,8 @@ class AddEditNote extends StatelessWidget {
               TextField(
                 minLines: 1,
                 maxLines: 4000000000,
-                controller: _editNoteController.noteTextController,
-                focusNode: _editNoteController.noteFocusNode,
+                controller: _addEditNoteController.noteTextController,
+                focusNode: _addEditNoteController.noteFocusNode,
                 decoration: const InputDecoration(
                   hintText: "Type your note...",
                   border: InputBorder.none,
