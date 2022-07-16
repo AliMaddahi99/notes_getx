@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/add_edit_note_controller.dart';
 import 'package:notes_getx/controllers/note_controller.dart';
 import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
+import 'package:notes_getx/widgets/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
   AddEditNote({Key? key}) : super(key: key);
@@ -10,12 +11,6 @@ class AddEditNote extends StatelessWidget {
   final AddEditNoteController _addEditNoteController =
       Get.put(AddEditNoteController());
   final NoteController _controller = Get.find();
-
-  void toggleSaveButtonVisibility() {
-    _addEditNoteController.saveButtonVisibility()
-        ? _addEditNoteController.isSaveButtonVisible.value = true
-        : _addEditNoteController.isSaveButtonVisible.value = false;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,43 +106,14 @@ class AddEditNote extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: [
-              TextField(
-                minLines: 1,
-                maxLines: 4000000000,
+              TitleNoteTextField(
+                hintText: "Title",
+                fontSize: 24.0,
                 controller: _addEditNoteController.titleTextController,
-                decoration: const InputDecoration(
-                  hintText: "Title",
-                  border: InputBorder.none,
-                ),
-                style: const TextStyle(fontSize: 24.0),
-                toolbarOptions: const ToolbarOptions(
-                  copy: true,
-                  cut: true,
-                  paste: true,
-                  selectAll: true,
-                ),
-                onChanged: (text) {
-                  toggleSaveButtonVisibility();
-                },
               ),
-              TextField(
-                minLines: 1,
-                maxLines: 4000000000,
+              TitleNoteTextField(
+                hintText: "Type your note...",
                 controller: _addEditNoteController.noteTextController,
-                focusNode: _addEditNoteController.noteFocusNode,
-                decoration: const InputDecoration(
-                  hintText: "Type your note...",
-                  border: InputBorder.none,
-                ),
-                toolbarOptions: const ToolbarOptions(
-                  copy: true,
-                  cut: true,
-                  paste: true,
-                  selectAll: true,
-                ),
-                onChanged: (text) {
-                  toggleSaveButtonVisibility();
-                },
               ),
             ],
           ),
