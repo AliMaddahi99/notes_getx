@@ -47,8 +47,20 @@ class AddEditNote extends StatelessWidget {
                                 _addEditNoteController.titleTextController.text,
                             note:
                                 _addEditNoteController.noteTextController.text);
+                        Get.snackbar(
+                          "Note added",
+                          "Your note added",
+                          snackPosition: SnackPosition.BOTTOM,
+                          margin: const EdgeInsets.all(10.0),
+                        );
                       } else {
                         _addEditNoteController.editNote();
+                        Get.snackbar(
+                          "Note edited",
+                          "Your note edited",
+                          snackPosition: SnackPosition.BOTTOM,
+                          margin: const EdgeInsets.all(10.0),
+                        );
                       }
                     },
                     icon: const Icon(Icons.done),
