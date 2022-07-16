@@ -44,17 +44,27 @@ class AddEditNote extends StatelessWidget {
                                 _addEditNoteController.noteTextController.text);
                         Get.snackbar(
                           "Note added",
-                          "Your note added",
+                          "This note has been added to your notes",
+                          icon: const Icon(
+                            Icons.note_add_rounded,
+                            size: 32.0,
+                          ),
                           snackPosition: SnackPosition.BOTTOM,
                           margin: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(20.0),
                         );
                       } else {
                         _addEditNoteController.editNote();
                         Get.snackbar(
                           "Note edited",
-                          "Your note edited",
+                          "This note has been edited",
+                          icon: const Icon(
+                            Icons.edit_note_rounded,
+                            size: 32.0,
+                          ),
                           snackPosition: SnackPosition.BOTTOM,
                           margin: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(20.0),
                         );
                       }
                     },
@@ -114,6 +124,7 @@ class AddEditNote extends StatelessWidget {
               TitleNoteTextField(
                 hintText: "Type your note...",
                 controller: _addEditNoteController.noteTextController,
+                focusNode: _addEditNoteController.noteFocusNode,
               ),
             ],
           ),
