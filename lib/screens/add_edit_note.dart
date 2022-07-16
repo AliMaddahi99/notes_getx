@@ -120,6 +120,12 @@ class AddEditNote extends StatelessWidget {
                   border: InputBorder.none,
                 ),
                 style: const TextStyle(fontSize: 24.0),
+                toolbarOptions: const ToolbarOptions(
+                  copy: true,
+                  cut: true,
+                  paste: true,
+                  selectAll: true,
+                ),
                 onChanged: (text) {
                   toggleSaveButtonVisibility();
                 },
@@ -132,6 +138,12 @@ class AddEditNote extends StatelessWidget {
                 decoration: const InputDecoration(
                   hintText: "Type your note...",
                   border: InputBorder.none,
+                ),
+                toolbarOptions: const ToolbarOptions(
+                  copy: true,
+                  cut: true,
+                  paste: true,
+                  selectAll: true,
                 ),
                 onChanged: (text) {
                   toggleSaveButtonVisibility();
