@@ -6,12 +6,14 @@ class TitleNoteTextField extends StatelessWidget {
   final String? hintText;
   final double? fontSize;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   TitleNoteTextField({
     Key? key,
     this.hintText,
     this.fontSize,
     this.controller,
+    this.focusNode,
   }) : super(key: key);
 
   final AddEditNoteController _addEditNoteController =
@@ -28,12 +30,13 @@ class TitleNoteTextField extends StatelessWidget {
     return TextField(
       minLines: 1,
       maxLines: 4000000000,
-      controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
         border: InputBorder.none,
       ),
       style: TextStyle(fontSize: fontSize),
+      controller: controller,
+      focusNode: focusNode,
       toolbarOptions: const ToolbarOptions(
         copy: true,
         cut: true,
