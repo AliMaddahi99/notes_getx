@@ -65,7 +65,7 @@ class Home extends StatelessWidget {
                     ),
                   },
                   tooltip: "Add note",
-                  child: const Icon(Icons.add),
+                  child: const Icon(Icons.add_rounded),
                 )
               : const SizedBox.shrink(),
         ),
