@@ -5,7 +5,7 @@ import 'package:notes_getx/screens/add_edit_note.dart';
 import 'package:notes_getx/widgets/gridview_note_card.dart';
 import 'package:notes_getx/widgets/listview_note_card.dart';
 import 'package:notes_getx/widgets/main_appbar.dart';
-import 'package:notes_getx/widgets/select_mode_appbar.dart';
+import 'package:notes_getx/widgets/select_mode_app_bar.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
