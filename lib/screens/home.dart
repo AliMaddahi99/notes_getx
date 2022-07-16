@@ -31,9 +31,31 @@ class Home extends StatelessWidget {
                 ? SelectModeAppBar()
                 : MainAppBar(),
           ),
-          body: _controller.isGridView.value
-              ? GridViewNoteCard()
-              : ListViewNoteCard(),
+          body: _controller.notes.isNotEmpty
+              ? _controller.isGridView.value
+                  ? GridViewNoteCard()
+                  : ListViewNoteCard()
+              : Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Icon(
+                          Icons.note_alt_rounded,
+                          size: 56.0,
+                          color: Colors.amber.shade200,
+                        ),
+                      ),
+                      const Text(
+                        "No notes here yet",
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
           floatingActionButton: !_controller.isSelectMode.value
               ? FloatingActionButton(
                   onPressed: () => {
