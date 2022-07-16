@@ -6,6 +6,7 @@ import 'package:notes_getx/widgets/gridview_note_card.dart';
 import 'package:notes_getx/widgets/listview_note_card.dart';
 import 'package:notes_getx/widgets/main_appbar.dart';
 import 'package:notes_getx/widgets/select_mode_app_bar.dart';
+import 'package:notes_getx/widgets/select_mode_bottom_navigation_bar.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -56,6 +57,9 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
+          bottomNavigationBar: _controller.isSelectMode.value
+              ? SelectModeBottomNavigationBar()
+              : const SizedBox.shrink(),
           floatingActionButton: !_controller.isSelectMode.value
               ? FloatingActionButton(
                   onPressed: () => {
