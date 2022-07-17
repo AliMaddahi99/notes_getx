@@ -25,26 +25,26 @@ class TaskItemCard extends StatelessWidget {
           );
         },
         child: Card(
-          elevation: 4.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
           margin: const EdgeInsets.all(0),
           child: Container(
             padding: const EdgeInsets.fromLTRB(5.0, 10.0, 10.0, 10.0),
             child: Row(
               children: [
                 Obx(
-                  () => Transform.scale(
-                    scale: 1.3,
-                    child: Checkbox(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      value: _controller.tasks[index].isDone,
-                      onChanged: (done) {
-                        var changed = _controller.tasks[index];
-                        changed.isDone = done!;
-                        _controller.tasks[index] = changed;
-                      },
+                  () => Checkbox(
+                    activeColor: Colors.grey,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(3.0),
                     ),
+                    value: _controller.tasks[index].isDone,
+                    onChanged: (done) {
+                      var changed = _controller.tasks[index];
+                      changed.isDone = done!;
+                      _controller.tasks[index] = changed;
+                    },
                   ),
                 ),
                 Expanded(
@@ -53,9 +53,12 @@ class TaskItemCard extends StatelessWidget {
                     style: _controller.tasks[index].isDone
                         ? const TextStyle(
                             decoration: TextDecoration.lineThrough,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
                           )
                         : const TextStyle(
                             decoration: TextDecoration.none,
+                            fontWeight: FontWeight.bold,
                           ),
                   ),
                 ),
