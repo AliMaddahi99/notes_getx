@@ -8,11 +8,6 @@ class TaskApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Todo Getx",
-        ),
-      ),
       body: Column(
         children: [
           DismissibleCardListView(),
