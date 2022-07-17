@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/notes/controllers/note_controller.dart';
 import 'package:notes_getx/notes/screens/add_edit_note.dart';
+import 'package:notes_getx/notes/widgets/no_note.dart';
 import 'package:notes_getx/tasks/screens/task_app.dart';
 import 'package:notes_getx/notes/widgets/gridview_note_card.dart';
 import 'package:notes_getx/notes/widgets/listview_note_card.dart';
@@ -42,28 +43,8 @@ class Home extends StatelessWidget {
                   ? _controller.isGridView.value
                       ? GridViewNoteCard()
                       : ListViewNoteCard()
-                  : Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10.0),
-                            child: Icon(
-                              Icons.note_alt_rounded,
-                              size: 56.0,
-                              color: Colors.amber.shade200,
-                            ),
-                          ),
-                          const Text(
-                            "No notes here yet",
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-              TaskApp(),
+                  : const NoNote(),
+              const TaskApp(),
             ],
           ),
           bottomNavigationBar: _controller.isSelectMode.value
