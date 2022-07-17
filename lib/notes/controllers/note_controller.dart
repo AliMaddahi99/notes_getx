@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/notes/models/note_model.dart';
 
 class NoteController extends GetxController {
   var notes = <NoteModel>[].obs;

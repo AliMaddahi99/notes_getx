@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/controllers/note_controller.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/notes/controllers/note_controller.dart';
+import 'package:notes_getx/notes/models/note_model.dart';
 
 class AddEditNoteController extends GetxController {
   final TextEditingController titleTextController = TextEditingController();

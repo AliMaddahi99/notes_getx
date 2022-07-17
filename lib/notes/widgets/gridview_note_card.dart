@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/controllers/note_controller.dart';
-import 'package:notes_getx/widgets/note_card.dart';
+import 'package:notes_getx/notes/controllers/note_controller.dart';
+import 'package:notes_getx/notes/widgets/note_card.dart';
 
 class GridViewNoteCard extends StatelessWidget {
   GridViewNoteCard({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/controllers/note_controller.dart';
+import 'package:notes_getx/notes/controllers/note_controller.dart';
 
 class MainAppBar extends StatelessWidget {
   MainAppBar({Key? key}) : super(key: key);

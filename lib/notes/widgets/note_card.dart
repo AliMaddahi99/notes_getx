@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/controllers/note_controller.dart';
-import 'package:notes_getx/screens/add_edit_note.dart';
+import 'package:notes_getx/notes/controllers/note_controller.dart';
+import 'package:notes_getx/notes/screens/add_edit_note.dart';
 
 class NoteCard extends StatelessWidget {
   final int index;
