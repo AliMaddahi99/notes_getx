@@ -32,16 +32,19 @@ class TaskItemCard extends StatelessWidget {
             child: Row(
               children: [
                 Obx(
-                  () => Checkbox(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                  () => Transform.scale(
+                    scale: 1.3,
+                    child: Checkbox(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      value: _controller.tasks[index].isDone,
+                      onChanged: (done) {
+                        var changed = _controller.tasks[index];
+                        changed.isDone = done!;
+                        _controller.tasks[index] = changed;
+                      },
                     ),
-                    value: _controller.tasks[index].isDone,
-                    onChanged: (done) {
-                      var changed = _controller.tasks[index];
-                      changed.isDone = done!;
-                      _controller.tasks[index] = changed;
-                    },
                   ),
                 ),
                 Expanded(
