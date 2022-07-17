@@ -1,12 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:notes_getx/notes/models/note_model.dart';
 
 class NoteController extends GetxController {
+  final PageController pageController = PageController();
+
   var notes = <NoteModel>[].obs;
   var isGridView = false.obs;
   var selectedNote = [].obs;
   var isSelectMode = false.obs;
+  var pageViewId = 0.obs;
 
   void deleteNote(int id) {
     notes.removeWhere((note) => note.id == id);
