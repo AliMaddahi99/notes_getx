@@ -10,10 +10,11 @@ class AddTaskTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(16.0),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade400,
