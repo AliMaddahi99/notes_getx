@@ -7,14 +7,14 @@ class EditTaskController extends GetxController {
       TextEditingController();
   final FocusNode editTaskTextFieldFocusNode = FocusNode();
 
-  final TaskController _controller = Get.find();
+  final TaskController _taskController = Get.find();
 
   var args = Get.arguments;
 
   @override
   void onInit() {
     editTaskTextEditingController.text =
-        _controller.tasks.isNotEmpty ? args[1] : "Nothing!";
+        _taskController.tasks.isNotEmpty ? args[1] : "Nothing!";
     editTaskTextFieldFocusNode.requestFocus();
     super.onInit();
   }
