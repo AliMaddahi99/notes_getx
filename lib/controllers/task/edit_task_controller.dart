@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/tasks/controllers/task_controller.dart';
+import 'package:notes_getx/controllers/task/task_controller.dart';
 
 class EditTaskController extends GetxController {
   final TextEditingController editTaskTextEditingController =

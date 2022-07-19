@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/tasks/controllers/task_controller.dart';
-import 'package:notes_getx/tasks/screens/edit_task.dart';
+import 'package:notes_getx/controllers/task/task_controller.dart';
+import 'package:notes_getx/screens/task/edit_task.dart';
 
 class TaskItemCard extends StatelessWidget {
   final int index;

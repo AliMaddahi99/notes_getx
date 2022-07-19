@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/tasks/controllers/task_controller.dart';
-
-import 'package:notes_getx/tasks/widgets/task_item_card.dart';
+import 'package:notes_getx/controllers/task/task_controller.dart';
+import 'package:notes_getx/widgets/task/task_item_card.dart';
 
 class DismissibleCardListView extends StatelessWidget {
   DismissibleCardListView({Key? key}) : super(key: key);

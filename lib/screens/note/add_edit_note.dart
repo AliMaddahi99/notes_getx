@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/notes/controllers/add_edit_note_controller.dart';
-import 'package:notes_getx/notes/controllers/note_controller.dart';
-import 'package:notes_getx/notes/widgets/delete_bottom_sheet.dart';
-import 'package:notes_getx/notes/widgets/title_note_text_field.dart';
+import 'package:notes_getx/controllers/note/add_edit_note_controller.dart';
+import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/widgets/note/delete_bottom_sheet.dart';
+import 'package:notes_getx/widgets/note/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
   AddEditNote({Key? key}) : super(key: key);

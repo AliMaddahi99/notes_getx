@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:notes_getx/tasks/models/task_model.dart';
+import 'package:notes_getx/models/task_model.dart';
 
 class TaskController extends GetxController {
   final TextEditingController addTaskTextEditingController =
@@ -10,6 +10,7 @@ class TaskController extends GetxController {
 
   var isTextFieldNotEmpty = false.obs;
   var tasks = <TaskModel>[].obs;
+  var isAddTaskTextViewVisible = false.obs;
 
   void addTask({required String title}) {
     addTaskTextEditingController.clear();

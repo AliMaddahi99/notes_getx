@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/tasks/controllers/task_controller.dart';
-import 'package:notes_getx/tasks/controllers/edit_task_controller.dart';
+import 'package:notes_getx/controllers/task/task_controller.dart';
+import 'package:notes_getx/controllers/task/edit_task_controller.dart';
 
 class EditTodo extends StatelessWidget {
   EditTodo({Key? key}) : super(key: key);
