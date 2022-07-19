@@ -33,7 +33,7 @@ class DismissibleCardListView extends StatelessWidget {
                       ),
                     ),
                     onDismissed: (_) {
-                      _controller.deleteTodo(id: index);
+                      _controller.deleteTask(id: index);
                     },
                     child: TaskItemCard(
                       index: index,

@@ -23,15 +23,15 @@ class TaskController extends GetxController {
     addTaskTextFieldFocusNode.requestFocus();
   }
 
-  void deleteTodo({required int id}) {
+  void deleteTask({required int id}) {
     tasks.removeAt(id);
   }
 
   @override
   void onInit() {
-    var storedTodos = GetStorage().read<List>("tasks");
-    if (storedTodos != null) {
-      tasks = storedTodos.map((e) => TaskModel.fromJson(e)).toList().obs;
+    var storedTasks = GetStorage().read<List>("tasks");
+    if (storedTasks != null) {
+      tasks = storedTasks.map((e) => TaskModel.fromJson(e)).toList().obs;
     }
 
     ever(tasks, (_) {
