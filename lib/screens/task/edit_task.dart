@@ -7,12 +7,12 @@ class EditTodo extends StatelessWidget {
   EditTodo({Key? key}) : super(key: key);
 
   final EditTaskController _editTaskController = Get.put(EditTaskController());
-  final TaskController _controller = Get.find();
+  final TaskController _taskController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     var id = _editTaskController.args[0];
-    var edited = _controller.tasks[id];
+    var edited = _taskController.tasks[id];
     var title = _editTaskController.args[1];
 
     return Scaffold(
@@ -42,10 +42,10 @@ class EditTodo extends StatelessWidget {
           onChanged: (text) {
             if (text.isEmpty) {
               edited.title = title;
-              _controller.tasks[id] = edited;
+              _taskController.tasks[id] = edited;
             } else {
               edited.title = text;
-              _controller.tasks[id] = edited;
+              _taskController.tasks[id] = edited;
             }
           },
         ),
