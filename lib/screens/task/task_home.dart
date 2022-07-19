@@ -7,7 +7,7 @@ import 'package:notes_getx/widgets/task/dismissible_card_listview.dart';
 class TaskHome extends StatelessWidget {
   TaskHome({Key? key}) : super(key: key);
 
-  final TaskController _taskController = Get.put(TaskController());
+  final TaskController _taskController = Get.find();
 
   @override
   Widget build(BuildContext context) {
