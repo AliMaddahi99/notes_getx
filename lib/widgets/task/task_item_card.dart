@@ -11,7 +11,7 @@ class TaskItemCard extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-  final TaskController _controller = Get.find();
+  final TaskController _taskController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class TaskItemCard extends StatelessWidget {
         onTap: () {
           Get.to(
             () => EditTodo(),
-            arguments: [index, _controller.tasks[index].title],
+            arguments: [index, _taskController.tasks[index].title],
           );
         },
         child: Card(
@@ -39,18 +39,18 @@ class TaskItemCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3.0),
                     ),
-                    value: _controller.tasks[index].isDone,
+                    value: _taskController.tasks[index].isDone,
                     onChanged: (done) {
-                      var changed = _controller.tasks[index];
+                      var changed = _taskController.tasks[index];
                       changed.isDone = done!;
-                      _controller.tasks[index] = changed;
+                      _taskController.tasks[index] = changed;
                     },
                   ),
                 ),
                 Expanded(
                   child: Text(
-                    _controller.tasks[index].title,
-                    style: _controller.tasks[index].isDone
+                    _taskController.tasks[index].title,
+                    style: _taskController.tasks[index].isDone
                         ? const TextStyle(
                             decoration: TextDecoration.lineThrough,
                             fontWeight: FontWeight.bold,
