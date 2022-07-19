@@ -10,8 +10,8 @@ import 'package:notes_getx/widgets/note/main_appbar.dart';
 import 'package:notes_getx/widgets/note/select_mode_app_bar.dart';
 import 'package:notes_getx/widgets/note/select_mode_bottom_navigation_bar.dart';
 
-class Home extends StatelessWidget {
-  Home({Key? key}) : super(key: key);
+class NoteHome extends StatelessWidget {
+  NoteHome({Key? key}) : super(key: key);
 
   final NoteController _noteController = Get.put(NoteController());
 
@@ -46,7 +46,7 @@ class Home extends StatelessWidget {
                             ? GridViewNoteCard()
                             : ListViewNoteCard()
                         : const NoNote(),
-                    TaskApp(),
+                    TaskHome(),
                   ],
                 )
               : _noteController.notes.isNotEmpty

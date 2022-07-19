@@ -4,8 +4,8 @@ import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/widgets/task/add_task_text_field.dart';
 import 'package:notes_getx/widgets/task/dismissible_card_listview.dart';
 
-class TaskApp extends StatelessWidget {
-  TaskApp({Key? key}) : super(key: key);
+class TaskHome extends StatelessWidget {
+  TaskHome({Key? key}) : super(key: key);
 
   final TaskController _taskController = Get.put(TaskController());
 
