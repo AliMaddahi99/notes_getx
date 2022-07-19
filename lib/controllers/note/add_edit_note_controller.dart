@@ -11,11 +11,11 @@ class AddEditNoteController extends GetxController {
   var args = Get.arguments;
   var isSaveButtonVisible = false.obs;
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   void addNote({required String title, required String note}) {
     if (title.isNotEmpty || note.isNotEmpty) {
-      _controller.notes.insert(
+      _noteController.notes.insert(
         0,
         NoteModel(
           id: DateTime.now().microsecondsSinceEpoch,
@@ -30,13 +30,13 @@ class AddEditNoteController extends GetxController {
 
   void editNote() {
     if (titleTextController.text.isEmpty && noteTextController.text.isEmpty) {
-      _controller.deleteNote(_controller.notes[args].id);
+      _noteController.deleteNote(_noteController.notes[args].id);
     } else {
-      var edited = _controller.notes[args];
+      var edited = _noteController.notes[args];
       edited.title = titleTextController.text;
       edited.note = noteTextController.text;
       edited.dateTime = dateTimeNowStringify();
-      _controller.notes[args] = edited;
+      _noteController.notes[args] = edited;
     }
   }
 
@@ -52,8 +52,8 @@ class AddEditNoteController extends GetxController {
   @override
   void onInit() {
     if (args != null) {
-      titleTextController.text = _controller.notes[args].title;
-      noteTextController.text = _controller.notes[args].note;
+      titleTextController.text = _noteController.notes[args].title;
+      noteTextController.text = _noteController.notes[args].note;
       isSaveButtonVisible.value = true;
     } else {
       noteFocusNode.requestFocus();
