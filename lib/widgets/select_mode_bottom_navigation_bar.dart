@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/controllers/note/note_controller.dart';
-import 'package:notes_getx/widgets/note/delete_bottom_sheet.dart';
+import 'package:notes_getx/controllers/app_controller.dart';
+import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 
 class SelectModeBottomNavigationBar extends StatelessWidget {
   SelectModeBottomNavigationBar({Key? key}) : super(key: key);
 
-  final NoteController _noteController = Get.find();
+  final AppController _appController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,12 @@ class SelectModeBottomNavigationBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: _noteController.selectedNote.isNotEmpty
+              onPressed: _appController.selectedItems.isNotEmpty
                   ? () {
                       Get.bottomSheet(
                         DeleteBottomSheet(
                           message:
-                              "Delete ${_noteController.getSelectedNotesCount()}?",
+                              "Delete ${_appController.getSelectedItemsCount()}?",
                         ),
                         backgroundColor: Colors.white,
                         shape: const RoundedRectangleBorder(

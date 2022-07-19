@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/add_edit_note_controller.dart';
-import 'package:notes_getx/controllers/note/note_controller.dart';
-import 'package:notes_getx/widgets/note/delete_bottom_sheet.dart';
+import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
@@ -10,7 +10,7 @@ class AddEditNote extends StatelessWidget {
 
   final AddEditNoteController _addEditNoteController =
       Get.put(AddEditNoteController());
-  final NoteController _noteController = Get.find();
+  final AppController _appController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AddEditNote extends StatelessWidget {
         } else {
           _addEditNoteController.editNote();
         }
-        _noteController.selectedNote.clear();
+        _appController.selectedItems.clear();
         return true;
       },
       child: Scaffold(

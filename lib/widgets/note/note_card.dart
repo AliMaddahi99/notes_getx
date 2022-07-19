@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
 
@@ -7,6 +8,7 @@ class NoteCard extends StatelessWidget {
   final int index;
   NoteCard({Key? key, required this.index}) : super(key: key);
 
+  final AppController _appController = Get.find();
   final NoteController _noteController = Get.find();
 
   @override
@@ -20,17 +22,17 @@ class NoteCard extends StatelessWidget {
           mouseCursor: SystemMouseCursors.click,
           borderRadius: BorderRadius.circular(16.0),
           onTap: () {
-            if (_noteController.isSelectMode.value) {
-              _noteController.selectNote(_noteController.notes[index].id);
+            if (_appController.isSelectMode.value) {
+              _appController.selectItem(_noteController.notes[index].id);
             } else {
-              _noteController.selectedNote.clear();
-              _noteController.selectNote(_noteController.notes[index].id);
+              _appController.selectedItems.clear();
+              _appController.selectItem(_noteController.notes[index].id);
               Get.to(() => AddEditNote(), arguments: index);
             }
           },
           onLongPress: () {
-            _noteController.isSelectMode.value = true;
-            _noteController.selectNote(_noteController.notes[index].id);
+            _appController.isSelectMode.value = true;
+            _appController.selectItem(_noteController.notes[index].id);
           },
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -85,23 +87,24 @@ class NoteCard extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: _noteController.isSelectMode.value,
+                        visible: _appController.isSelectMode.value,
                         child: Transform.scale(
                           scale: 1.3,
                           child: SizedBox(
                             height: 0,
                             width: 16,
                             child: Checkbox(
-                                splashRadius: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                value: _noteController.selectedNote
-                                    .contains(_noteController.notes[index].id),
-                                onChanged: (checked) {
-                                  _noteController.selectNote(
-                                      _noteController.notes[index].id);
-                                }),
+                              splashRadius: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              value: _appController.selectedItems
+                                  .contains(_noteController.notes[index].id),
+                              onChanged: (checked) {
+                                _appController.selectItem(
+                                    _noteController.notes[index].id);
+                              },
+                            ),
                           ),
                         ),
                       ),

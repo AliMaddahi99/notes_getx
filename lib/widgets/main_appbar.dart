@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 
 class MainAppBar extends StatelessWidget {
   MainAppBar({Key? key}) : super(key: key);
 
+  final AppController _appController = Get.find();
   final NoteController _noteController = Get.find();
 
   @override
@@ -19,30 +21,30 @@ class MainAppBar extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    _noteController.pageViewId.value = 0;
-                    _noteController.pageController.animateToPage(
+                    _appController.pageViewId.value = 0;
+                    _appController.pageController.animateToPage(
                       0,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.decelerate,
                     );
                   },
                   icon: Icon(
-                    _noteController.pageViewId.value == 0
+                    _appController.pageViewId.value == 0
                         ? Icons.book_rounded
                         : Icons.book_outlined,
                   ),
                 ),
                 IconButton(
                   onPressed: () {
-                    _noteController.pageViewId.value = 1;
-                    _noteController.pageController.animateToPage(
+                    _appController.pageViewId.value = 1;
+                    _appController.pageController.animateToPage(
                       1,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.decelerate,
                     );
                   },
                   icon: Icon(
-                    _noteController.pageViewId.value == 1
+                    _appController.pageViewId.value == 1
                         ? Icons.check_box_rounded
                         : Icons.check_box_outlined,
                   ),
@@ -51,7 +53,7 @@ class MainAppBar extends StatelessWidget {
             ),
           ),
           Obx(
-            () => _noteController.pageViewId.value == 0
+            () => _appController.pageViewId.value == 0
                 ? IconButton(
                     onPressed: () {
                       _noteController.isGridView.value =
