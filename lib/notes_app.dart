@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/screens/note/home.dart';
+import 'package:notes_getx/screens/note/note_home.dart';
 
 class NotesApp extends StatelessWidget {
   const NotesApp({Key? key}) : super(key: key);
