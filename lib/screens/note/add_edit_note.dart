@@ -10,7 +10,7 @@ class AddEditNote extends StatelessWidget {
 
   final AddEditNoteController _addEditNoteController =
       Get.put(AddEditNoteController());
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AddEditNote extends StatelessWidget {
         } else {
           _addEditNoteController.editNote();
         }
-        _controller.selectedNote.clear();
+        _noteController.selectedNote.clear();
         return true;
       },
       child: Scaffold(
