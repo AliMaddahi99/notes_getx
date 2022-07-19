@@ -11,7 +11,7 @@ class NoteHome extends StatelessWidget {
   NoteHome({Key? key}) : super(key: key);
 
   final AppController _appController = Get.find();
-  final NoteController _noteController = Get.put(NoteController());
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
