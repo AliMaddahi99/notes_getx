@@ -5,7 +5,7 @@ import 'package:notes_getx/widgets/task/task_item_card.dart';
 
 class DismissibleCardListView extends StatelessWidget {
   DismissibleCardListView({Key? key}) : super(key: key);
-  final TaskController _controller = Get.put(TaskController());
+  final TaskController _taskController = Get.put(TaskController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class DismissibleCardListView extends StatelessWidget {
               return Column(
                 children: [
                   Dismissible(
-                    key: Key(_controller.tasks[index].id.toString()),
+                    key: Key(_taskController.tasks[index].id.toString()),
                     direction: DismissDirection.endToStart,
                     background: Container(
                       alignment: Alignment.centerRight,
@@ -33,7 +33,7 @@ class DismissibleCardListView extends StatelessWidget {
                       ),
                     ),
                     onDismissed: (_) {
-                      _controller.deleteTask(id: index);
+                      _taskController.deleteTask(id: index);
                     },
                     child: TaskItemCard(
                       index: index,
@@ -43,7 +43,7 @@ class DismissibleCardListView extends StatelessWidget {
                 ],
               );
             },
-            itemCount: _controller.tasks.length,
+            itemCount: _taskController.tasks.length,
           ),
         ),
       ),
