@@ -6,7 +6,7 @@ class DeleteBottomSheet extends StatelessWidget {
   final String message;
   DeleteBottomSheet({Key? key, required this.message}) : super(key: key);
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +65,11 @@ class DeleteBottomSheet extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  for (var n in _controller.selectedNote) {
-                    _controller.deleteNote(n);
+                  for (var n in _noteController.selectedNote) {
+                    _noteController.deleteNote(n);
                   }
-                  _controller.selectedNote.clear();
-                  _controller.isSelectMode.value = false;
+                  _noteController.selectedNote.clear();
+                  _noteController.isSelectMode.value = false;
                   // Two backs for deletion in add_edit_note
                   // just one back cuase error in add_edit_note on deletion
                   // because index of deleted item still is there,

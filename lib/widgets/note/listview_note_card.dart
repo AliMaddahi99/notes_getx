@@ -7,7 +7,7 @@ import 'package:notes_getx/widgets/note/note_card.dart';
 class ListViewNoteCard extends StatelessWidget {
   ListViewNoteCard({Key? key}) : super(key: key);
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ListViewNoteCard extends StatelessWidget {
             ),
           );
         },
-        itemCount: _controller.notes.length,
+        itemCount: _noteController.notes.length,
       ),
     );
   }

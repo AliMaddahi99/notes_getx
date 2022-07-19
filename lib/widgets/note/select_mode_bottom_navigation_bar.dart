@@ -6,7 +6,7 @@ import 'package:notes_getx/widgets/note/delete_bottom_sheet.dart';
 class SelectModeBottomNavigationBar extends StatelessWidget {
   SelectModeBottomNavigationBar({Key? key}) : super(key: key);
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,12 @@ class SelectModeBottomNavigationBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: _controller.selectedNote.isNotEmpty
+              onPressed: _noteController.selectedNote.isNotEmpty
                   ? () {
                       Get.bottomSheet(
                         DeleteBottomSheet(
                           message:
-                              "Delete ${_controller.getSelectedNotesCount()}?",
+                              "Delete ${_noteController.getSelectedNotesCount()}?",
                         ),
                         backgroundColor: Colors.white,
                         shape: const RoundedRectangleBorder(

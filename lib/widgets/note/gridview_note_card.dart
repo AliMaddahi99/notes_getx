@@ -8,7 +8,7 @@ import 'package:notes_getx/widgets/note/note_card.dart';
 class GridViewNoteCard extends StatelessWidget {
   GridViewNoteCard({Key? key}) : super(key: key);
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class GridViewNoteCard extends StatelessWidget {
             child: MasonryGridView.count(
                 padding: const EdgeInsets.all(8.0),
                 crossAxisCount: constraints.maxWidth > 768 ? 4 : 2,
-                itemCount: _controller.notes.length,
+                itemCount: _noteController.notes.length,
                 itemBuilder: (context, index) {
                   return AnimationConfiguration.staggeredGrid(
                     columnCount: constraints.maxWidth > 768 ? 4 : 2,

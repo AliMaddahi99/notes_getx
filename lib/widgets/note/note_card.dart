@@ -7,7 +7,7 @@ class NoteCard extends StatelessWidget {
   final int index;
   NoteCard({Key? key, required this.index}) : super(key: key);
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +20,30 @@ class NoteCard extends StatelessWidget {
           mouseCursor: SystemMouseCursors.click,
           borderRadius: BorderRadius.circular(16.0),
           onTap: () {
-            if (_controller.isSelectMode.value) {
-              _controller.selectNote(_controller.notes[index].id);
+            if (_noteController.isSelectMode.value) {
+              _noteController.selectNote(_noteController.notes[index].id);
             } else {
-              _controller.selectedNote.clear();
-              _controller.selectNote(_controller.notes[index].id);
+              _noteController.selectedNote.clear();
+              _noteController.selectNote(_noteController.notes[index].id);
               Get.to(() => AddEditNote(), arguments: index);
             }
           },
           onLongPress: () {
-            _controller.isSelectMode.value = true;
-            _controller.selectNote(_controller.notes[index].id);
+            _noteController.isSelectMode.value = true;
+            _noteController.selectNote(_noteController.notes[index].id);
           },
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _controller.notes[index].title.isNotEmpty
+                _noteController.notes[index].title.isNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.only(
                           bottom: 8.0,
                         ),
                         child: Text(
-                          _controller.notes[index].title,
+                          _noteController.notes[index].title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -53,18 +53,18 @@ class NoteCard extends StatelessWidget {
                         ),
                       )
                     : const SizedBox.shrink(),
-                _controller.notes[index].note.isNotEmpty
+                _noteController.notes[index].note.isNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.only(
                           bottom: 8.0,
                         ),
                         child: Text(
-                          _controller.notes[index].note,
-                          maxLines: _controller.isGridView.value ? 4 : 1,
+                          _noteController.notes[index].note,
+                          maxLines: _noteController.isGridView.value ? 4 : 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize:
-                                _controller.isGridView.value ? 16.0 : 18.0,
+                                _noteController.isGridView.value ? 16.0 : 18.0,
                             color: Colors.black54,
                           ),
                         ),
@@ -72,20 +72,20 @@ class NoteCard extends StatelessWidget {
                     : const SizedBox.shrink(),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: _controller.isGridView.value ? 16.0 : 0,
+                    top: _noteController.isGridView.value ? 16.0 : 0,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        _controller.notes[index].dateTime.toString(),
+                        _noteController.notes[index].dateTime.toString(),
                         style: const TextStyle(
                           fontSize: 12.0,
                           color: Colors.black45,
                         ),
                       ),
                       Visibility(
-                        visible: _controller.isSelectMode.value,
+                        visible: _noteController.isSelectMode.value,
                         child: Transform.scale(
                           scale: 1.3,
                           child: SizedBox(
@@ -96,11 +96,11 @@ class NoteCard extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
-                                value: _controller.selectedNote
-                                    .contains(_controller.notes[index].id),
+                                value: _noteController.selectedNote
+                                    .contains(_noteController.notes[index].id),
                                 onChanged: (checked) {
-                                  _controller
-                                      .selectNote(_controller.notes[index].id);
+                                  _noteController.selectNote(
+                                      _noteController.notes[index].id);
                                 }),
                           ),
                         ),

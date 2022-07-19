@@ -5,7 +5,7 @@ import 'package:notes_getx/controllers/note/note_controller.dart';
 class MainAppBar extends StatelessWidget {
   MainAppBar({Key? key}) : super(key: key);
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -19,30 +19,30 @@ class MainAppBar extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    _controller.pageViewId.value = 0;
-                    _controller.pageController.animateToPage(
+                    _noteController.pageViewId.value = 0;
+                    _noteController.pageController.animateToPage(
                       0,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.decelerate,
                     );
                   },
                   icon: Icon(
-                    _controller.pageViewId.value == 0
+                    _noteController.pageViewId.value == 0
                         ? Icons.book_rounded
                         : Icons.book_outlined,
                   ),
                 ),
                 IconButton(
                   onPressed: () {
-                    _controller.pageViewId.value = 1;
-                    _controller.pageController.animateToPage(
+                    _noteController.pageViewId.value = 1;
+                    _noteController.pageController.animateToPage(
                       1,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.decelerate,
                     );
                   },
                   icon: Icon(
-                    _controller.pageViewId.value == 1
+                    _noteController.pageViewId.value == 1
                         ? Icons.check_box_rounded
                         : Icons.check_box_outlined,
                   ),
@@ -51,16 +51,16 @@ class MainAppBar extends StatelessWidget {
             ),
           ),
           Obx(
-            () => _controller.pageViewId.value == 0
+            () => _noteController.pageViewId.value == 0
                 ? IconButton(
                     onPressed: () {
-                      _controller.isGridView.value =
-                          !_controller.isGridView.value;
+                      _noteController.isGridView.value =
+                          !_noteController.isGridView.value;
                     },
-                    icon: _controller.isGridView.value
+                    icon: _noteController.isGridView.value
                         ? const Icon(Icons.view_list_rounded)
                         : const Icon(Icons.grid_view_rounded),
-                    tooltip: _controller.isGridView.value
+                    tooltip: _noteController.isGridView.value
                         ? "List view"
                         : "Grid view",
                   )

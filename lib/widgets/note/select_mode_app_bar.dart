@@ -5,24 +5,24 @@ import 'package:notes_getx/controllers/note/note_controller.dart';
 class SelectModeAppBar extends StatelessWidget {
   SelectModeAppBar({Key? key}) : super(key: key);
 
-  final NoteController _controller = Get.find();
+  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Obx(
         () => Text(
-          _controller.selectedNote.isEmpty
+          _noteController.selectedNote.isEmpty
               ? "Select items"
-              : "${_controller.getSelectedNotesCount()} selected",
+              : "${_noteController.getSelectedNotesCount()} selected",
         ),
       ),
       centerTitle: true,
       leading: IconButton(
         icon: const Icon(Icons.clear_rounded),
         onPressed: () {
-          _controller.isSelectMode.value = false;
-          _controller.selectedNote.clear();
+          _noteController.isSelectMode.value = false;
+          _noteController.selectedNote.clear();
         },
       ),
       actions: [
@@ -30,13 +30,14 @@ class SelectModeAppBar extends StatelessWidget {
           padding: const EdgeInsets.only(right: 10.0),
           child: IconButton(
             onPressed: () {
-              if (_controller.selectedNote.length < _controller.notes.length) {
-                _controller.selectedNote.clear();
-                for (var note in _controller.notes) {
-                  _controller.selectedNote.add(note.id);
+              if (_noteController.selectedNote.length <
+                  _noteController.notes.length) {
+                _noteController.selectedNote.clear();
+                for (var note in _noteController.notes) {
+                  _noteController.selectedNote.add(note.id);
                 }
               } else {
-                _controller.selectedNote.clear();
+                _noteController.selectedNote.clear();
               }
             },
             icon: const Icon(Icons.checklist_rounded),
