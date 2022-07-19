@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
-import 'package:notes_getx/screens/task/task_app.dart';
+import 'package:notes_getx/screens/task/task_home.dart';
 import 'package:notes_getx/widgets/note/no_note.dart';
 import 'package:notes_getx/widgets/note/gridview_note_card.dart';
 import 'package:notes_getx/widgets/note/listview_note_card.dart';
