@@ -13,16 +13,16 @@ import 'package:notes_getx/widgets/note/select_mode_bottom_navigation_bar.dart';
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
 
-  final NoteController _controller = Get.put(NoteController());
+  final NoteController _noteController = Get.put(NoteController());
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => WillPopScope(
         onWillPop: () async {
-          if (_controller.isSelectMode.value) {
-            _controller.selectedNote.clear();
-            _controller.isSelectMode.value = false;
+          if (_noteController.isSelectMode.value) {
+            _noteController.selectedNote.clear();
+            _noteController.isSelectMode.value = false;
             return false;
           }
           return true;
@@ -30,35 +30,35 @@ class Home extends StatelessWidget {
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),
-            child: _controller.isSelectMode.value
+            child: _noteController.isSelectMode.value
                 ? SelectModeAppBar()
                 : MainAppBar(),
           ),
-          body: !_controller.isSelectMode.value
+          body: !_noteController.isSelectMode.value
               ? PageView(
                   onPageChanged: (value) {
-                    _controller.pageViewId.value = value;
+                    _noteController.pageViewId.value = value;
                   },
-                  controller: _controller.pageController,
+                  controller: _noteController.pageController,
                   children: [
-                    _controller.notes.isNotEmpty
-                        ? _controller.isGridView.value
+                    _noteController.notes.isNotEmpty
+                        ? _noteController.isGridView.value
                             ? GridViewNoteCard()
                             : ListViewNoteCard()
                         : const NoNote(),
                     TaskApp(),
                   ],
                 )
-              : _controller.notes.isNotEmpty
-                  ? _controller.isGridView.value
+              : _noteController.notes.isNotEmpty
+                  ? _noteController.isGridView.value
                       ? GridViewNoteCard()
                       : ListViewNoteCard()
                   : const NoNote(),
-          bottomNavigationBar: _controller.isSelectMode.value
+          bottomNavigationBar: _noteController.isSelectMode.value
               ? SelectModeBottomNavigationBar()
               : const SizedBox.shrink(),
-          floatingActionButton: (!_controller.isSelectMode.value &&
-                  _controller.pageViewId.value == 0)
+          floatingActionButton: (!_noteController.isSelectMode.value &&
+                  _noteController.pageViewId.value == 0)
               ? FloatingActionButton(
                   onPressed: () => {
                     Get.to(
