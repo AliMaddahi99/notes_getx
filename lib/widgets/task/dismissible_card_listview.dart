@@ -23,13 +23,16 @@ class DismissibleCardListView extends StatelessWidget {
                     background: Container(
                       alignment: Alignment.centerRight,
                       padding: const EdgeInsets.only(right: 10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.0),
-                        color: Colors.red,
-                      ),
-                      child: const Icon(
-                        Icons.delete_outline,
-                        color: Colors.white,
+                      child: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        child: const Icon(
+                          Icons.delete_outline_rounded,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     onDismissed: (_) {
