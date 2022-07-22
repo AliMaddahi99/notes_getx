@@ -10,43 +10,36 @@ class DismissibleCardListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Dismissible(
-                  key: Key(_taskController.tasks[index].id.toString()),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.only(right: 10.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      child: const Icon(
-                        Icons.delete_outline_rounded,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  onDismissed: (_) {
-                    _taskController.deleteTask(_taskController.tasks[index].id);
-                  },
-                  child: TaskItemCard(
-                    index: index,
-                  ),
+      () => ListView.builder(
+        padding: const EdgeInsets.all(8.0),
+        itemBuilder: (context, index) {
+          return Dismissible(
+            key: Key(_taskController.tasks[index].id.toString()),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(50.0),
                 ),
-                const SizedBox(height: 8.0),
-              ],
-            );
-          },
-          itemCount: _taskController.tasks.length,
-        ),
+                child: const Icon(
+                  Icons.delete_outline_rounded,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            onDismissed: (_) {
+              _taskController.deleteTask(_taskController.tasks[index].id);
+            },
+            child: TaskItemCard(
+              index: index,
+            ),
+          );
+        },
+        itemCount: _taskController.tasks.length,
       ),
     );
   }
