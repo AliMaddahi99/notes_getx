@@ -27,7 +27,10 @@ class NoteCard extends StatelessWidget {
             } else {
               _appController.selectedItems.clear();
               _appController.selectItem(_noteController.notes[index].id);
-              Get.to(() => AddEditNote(), arguments: index);
+              Get.to(
+                () => AddEditNote(),
+                arguments: index,
+              );
             }
           },
           onLongPress: () {
