@@ -39,7 +39,7 @@ class TaskItemCard extends StatelessWidget {
             _appController.selectItem(_taskController.tasks[index].id);
           },
           child: Container(
-            padding: const EdgeInsets.fromLTRB(5.0, 10.0, 10.0, 10.0),
+            padding: const EdgeInsets.fromLTRB(0.0, 13.0, 16.0, 14.0),
             child: Row(
               children: [
                 Obx(
@@ -58,6 +58,7 @@ class TaskItemCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
+                    overflow: TextOverflow.ellipsis,
                     _taskController.tasks[index].title,
                     style: _taskController.tasks[index].isDone
                         ? const TextStyle(
