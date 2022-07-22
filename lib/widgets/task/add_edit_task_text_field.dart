@@ -27,14 +27,22 @@ class AddEditTaskTextField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
-              margin: const EdgeInsets.only(left: 10.0),
+              margin: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
+                minLines: 1,
+                maxLines: 100,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: "What todo?",
                 ),
                 controller: _addEditTaskController.taskTextController,
                 focusNode: _addEditTaskController.taskFocusNode,
+                toolbarOptions: const ToolbarOptions(
+                  copy: true,
+                  cut: true,
+                  paste: true,
+                  selectAll: true,
+                ),
                 onChanged: (text) {
                   _addEditTaskController.isTextFieldNotEmpty.value =
                       text.isNotEmpty;
