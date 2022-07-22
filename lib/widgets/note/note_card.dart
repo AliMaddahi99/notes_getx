@@ -13,112 +13,121 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Obx(
-        () => InkWell(
-          mouseCursor: SystemMouseCursors.click,
-          borderRadius: BorderRadius.circular(16.0),
-          onTap: () {
-            if (_appController.isSelectMode.value) {
-              _appController.selectItem(_noteController.notes[index].id);
-            } else {
-              _appController.selectedItems.clear();
-              _appController.selectItem(_noteController.notes[index].id);
-              Get.to(
-                () => AddEditNote(),
-                arguments: index,
-              );
-            }
-          },
-          onLongPress: () {
-            _appController.isSelectMode.value = true;
-            _appController.selectItem(_noteController.notes[index].id);
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _noteController.notes[index].title.isNotEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 8.0,
-                        ),
-                        child: Text(
-                          _noteController.notes[index].title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-                _noteController.notes[index].note.isNotEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 8.0,
-                        ),
-                        child: Text(
-                          _noteController.notes[index].note,
-                          maxLines: _noteController.isGridView.value ? 4 : 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize:
-                                _noteController.isGridView.value ? 16.0 : 18.0,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: _noteController.isGridView.value ? 16.0 : 0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
+      alignment: _noteController.isGridView.value
+          ? Alignment.bottomRight
+          : Alignment.centerRight,
+      children: [
+        // SizedBox with width: double.infinity to override stack's width
+        SizedBox(
+          width: double.infinity,
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            child: Obx(
+              () => InkWell(
+                mouseCursor: SystemMouseCursors.click,
+                borderRadius: BorderRadius.circular(16.0),
+                onTap: () {
+                  if (_appController.isSelectMode.value) {
+                    _appController.selectItem(_noteController.notes[index].id);
+                  } else {
+                    _appController.selectedItems.clear();
+                    _appController.selectItem(_noteController.notes[index].id);
+                    Get.to(
+                      () => AddEditNote(),
+                      arguments: index,
+                    );
+                  }
+                },
+                onLongPress: () {
+                  _appController.isSelectMode.value = true;
+                  _appController.selectItem(_noteController.notes[index].id);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        _noteController.notes[index].dateTime.toString(),
-                        style: const TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.black45,
-                        ),
-                      ),
-                      Visibility(
-                        visible: _appController.isSelectMode.value,
-                        child: Transform.scale(
-                          scale: 1.3,
-                          child: SizedBox(
-                            height: 0,
-                            width: 16,
-                            child: Checkbox(
-                              splashRadius: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
+                      _noteController.notes[index].title.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 8.0,
                               ),
-                              value: _appController.selectedItems
-                                  .contains(_noteController.notes[index].id),
-                              onChanged: (checked) {
-                                _appController.selectItem(
-                                    _noteController.notes[index].id);
-                              },
-                            ),
+                              child: Text(
+                                _noteController.notes[index].title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                      _noteController.notes[index].note.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 8.0,
+                              ),
+                              child: Text(
+                                _noteController.notes[index].note,
+                                maxLines:
+                                    _noteController.isGridView.value ? 4 : 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: _noteController.isGridView.value
+                                      ? 16.0
+                                      : 18.0,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: _noteController.isGridView.value ? 16.0 : 0,
+                        ),
+                        child: Text(
+                          _noteController.notes[index].dateTime.toString(),
+                          style: const TextStyle(
+                            fontSize: 12.0,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        Obx(
+          () => Visibility(
+            visible: _appController.isSelectMode.value,
+            child: Transform.scale(
+              scale: 1.3,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                child: Checkbox(
+                  splashRadius: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  value: _appController.selectedItems
+                      .contains(_noteController.notes[index].id),
+                  onChanged: (checked) {
+                    _appController.selectItem(_noteController.notes[index].id);
+                  },
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
