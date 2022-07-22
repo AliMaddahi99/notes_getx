@@ -5,8 +5,13 @@ import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
+  final String title;
   final String message;
-  DeleteBottomSheet({Key? key, required this.message}) : super(key: key);
+  DeleteBottomSheet({
+    Key? key,
+    required this.title,
+    required this.message,
+  }) : super(key: key);
 
   final AppController _appController = Get.find();
   final NoteController _noteController = Get.find();
@@ -19,9 +24,9 @@ class DeleteBottomSheet extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            "Delete note",
-            style: TextStyle(
+          Text(
+            title,
+            style: const TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.bold,
             ),

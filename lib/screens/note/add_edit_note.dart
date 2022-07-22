@@ -84,6 +84,7 @@ class AddEditNote extends StatelessWidget {
                   case "Delete":
                     Get.bottomSheet(
                       DeleteBottomSheet(
+                        title: "Delete note",
                         message: "Delete this note?",
                       ),
                       backgroundColor: Colors.white,

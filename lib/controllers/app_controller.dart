@@ -13,9 +13,9 @@ class AppController extends GetxController {
         : selectedItems.add(id);
   }
 
-  String getSelectedItemsCount() {
+  String getSelectedItemsCount(String message) {
     return selectedItems.length == 1
-        ? "${selectedItems.length} item"
-        : "${selectedItems.length} items";
+        ? "${selectedItems.length} $message"
+        : "${selectedItems.length} ${message}s";
   }
 }

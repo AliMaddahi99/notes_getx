@@ -18,7 +18,7 @@ class SelectModeAppBar extends StatelessWidget {
         () => Text(
           _appController.selectedItems.isEmpty
               ? "Select items"
-              : "${_appController.getSelectedItemsCount()} selected",
+              : "${_appController.getSelectedItemsCount("item")} selected",
         ),
       ),
       centerTitle: true,

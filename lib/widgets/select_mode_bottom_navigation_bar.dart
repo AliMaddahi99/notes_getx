@@ -22,8 +22,11 @@ class SelectModeBottomNavigationBar extends StatelessWidget {
                   ? () {
                       Get.bottomSheet(
                         DeleteBottomSheet(
+                          title: _appController.pageViewId.value == 0
+                              ? "Delete note"
+                              : "Delete task",
                           message:
-                              "Delete ${_appController.getSelectedItemsCount()}?",
+                              "Delete ${_appController.getSelectedItemsCount(_appController.pageViewId.value == 0 ? "item" : "task")}?",
                         ),
                         backgroundColor: Colors.white,
                         shape: const RoundedRectangleBorder(
