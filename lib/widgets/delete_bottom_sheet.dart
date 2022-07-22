@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/controllers/task/task_controller.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
   final String message;
@@ -9,6 +10,7 @@ class DeleteBottomSheet extends StatelessWidget {
 
   final AppController _appController = Get.find();
   final NoteController _noteController = Get.find();
+  final TaskController _taskController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +69,15 @@ class DeleteBottomSheet extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  for (var n in _appController.selectedItems) {
-                    _noteController.deleteNote(n);
-                  }
+                  _appController.pageViewId.value == 0
+                      ? {
+                          for (var n in _appController.selectedItems)
+                            _noteController.deleteNote(n)
+                        }
+                      : {
+                          for (var t in _appController.selectedItems)
+                            _taskController.deleteTask(t)
+                        };
                   _appController.selectedItems.clear();
                   _appController.isSelectMode.value = false;
 
