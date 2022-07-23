@@ -39,7 +39,7 @@ class TaskItemCard extends StatelessWidget {
             _appController.selectItem(_taskController.tasks[index].id);
           },
           child: Container(
-            padding: const EdgeInsets.fromLTRB(0.0, 13.0, 16.0, 14.0),
+            padding: const EdgeInsets.fromLTRB(0.0, 13.0, 4.0, 14.0),
             child: Row(
               children: [
                 Obx(
