@@ -35,18 +35,19 @@ class Home extends StatelessWidget {
                 ? SelectModeAppBar()
                 : MainAppBar(),
           ),
-          body: !_appController.isSelectMode.value
-              ? PageView(
-                  onPageChanged: (value) {
-                    _appController.pageViewId.value = value;
-                  },
-                  controller: _appController.pageController,
-                  children: [
-                    NoteHome(),
-                    TaskHome(),
-                  ],
-                )
-              : NoteHome(),
+          body: PageView(
+            physics: _appController.isSelectMode.value
+                ? const NeverScrollableScrollPhysics()
+                : const PageScrollPhysics(),
+            onPageChanged: (value) {
+              _appController.pageViewId.value = value;
+            },
+            controller: _appController.pageController,
+            children: [
+              NoteHome(),
+              TaskHome(),
+            ],
+          ),
           bottomNavigationBar: _appController.isSelectMode.value
               ? SelectModeBottomNavigationBar()
               : const SizedBox.shrink(),
