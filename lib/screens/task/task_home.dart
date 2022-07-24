@@ -4,7 +4,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/screens/task/add_edit_task.dart';
 import 'package:notes_getx/widgets/no_item.dart';
-import 'package:notes_getx/widgets/task/dismissible_card_listview.dart';
+import 'package:notes_getx/widgets/task/slidable_card_listview.dart';
 
 class TaskHome extends StatelessWidget {
   TaskHome({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class TaskHome extends StatelessWidget {
       () => Scaffold(
         body: _taskController.tasks.isNotEmpty
             ? SizedBox(
-                child: DismissibleCardListView(),
+                child: SlidableCardListView(),
               )
             : NoItem(),
         floatingActionButton: !_appController.isSelectMode.value
