@@ -17,9 +17,7 @@ class TaskHome extends StatelessWidget {
     return Obx(
       () => Scaffold(
         body: _taskController.tasks.isNotEmpty
-            ? SizedBox(
-                child: SlidableCardListView(),
-              )
+            ? SlidableCardListView()
             : NoItem(),
         floatingActionButton: !_appController.isSelectMode.value
             ? Visibility(
