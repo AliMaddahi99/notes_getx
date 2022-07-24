@@ -34,27 +34,31 @@ class TaskItemCard extends StatelessWidget {
               );
             }
           },
-          onLongPress: () {
-            _appController.isSelectMode.value = true;
-            _appController.selectItem(_taskController.tasks[index].id);
-          },
           child: Container(
             padding: const EdgeInsets.fromLTRB(0.0, 13.0, 4.0, 14.0),
             child: Row(
               children: [
                 Obx(
-                  () => Checkbox(
-                    activeColor: Colors.grey,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3.0),
-                    ),
-                    value: _taskController.tasks[index].isDone,
-                    onChanged: (done) {
-                      var changed = _taskController.tasks[index];
-                      changed.isDone = done!;
-                      _taskController.tasks[index] = changed;
-                    },
-                  ),
+                  () => !_appController.isSelectMode.value
+                      ? Checkbox(
+                          activeColor: Colors.grey,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(3.0),
+                          ),
+                          value: _taskController.tasks[index].isDone,
+                          onChanged: (done) {
+                            var changed = _taskController.tasks[index];
+                            changed.isDone = done!;
+                            _taskController.tasks[index] = changed;
+                          },
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ReorderableDragStartListener(
+                            index: index,
+                            child: const Icon(Icons.drag_handle_rounded),
+                          ),
+                        ),
                 ),
                 Expanded(
                   child: Text(
