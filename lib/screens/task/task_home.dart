@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/screens/task/add_edit_task.dart';
+import 'package:notes_getx/widgets/no_item.dart';
 import 'package:notes_getx/widgets/task/dismissible_card_listview.dart';
 
 class TaskHome extends StatelessWidget {
@@ -15,9 +16,11 @@ class TaskHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        body: SizedBox(
-          child: DismissibleCardListView(),
-        ),
+        body: _taskController.tasks.isNotEmpty
+            ? SizedBox(
+                child: DismissibleCardListView(),
+              )
+            : NoItem(),
         floatingActionButton: !_appController.isSelectMode.value
             ? Visibility(
                 visible: !_taskController.isAddEditTaskScreen.value,
