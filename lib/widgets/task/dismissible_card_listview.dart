@@ -30,6 +30,7 @@ class DismissibleCardListView extends StatelessWidget {
         itemCount: _taskController.tasks.length,
         itemBuilder: (context, index) {
           return Dismissible(
+            dismissThresholds: const {DismissDirection.startToEnd: 1},
             direction: _appController.isSelectMode.value
                 ? DismissDirection.none
                 : DismissDirection.horizontal,
