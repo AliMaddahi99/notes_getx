@@ -13,6 +13,7 @@ class TaskController extends GetxController {
 
   @override
   void onInit() {
+    // Save and read tasks
     var storedTasks = GetStorage().read<List>("tasks");
     if (storedTasks != null) {
       tasks = storedTasks.map((e) => TaskModel.fromJson(e)).toList().obs;
