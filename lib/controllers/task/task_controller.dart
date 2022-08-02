@@ -4,6 +4,7 @@ import 'package:notes_getx/models/task_model.dart';
 
 class TaskController extends GetxController {
   var tasks = <TaskModel>[].obs;
+  var deletedTaskToUndo = [].obs;
   var isAddEditTaskScreen = false.obs;
 
   void deleteTask(int id) {
