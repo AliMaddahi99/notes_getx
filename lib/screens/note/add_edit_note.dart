@@ -50,6 +50,7 @@ class AddEditNote extends StatelessWidget {
                             size: 32.0,
                           ),
                           snackPosition: SnackPosition.BOTTOM,
+                          animationDuration: const Duration(milliseconds: 300),
                           margin: const EdgeInsets.all(10.0),
                           padding: const EdgeInsets.all(20.0),
                         );
@@ -63,6 +64,7 @@ class AddEditNote extends StatelessWidget {
                             size: 32.0,
                           ),
                           snackPosition: SnackPosition.BOTTOM,
+                          animationDuration: const Duration(milliseconds: 300),
                           margin: const EdgeInsets.all(10.0),
                           padding: const EdgeInsets.all(20.0),
                         );
