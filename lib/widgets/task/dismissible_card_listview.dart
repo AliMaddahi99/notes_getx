@@ -48,8 +48,9 @@ class DismissibleCardListView extends StatelessWidget {
             ),
             onUpdate: (details) {
               if (details.direction == DismissDirection.startToEnd) {
-                _appController.pageController.previousPage(
-                  duration: const Duration(milliseconds: 300),
+                _appController.pageController.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.decelerate,
                 );
               }
