@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+// import 'package:get_storage/get_storage.dart';
 
 class AppController extends GetxController {
-  late PageController pageController;
+  PageController pageController = PageController();
   var pageViewId = 0.obs;
   var isSelectMode = false.obs;
   var selectedItems = [].obs;
@@ -20,18 +20,17 @@ class AppController extends GetxController {
         : "${selectedItems.length} ${message}s";
   }
 
-  @override
-  void onInit() {
-    // Save and read PageView
-    var pageView = GetStorage().read("page");
-    if (pageView != null) {
-      pageViewId.value = pageView;
-    }
-    ever(pageViewId, (_) {
-      GetStorage().write("page", pageViewId.value);
-    });
-    pageController = PageController(initialPage: pageViewId.value);
+  // @override
+  // void onInit() {
+  //   // Save and read PageView
+  //   var pageView = GetStorage().read("page");
+  //   if (pageView != null) {
+  //     pageViewId.value = pageView;
+  //   }
+  //   ever(pageViewId, (_) {
+  //     GetStorage().write("page", pageViewId.value);
+  //   });
 
-    super.onInit();
-  }
+  // super.onInit();
+  // }
 }
