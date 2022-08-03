@@ -27,6 +27,7 @@ class ViewNoteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => MasonryGridView.count(
+        key: const PageStorageKey<String>("notesPage"),
         padding: const EdgeInsets.all(8.0),
         crossAxisCount: gridCrossAxisCount(context),
         itemCount: _noteController.notes.length,

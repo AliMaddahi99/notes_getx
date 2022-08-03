@@ -13,6 +13,7 @@ class DismissibleCardListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => ReorderableListView.builder(
+        key: const PageStorageKey<String>("tasksPage"),
         onReorder: (oldIndex, newIndex) {
           if (oldIndex < newIndex) {
             newIndex -= 1;
