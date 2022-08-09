@@ -4,7 +4,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
-import 'package:notes_getx/models/note_model.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 
 class ViewNoteCard extends StatelessWidget {
@@ -46,15 +45,7 @@ class ViewNoteCard extends StatelessWidget {
                 child: FadeInAnimation(
                   child: DragTarget(
                     builder: (context, candidateData, rejectedData) {
-                      return /*_noteController.isDropped.value
-                          ? Container(
-                              color: Colors.red,
-                              // width: 100,
-                              // height: 2,
-                              child: NoteCard(index: index),
-                            )
-                          : */
-                          LongPressDraggable(
+                      return LongPressDraggable(
                         onDragStarted: () {
                           _appController.isSelectMode.value = true;
                           _appController
@@ -101,9 +92,6 @@ class ViewNoteCard extends StatelessWidget {
                         ),
                       );
                     },
-                    // onWillAccept: (data) {
-                    //   return data == NoteModel;
-                    // },
                     onAccept: (data) {
                       _noteController.isDropped.value = true;
                       Get.snackbar("Dropped", "");
