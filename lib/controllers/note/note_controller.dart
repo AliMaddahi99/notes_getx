@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:notes_getx/models/note_model.dart';
@@ -5,6 +6,9 @@ import 'package:notes_getx/models/note_model.dart';
 class NoteController extends GetxController {
   var notes = <NoteModel>[].obs;
   var isGridView = false.obs;
+
+  ScrollController scrollController = ScrollController();
+  var isDropped = false.obs;
 
   void deleteNote(int id) {
     notes.removeWhere((note) => note.id == id);
