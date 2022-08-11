@@ -90,6 +90,7 @@ class ViewNoteCard extends StatelessWidget {
                         child: NoteCard(
                           index: index,
                           highlighted: candidateData.isNotEmpty,
+                          isFolder: _noteController.notes[index].isFolder,
                         ),
                       );
                     },
