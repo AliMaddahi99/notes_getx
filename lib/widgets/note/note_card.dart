@@ -102,7 +102,6 @@ class NoteCard extends StatelessWidget {
                       ),
                       // Empty Row to override stack's width
                       Row(),
-                      Text("${_noteController.notes[index].folder}"),
                     ],
                   ),
                 ),
