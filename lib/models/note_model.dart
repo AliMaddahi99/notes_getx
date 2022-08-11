@@ -3,14 +3,18 @@ class NoteModel {
   String title;
   String note;
   String dateTime;
-  String folder;
+  String folderName;
+  bool isFolder;
+  bool isInParentFolder;
 
   NoteModel({
     required this.id,
     required this.title,
     required this.note,
     required this.dateTime,
-    required this.folder,
+    required this.folderName,
+    required this.isFolder,
+    required this.isInParentFolder,
   });
 
   factory NoteModel.fromJson(Map<String, dynamic> json) => NoteModel(
@@ -18,7 +22,9 @@ class NoteModel {
         title: json["title"],
         note: json["note"],
         dateTime: json["dateTime"],
-        folder: json["folder"],
+        folderName: json["folderName"],
+        isFolder: json["isFolder"],
+        isInParentFolder: json["isInParentFolder"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -26,6 +32,8 @@ class NoteModel {
         "title": title,
         "note": note,
         "dateTime": dateTime,
-        "folder": folder,
+        "folderName": folderName,
+        "isFolder": isFolder,
+        "isInParentFolder": isInParentFolder,
       };
 }
