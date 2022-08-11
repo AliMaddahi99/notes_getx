@@ -3,14 +3,14 @@ class NoteModel {
   String title;
   String note;
   String dateTime;
-  String? folder;
+  String folder;
 
   NoteModel({
     required this.id,
     required this.title,
     required this.note,
     required this.dateTime,
-    this.folder,
+    required this.folder,
   });
 
   factory NoteModel.fromJson(Map<String, dynamic> json) => NoteModel(

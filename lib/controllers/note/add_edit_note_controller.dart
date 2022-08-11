@@ -13,7 +13,11 @@ class AddEditNoteController extends GetxController {
 
   final NoteController _noteController = Get.find();
 
-  void addNote({required String title, required String note}) {
+  void addNote({
+    required String title,
+    required String note,
+    String folder = "parent",
+  }) {
     if (title.isNotEmpty || note.isNotEmpty) {
       _noteController.notes.insert(
         0,
@@ -22,6 +26,7 @@ class AddEditNoteController extends GetxController {
           note: note,
           title: title,
           dateTime: dateTimeNowStringify(),
+          folder: folder,
         ),
       );
 
