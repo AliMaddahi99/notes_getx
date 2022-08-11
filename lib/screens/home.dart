@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
+import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/screens/note/note_home.dart';
@@ -15,6 +16,7 @@ class Home extends StatelessWidget {
   final AppController _appController = Get.put(AppController());
   final NoteController _noteController = Get.put(NoteController());
   final TaskController _taskController = Get.put(TaskController());
+  final FolderController _folderController = Get.put(FolderController());
 
   @override
   Widget build(BuildContext context) {
