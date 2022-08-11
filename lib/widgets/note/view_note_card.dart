@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/widgets/note/folder_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 
 class ViewNoteCard extends StatelessWidget {
@@ -69,7 +70,7 @@ class ViewNoteCard extends StatelessWidget {
                             );
                           }
                         },
-                        data: _noteController.notes[index].id,
+                        data: index,
                         childWhenDragging: Opacity(
                           opacity: 0.0,
                           child: NoteCard(
@@ -92,12 +93,23 @@ class ViewNoteCard extends StatelessWidget {
                         ),
                       );
                     },
+                    onWillAccept: (data) {
+                      return data != index;
+                    },
                     onAccept: (data) {
-                      Get.snackbar("Dropped", "");
-                      var n = _noteController.notes
-                          .singleWhere((note) => note.id == data);
-                      n.folder = "folder1";
-                      _noteController.notes[index].folder = "folder1";
+                      Get.bottomSheet(
+                        FolderBottomSheet(
+                          title: "New Folder",
+                          index: index,
+                          data: data as int,
+                        ),
+                        backgroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20.0),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
