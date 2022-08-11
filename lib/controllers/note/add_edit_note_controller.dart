@@ -24,6 +24,10 @@ class AddEditNoteController extends GetxController {
           dateTime: dateTimeNowStringify(),
         ),
       );
+
+      // args is index of note in the list
+      // so make args = 0; make it possible to be editable after adding the note
+      // because the note is added to index 0
       args = 0;
     }
   }
