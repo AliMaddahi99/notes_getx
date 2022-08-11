@@ -50,60 +50,126 @@ class NoteCard extends StatelessWidget {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _noteController.notes[index].title.isNotEmpty
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                bottom: 8.0,
+                  child: _noteController.notes[index].folder != null
+                      ? Row(
+                          textDirection: TextDirection.ltr,
+                          children: [
+                            const Icon(
+                              Icons.folder_rounded,
+                              color: Colors.amber,
+                              size: 32.0,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                ),
+                                child: _noteController.isGridView.value
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            "${_noteController.notes[index].folder}",
+                                            style: const TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const Text(
+                                            "0",
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Text(
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        "${_noteController.notes[index].folder}",
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            !_noteController.isGridView.value
+                                ? Padding(
+                                    padding: _appController.isSelectMode.value
+                                        ? const EdgeInsets.only(right: 40.0)
+                                        : EdgeInsets.zero,
+                                    child: const Text(
+                                      "0",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _noteController.notes[index].title.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 8.0,
+                                    ),
+                                    child: Text(
+                                      _noteController.notes[index].title,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                            _noteController.notes[index].note.isNotEmpty
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 8.0,
+                                    ),
+                                    child: Text(
+                                      _noteController.notes[index].note,
+                                      maxLines: _noteController.isGridView.value
+                                          ? 4
+                                          : 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize:
+                                            _noteController.isGridView.value
+                                                ? 16.0
+                                                : 18.0,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top:
+                                    _noteController.isGridView.value ? 16.0 : 0,
                               ),
                               child: Text(
-                                _noteController.notes[index].title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                                _noteController.notes[index].dateTime
+                                    .toString(),
                                 style: const TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.0,
+                                  color: Colors.black45,
                                 ),
                               ),
-                            )
-                          : const SizedBox.shrink(),
-                      _noteController.notes[index].note.isNotEmpty
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                bottom: 8.0,
-                              ),
-                              child: Text(
-                                _noteController.notes[index].note,
-                                maxLines:
-                                    _noteController.isGridView.value ? 4 : 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: _noteController.isGridView.value
-                                      ? 16.0
-                                      : 18.0,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                            )
-                          : const SizedBox.shrink(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: _noteController.isGridView.value ? 16.0 : 0,
+                            ),
+                            // Empty Row to override stack's width
+                            Row(),
+                          ],
                         ),
-                        child: Text(
-                          _noteController.notes[index].dateTime.toString(),
-                          style: const TextStyle(
-                            fontSize: 12.0,
-                            color: Colors.black45,
-                          ),
-                        ),
-                      ),
-                      // Empty Row to override stack's width
-                      Row(),
-                    ],
-                  ),
                 ),
               ),
             ),
