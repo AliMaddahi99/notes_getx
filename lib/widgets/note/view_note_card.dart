@@ -93,7 +93,6 @@ class ViewNoteCard extends StatelessWidget {
                       );
                     },
                     onAccept: (data) {
-                      _noteController.isDropped.value = true;
                       Get.snackbar("Dropped", "");
                       var n = _noteController.notes
                           .singleWhere((note) => note.id == data);

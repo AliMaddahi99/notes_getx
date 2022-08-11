@@ -8,7 +8,6 @@ class NoteController extends GetxController {
   var isGridView = false.obs;
 
   ScrollController scrollController = ScrollController();
-  var isDropped = false.obs;
 
   void deleteNote(int id) {
     notes.removeWhere((note) => note.id == id);
