@@ -5,7 +5,10 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/widgets/note/folder_screen_main_app_bar.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
+import 'package:notes_getx/widgets/select_mode_app_bar.dart';
+import 'package:notes_getx/widgets/select_mode_bottom_navigation_bar.dart';
 
 class FolderScreen extends StatelessWidget {
   final String folderName;
@@ -45,48 +48,15 @@ class FolderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(folderName),
-        actions: [
-          Obx(
-            () => _appController.pageViewId.value == 0
-                ? IconButton(
-                    onPressed: () {
-                      _noteController.isGridView.value =
-                          !_noteController.isGridView.value;
-                    },
-                    icon: _noteController.isGridView.value
-                        ? const Icon(Icons.view_list_rounded)
-                        : const Icon(Icons.grid_view_rounded),
-                    tooltip: _noteController.isGridView.value
-                        ? "List view"
-                        : "Grid view",
-                  )
-                : const SizedBox.shrink(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Obx(
+          () => Container(
+            child: _appController.isSelectMode.value
+                ? SelectModeAppBar()
+                : FolderScreenMainAppBar(folderName: folderName),
           ),
-          PopupMenuButton<String>(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            tooltip: "Options",
-            onSelected: (value) {
-              switch (value) {
-                case "Rename":
-                  break;
-                case "Delete":
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return {"Rename", "Delete"}.map((choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          ),
-        ],
+        ),
       ),
       body: Obx(
         () => MasonryGridView.count(
@@ -107,6 +77,13 @@ class FolderScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add_rounded),
+      ),
+      bottomNavigationBar: Obx(
+        () => Container(
+          child: _appController.isSelectMode.value
+              ? SelectModeBottomNavigationBar()
+              : const SizedBox.shrink(),
+        ),
       ),
     );
   }
