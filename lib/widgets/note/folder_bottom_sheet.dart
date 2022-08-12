@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/models/note_model.dart';
 
 class FolderBottomSheet extends StatelessWidget {
   final String title;
-  final int index;
-  final int data;
+  final int targetNoteId;
+  final int draggingNoteId;
   FolderBottomSheet({
     Key? key,
     required this.title,
-    required this.index,
-    required this.data,
+    required this.targetNoteId,
+    required this.draggingNoteId,
   }) : super(key: key);
 
   final FolderController _folderController = Get.find();
@@ -44,6 +45,9 @@ class FolderBottomSheet extends StatelessWidget {
                   ),
                 ),
               ),
+              onChanged: (value) {
+                _folderController.isTextFieldEmpty.value = value.isEmpty;
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,33 +71,71 @@ class FolderBottomSheet extends StatelessWidget {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.white,
-                    minimumSize:
-                        Size(MediaQuery.of(context).size.width / 2 - 22, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
+                Obx(
+                  () => ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      onPrimary: Colors.white,
+                      minimumSize:
+                          Size(MediaQuery.of(context).size.width / 2 - 22, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    if (_folderController
-                        .folderTextController.text.isNotEmpty) {
-                      var n = _noteController.notes;
-                      _noteController.notes[data as int].folder =
-                          _folderController.folderTextController.text;
-                      _noteController.notes[index].folder =
-                          _folderController.folderTextController.text;
+                    onPressed: !_folderController.isTextFieldEmpty.value
+                        ? () {
+                            var enteredFolderName =
+                                _folderController.folderTextController.text;
 
-                      _folderController.folderTextController.clear();
-                      Get.back();
-                    }
-                  },
-                  child: const Text(
-                    "OK",
-                    style: TextStyle(
-                      fontSize: 18.0,
+                            var foldersName = _folderController.folders
+                                .map((folder) => folder.name);
+                            if (foldersName.contains(enteredFolderName)) {
+                              Get.snackbar(
+                                "Folder exists",
+                                "This folder is already exist",
+                                snackPosition: SnackPosition.BOTTOM,
+                                animationDuration:
+                                    const Duration(milliseconds: 300),
+                              );
+                            } else {
+                              _noteController.notes.map((note) {
+                                if (note.id == draggingNoteId) {
+                                  note.folderName = enteredFolderName;
+                                }
+
+                                if (note.id == targetNoteId) {
+                                  note.folderName = enteredFolderName;
+                                }
+                              });
+
+                              List<NoteModel> notes = [
+                                _noteController.notes.firstWhere(
+                                    (note) => note.id == draggingNoteId),
+                                _noteController.notes.firstWhere(
+                                    (note) => note.id == targetNoteId),
+                              ];
+
+                              _noteController.notes.removeWhere(
+                                  (note) => note.id == draggingNoteId);
+                              _noteController.notes.removeWhere(
+                                  (note) => note.id == targetNoteId);
+
+                              _folderController.createFolder(
+                                  enteredFolderName, notes);
+
+                              Get.back();
+                              print(
+                                  "notes: ${_noteController.notes.map((note) => note.note)}");
+                              print(
+                                  "folderNotes: ${_folderController.folders.map((folder) => "${folder.notes[0].note} ${folder.notes[1].note}")}");
+                            }
+                          }
+                        : null,
+                    child: const Text(
+                      "OK",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
                     ),
                   ),
                 ),
