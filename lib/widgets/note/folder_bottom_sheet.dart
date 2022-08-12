@@ -98,7 +98,7 @@ class FolderBottomSheet extends StatelessWidget {
                                     const Duration(milliseconds: 300),
                               );
                             } else {
-                              _noteController.notes.map((note) {
+                              for (var note in _noteController.notes) {
                                 if (note.id == draggingNoteId) {
                                   note.folderName = enteredFolderName;
                                 }
@@ -106,7 +106,7 @@ class FolderBottomSheet extends StatelessWidget {
                                 if (note.id == targetNoteId) {
                                   note.folderName = enteredFolderName;
                                 }
-                              });
+                              }
 
                               List<NoteModel> notes = [
                                 _noteController.notes.firstWhere(
@@ -124,10 +124,6 @@ class FolderBottomSheet extends StatelessWidget {
                                   enteredFolderName, notes);
 
                               Get.back();
-                              print(
-                                  "notes: ${_noteController.notes.map((note) => note.note)}");
-                              print(
-                                  "folderNotes: ${_folderController.folders.map((folder) => "${folder.notes[0].note} ${folder.notes[1].note}")}");
                             }
                           }
                         : null,
