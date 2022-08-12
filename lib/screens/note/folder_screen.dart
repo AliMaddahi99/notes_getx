@@ -53,7 +53,9 @@ class FolderScreen extends StatelessWidget {
         child: Obx(
           () => Container(
             child: _appController.isSelectMode.value
-                ? SelectModeAppBar()
+                ? SelectModeAppBar(
+                    folderName: folderName,
+                  )
                 : FolderScreenMainAppBar(folderName: folderName),
           ),
         ),
