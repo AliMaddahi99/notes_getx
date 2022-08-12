@@ -28,7 +28,6 @@ class AddEditNoteController extends GetxController {
           dateTime: dateTimeNowStringify(),
           folderName: folder,
           isFolder: false,
-          isInParentFolder: true,
         ),
       );
 
