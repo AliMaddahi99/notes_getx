@@ -61,6 +61,8 @@ class FolderBottomSheet extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    _folderController.folderTextController.clear();
+                    _folderController.isTextFieldEmpty.value = true;
                     Get.back();
                   },
                   child: const Text(
@@ -96,29 +98,16 @@ class FolderBottomSheet extends StatelessWidget {
                                 snackPosition: SnackPosition.BOTTOM,
                                 animationDuration:
                                     const Duration(milliseconds: 300),
+                                margin: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(20.0),
                               );
                             } else {
-                              for (var note in _noteController.notes) {
-                                if (note.id == draggingNoteId) {
-                                  note.folderName = enteredFolderName;
-                                }
-
-                                if (note.id == targetNoteId) {
-                                  note.folderName = enteredFolderName;
-                                }
-                              }
-
                               List<NoteModel> notes = [
                                 _noteController.notes.firstWhere(
                                     (note) => note.id == draggingNoteId),
                                 _noteController.notes.firstWhere(
                                     (note) => note.id == targetNoteId),
                               ];
-
-                              _noteController.notes.removeWhere(
-                                  (note) => note.id == draggingNoteId);
-                              _noteController.notes.removeWhere(
-                                  (note) => note.id == targetNoteId);
 
                               _folderController.createFolder(
                                   enteredFolderName, notes);
