@@ -4,6 +4,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
+import 'package:notes_getx/screens/note/folder_screen.dart';
 
 class NoteCard extends StatelessWidget {
   final int index;
@@ -51,7 +52,15 @@ class NoteCard extends StatelessWidget {
                         if (_appController.isSelectMode.value) {
                           _appController
                               .selectItem(_noteController.notes[index].id);
-                        } else {}
+                        } else {
+                          Get.to(
+                            () => FolderScreen(
+                              folderName:
+                                  _noteController.notes[index].folderName,
+                            ),
+                            transition: Transition.cupertino,
+                          );
+                        }
                       }
                     : () {
                         if (_appController.isSelectMode.value) {
@@ -64,6 +73,7 @@ class NoteCard extends StatelessWidget {
                           Get.to(
                             () => AddEditNote(),
                             arguments: index,
+                            transition: Transition.cupertino,
                           );
                         }
                       },
