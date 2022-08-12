@@ -55,7 +55,7 @@ class ViewNoteCard extends StatelessWidget {
                         onDragUpdate: (details) {
                           _appController.selectedItems.clear();
 
-                          if (details.globalPosition.dy < 150) {
+                          if (details.globalPosition.dy < 100) {
                             _noteController.scrollController.animateTo(
                               _noteController.scrollController.offset - 50,
                               duration: const Duration(milliseconds: 300),
