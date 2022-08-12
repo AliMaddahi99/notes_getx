@@ -70,7 +70,7 @@ class ViewNoteCard extends StatelessWidget {
                             );
                           }
                         },
-                        data: index,
+                        data: _noteController.notes[index].id,
                         childWhenDragging: Opacity(
                           opacity: 0.0,
                           child: NoteCard(
@@ -95,14 +95,14 @@ class ViewNoteCard extends StatelessWidget {
                       );
                     },
                     onWillAccept: (data) {
-                      return data != index;
+                      return data != _noteController.notes[index].id;
                     },
                     onAccept: (data) {
                       Get.bottomSheet(
                         FolderBottomSheet(
                           title: "New Folder",
-                          index: index,
-                          data: data as int,
+                          targetNoteId: _noteController.notes[index].id,
+                          draggingNoteId: data as int,
                         ),
                         backgroundColor: Colors.white,
                         shape: const RoundedRectangleBorder(
