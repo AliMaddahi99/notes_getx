@@ -42,7 +42,9 @@ class FolderController extends GetxController {
   void addNoteToExistingFolder(String folderName, NoteModel note) {
     for (var folder in folders) {
       if (folder.name == folderName) {
+        note.folderName = folderName;
         folder.notes.insert(0, note);
+        _noteController.notes.removeWhere((n) => n.id == note.id);
       }
     }
   }
