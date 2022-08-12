@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
+import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/widgets/note/folder_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
@@ -12,6 +13,7 @@ class ViewNoteCard extends StatelessWidget {
 
   final NoteController _noteController = Get.find();
   final AppController _appController = Get.find();
+  final FolderController _folderController = Get.find();
 
   int gridCrossAxisCount(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -106,19 +108,29 @@ class ViewNoteCard extends StatelessWidget {
                       return data != _noteController.notes[index].id;
                     },
                     onAccept: (data) {
-                      Get.bottomSheet(
-                        FolderBottomSheet(
-                          title: "New Folder",
-                          targetNoteId: _noteController.notes[index].id,
-                          draggingNoteId: data as int,
-                        ),
-                        backgroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20.0),
+                      if (_noteController.notes[index].isFolder) {
+                        _folderController.addNoteToExistingFolder(
+                          _noteController.notes[index].folderName,
+                          _noteController.notes
+                              .firstWhere((note) => note.id == data),
+                        );
+                      } else {
+                        Get.bottomSheet(
+                          FolderBottomSheet(
+                            title: "New Folder",
+                            targetNoteId: _noteController.notes[index].id,
+                            draggingNoteId: data as int,
                           ),
-                        ),
-                      );
+                          backgroundColor: Colors.white,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20.0),
+                            ),
+                          ),
+                          enableDrag: false,
+                          isDismissible: false,
+                        );
+                      }
                     },
                   ),
                 ),
