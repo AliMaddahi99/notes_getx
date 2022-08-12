@@ -7,12 +7,10 @@ import 'package:notes_getx/screens/note/add_edit_note.dart';
 class NoteCard extends StatelessWidget {
   final int index;
   final bool highlighted;
-  final bool isFolder;
   NoteCard({
     Key? key,
     required this.index,
     this.highlighted = false,
-    this.isFolder = false,
   }) : super(key: key);
 
   final AppController _appController = Get.find();
