@@ -6,6 +6,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/widgets/note/folder_bottom_sheet.dart';
+import 'package:notes_getx/widgets/note/folder_card.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 
 class ViewNoteCard extends StatelessWidget {
@@ -49,10 +50,9 @@ class ViewNoteCard extends StatelessWidget {
                   child: DragTarget(
                     builder: (context, candidateData, rejectedData) {
                       return _noteController.notes[index].isFolder
-                          ? NoteCard(
+                          ? FolderCard(
                               index: index,
                               highlighted: candidateData.isNotEmpty,
-                              isFolder: _noteController.notes[index].isFolder,
                             )
                           : LongPressDraggable(
                               onDragStarted: () {
