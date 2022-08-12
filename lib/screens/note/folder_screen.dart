@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/models/note_model.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 
 class FolderScreen extends StatelessWidget {
@@ -28,6 +29,17 @@ class FolderScreen extends StatelessWidget {
     }
 
     return count;
+  }
+
+  List<NoteModel> getNotesFromFolder() {
+    List<NoteModel> notes = [];
+    for (var folder in _folderController.folders) {
+      if (folder.name == folderName) {
+        notes = folder.notes;
+      }
+    }
+
+    return notes;
   }
 
   @override
@@ -85,11 +97,9 @@ class FolderScreen extends StatelessWidget {
               .notes
               .length,
           itemBuilder: (context, index) {
-            // return NoteCard(index: index);
-            return Container(
-              margin: const EdgeInsets.all(8.0),
-              height: 50,
-              color: Colors.amber,
+            return NoteCard(
+              index: index,
+              note: getNotesFromFolder()[index],
             );
           },
         ),
