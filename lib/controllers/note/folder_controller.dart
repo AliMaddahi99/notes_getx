@@ -12,6 +12,10 @@ class FolderController extends GetxController {
   var isTextFieldEmpty = true.obs;
 
   void createFolder(String folderName, List<NoteModel> notes) {
+    for (var note in notes) {
+      note.folderName = folderName;
+    }
+
     folders.insert(0, FolderModel(name: folderName, notes: notes));
 
     _noteController.notes.insert(
@@ -28,5 +32,18 @@ class FolderController extends GetxController {
     );
 
     folderTextController.clear();
+    isTextFieldEmpty.value = true;
+
+    for (var n in notes) {
+      _noteController.notes.removeWhere((note) => note.id == n.id);
+    }
+  }
+
+  void addNoteToExistingFolder(String folderName, NoteModel note) {
+    for (var folder in folders) {
+      if (folder.name == folderName) {
+        folder.notes.insert(0, note);
+      }
+    }
   }
 }
