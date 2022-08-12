@@ -59,6 +59,13 @@ class NoteCard extends StatelessWidget {
                     );
                   }
                 },
+                onLongPress: isFolder
+                    ? () {
+                        _appController.isSelectMode.value = true;
+                        _appController
+                            .selectItem(_noteController.notes[index].id);
+                      }
+                    : null,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: isFolder
