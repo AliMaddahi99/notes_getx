@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/folder_model.dart';
 import 'package:notes_getx/models/note_model.dart';
@@ -47,5 +48,19 @@ class FolderController extends GetxController {
         _noteController.notes.removeWhere((n) => n.id == note.id);
       }
     }
+  }
+
+  @override
+  void onInit() {
+    // Save and read folders
+    var storedFolders = GetStorage().read<List>("folders");
+    if (storedFolders != null) {
+      folders = storedFolders.map((e) => FolderModel.fromJson(e)).toList().obs;
+    }
+    ever(folders, (_) {
+      GetStorage().write("folders", folders.toList());
+    });
+
+    super.onInit();
   }
 }
