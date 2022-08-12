@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/models/note_model.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
 
 class NoteCard extends StatelessWidget {
+  final NoteModel note;
   final int index;
   final bool highlighted;
   NoteCard({
     Key? key,
+    required this.note,
     required this.index,
     this.highlighted = false,
   }) : super(key: key);
@@ -38,10 +41,10 @@ class NoteCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
                 onTap: () {
                   if (_appController.isSelectMode.value) {
-                    _appController.selectItem(_noteController.notes[index].id);
+                    _appController.selectItem(note.id);
                   } else {
                     _appController.selectedItems.clear();
-                    _appController.selectItem(_noteController.notes[index].id);
+                    _appController.selectItem(note.id);
                     Get.to(
                       () => AddEditNote(),
                       arguments: index,
@@ -49,18 +52,24 @@ class NoteCard extends StatelessWidget {
                     );
                   }
                 },
+                onLongPress: note.folderName != "parent"
+                    ? () {
+                        _appController.isSelectMode.value = true;
+                        _appController.selectItem(note.id);
+                      }
+                    : null,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _noteController.notes[index].title.isNotEmpty
+                      note.title.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(
                                 bottom: 8.0,
                               ),
                               child: Text(
-                                _noteController.notes[index].title,
+                                note.title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -70,13 +79,13 @@ class NoteCard extends StatelessWidget {
                               ),
                             )
                           : const SizedBox.shrink(),
-                      _noteController.notes[index].note.isNotEmpty
+                      note.note.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(
                                 bottom: 8.0,
                               ),
                               child: Text(
-                                _noteController.notes[index].note,
+                                note.note,
                                 maxLines:
                                     _noteController.isGridView.value ? 4 : 1,
                                 overflow: TextOverflow.ellipsis,
@@ -94,7 +103,7 @@ class NoteCard extends StatelessWidget {
                           top: _noteController.isGridView.value ? 16.0 : 0,
                         ),
                         child: Text(
-                          _noteController.notes[index].dateTime.toString(),
+                          note.dateTime.toString(),
                           style: const TextStyle(
                             fontSize: 12.0,
                             color: Colors.black45,
@@ -124,11 +133,9 @@ class NoteCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    value: _appController.selectedItems
-                        .contains(_noteController.notes[index].id),
+                    value: _appController.selectedItems.contains(note.id),
                     onChanged: (checked) {
-                      _appController
-                          .selectItem(_noteController.notes[index].id);
+                      _appController.selectItem(note.id);
                     },
                   ),
                 ),

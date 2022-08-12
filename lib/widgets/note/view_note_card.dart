@@ -85,6 +85,7 @@ class ViewNoteCard extends StatelessWidget {
                                 opacity: 0.0,
                                 child: NoteCard(
                                   index: index,
+                                  note: _noteController.notes[index],
                                 ),
                               ),
                               feedback: SizedBox(
@@ -95,10 +96,12 @@ class ViewNoteCard extends StatelessWidget {
                                     : MediaQuery.of(context).size.width - 16,
                                 child: NoteCard(
                                   index: index,
+                                  note: _noteController.notes[index],
                                 ),
                               ),
                               child: NoteCard(
                                 index: index,
+                                note: _noteController.notes[index],
                                 highlighted: candidateData.isNotEmpty,
                               ),
                             );
