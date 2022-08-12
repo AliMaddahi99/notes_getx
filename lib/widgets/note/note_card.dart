@@ -21,7 +21,6 @@ class NoteCard extends StatelessWidget {
   final FolderController _folderController = Get.find();
 
   String getNoteCountInFolder() {
-    print("folder: ${_folderController.folders.map((folder) => folder.name)}");
     var f = _folderController.folders.singleWhere(
         (folder) => folder.name == _noteController.notes[index].folderName);
     return f.notes.length.toString();
