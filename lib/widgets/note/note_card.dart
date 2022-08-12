@@ -46,18 +46,27 @@ class NoteCard extends StatelessWidget {
               () => InkWell(
                 mouseCursor: SystemMouseCursors.click,
                 borderRadius: BorderRadius.circular(16.0),
-                onTap: () {
-                  if (_appController.isSelectMode.value) {
-                    _appController.selectItem(_noteController.notes[index].id);
-                  } else {
-                    _appController.selectedItems.clear();
-                    _appController.selectItem(_noteController.notes[index].id);
-                    Get.to(
-                      () => AddEditNote(),
-                      arguments: index,
-                    );
-                  }
-                },
+                onTap: _noteController.notes[index].isFolder
+                    ? () {
+                        if (_appController.isSelectMode.value) {
+                          _appController
+                              .selectItem(_noteController.notes[index].id);
+                        } else {}
+                      }
+                    : () {
+                        if (_appController.isSelectMode.value) {
+                          _appController
+                              .selectItem(_noteController.notes[index].id);
+                        } else {
+                          _appController.selectedItems.clear();
+                          _appController
+                              .selectItem(_noteController.notes[index].id);
+                          Get.to(
+                            () => AddEditNote(),
+                            arguments: index,
+                          );
+                        }
+                      },
                 onLongPress: isFolder
                     ? () {
                         _appController.isSelectMode.value = true;
