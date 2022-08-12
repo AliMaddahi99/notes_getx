@@ -46,53 +46,61 @@ class ViewNoteCard extends StatelessWidget {
                 child: FadeInAnimation(
                   child: DragTarget(
                     builder: (context, candidateData, rejectedData) {
-                      return LongPressDraggable(
-                        onDragStarted: () {
-                          _appController.isSelectMode.value = true;
-                          _appController
-                              .selectItem(_noteController.notes[index].id);
-                        },
-                        onDragUpdate: (details) {
-                          _appController.selectedItems.clear();
+                      return _noteController.notes[index].isFolder
+                          ? NoteCard(
+                              index: index,
+                              highlighted: candidateData.isNotEmpty,
+                              isFolder: _noteController.notes[index].isFolder,
+                            )
+                          : LongPressDraggable(
+                              onDragStarted: () {
+                                _appController.isSelectMode.value = true;
+                                _appController.selectItem(
+                                    _noteController.notes[index].id);
+                              },
+                              onDragUpdate: (details) {
+                                _appController.selectedItems.clear();
 
-                          if (details.globalPosition.dy < 100) {
-                            _noteController.scrollController.animateTo(
-                              _noteController.scrollController.offset - 50,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.linear,
+                                if (details.globalPosition.dy < 100) {
+                                  _noteController.scrollController.animateTo(
+                                    _noteController.scrollController.offset -
+                                        50,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.linear,
+                                  );
+                                } else if (details.globalPosition.dy >
+                                    MediaQuery.of(context).size.height - 100) {
+                                  _noteController.scrollController.animateTo(
+                                    _noteController.scrollController.offset +
+                                        50,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.linear,
+                                  );
+                                }
+                              },
+                              data: _noteController.notes[index].id,
+                              childWhenDragging: Opacity(
+                                opacity: 0.0,
+                                child: NoteCard(
+                                  index: index,
+                                ),
+                              ),
+                              feedback: SizedBox(
+                                // using MediaQuery to set NoteCard width, otherwise,
+                                // it's width would be as long as NoteCard content
+                                width: _noteController.isGridView.value
+                                    ? MediaQuery.of(context).size.width / 2 - 8
+                                    : MediaQuery.of(context).size.width - 16,
+                                child: NoteCard(
+                                  index: index,
+                                ),
+                              ),
+                              child: NoteCard(
+                                index: index,
+                                highlighted: candidateData.isNotEmpty,
+                                isFolder: _noteController.notes[index].isFolder,
+                              ),
                             );
-                          } else if (details.globalPosition.dy >
-                              MediaQuery.of(context).size.height - 100) {
-                            _noteController.scrollController.animateTo(
-                              _noteController.scrollController.offset + 50,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.linear,
-                            );
-                          }
-                        },
-                        data: _noteController.notes[index].id,
-                        childWhenDragging: Opacity(
-                          opacity: 0.0,
-                          child: NoteCard(
-                            index: index,
-                          ),
-                        ),
-                        feedback: SizedBox(
-                          // using MediaQuery to set NoteCard width, otherwise,
-                          // it's width would be as long as NoteCard content
-                          width: _noteController.isGridView.value
-                              ? MediaQuery.of(context).size.width / 2 - 8
-                              : MediaQuery.of(context).size.width - 16,
-                          child: NoteCard(
-                            index: index,
-                          ),
-                        ),
-                        child: NoteCard(
-                          index: index,
-                          highlighted: candidateData.isNotEmpty,
-                          isFolder: _noteController.notes[index].isFolder,
-                        ),
-                      );
                     },
                     onWillAccept: (data) {
                       return data != _noteController.notes[index].id;
