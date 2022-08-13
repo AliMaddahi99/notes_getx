@@ -21,7 +21,9 @@ class NoteHome extends StatelessWidget {
             ? FloatingActionButton(
                 onPressed: () => {
                   Get.to(
-                    () => AddEditNote(),
+                    () => AddEditNote(
+                      folderName: "parent",
+                    ),
                     transition: Transition.cupertino,
                   ),
                 },
