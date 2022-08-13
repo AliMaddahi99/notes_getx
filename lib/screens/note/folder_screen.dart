@@ -5,6 +5,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/screens/note/add_edit_note.dart';
 import 'package:notes_getx/widgets/note/folder_screen_main_app_bar.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 import 'package:notes_getx/widgets/select_mode_app_bar.dart';
@@ -76,9 +77,23 @@ class FolderScreen extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add_rounded),
+      floatingActionButton: Obx(
+        () => Container(
+          child: !_appController.isSelectMode.value
+              ? FloatingActionButton(
+                  onPressed: () => {
+                    Get.to(
+                      () => AddEditNote(
+                        folderName: folderName,
+                      ),
+                      transition: Transition.cupertino,
+                    ),
+                  },
+                  tooltip: "Add note",
+                  child: const Icon(Icons.add_rounded),
+                )
+              : const SizedBox.shrink(),
+        ),
       ),
       bottomNavigationBar: Obx(
         () => Container(
