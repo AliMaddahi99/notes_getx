@@ -10,7 +10,7 @@ class FolderModel {
     return FolderModel(
       name: json["name"],
       notes:
-          List<NoteModel>.from(json['notes'].map((n) => NoteModel.fromJson(n))),
+          List<NoteModel>.from(json['notes'].map((n) => NoteModel.fromMap(n))),
     );
   }
 

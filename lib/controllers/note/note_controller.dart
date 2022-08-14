@@ -18,7 +18,7 @@ class NoteController extends GetxController {
     // Save and read notes
     var storedNotes = GetStorage().read<List>("notes");
     if (storedNotes != null) {
-      notes = storedNotes.map((e) => NoteModel.fromJson(e)).toList().obs;
+      notes = storedNotes.map((e) => NoteModel.fromMap(e)).toList().obs;
     }
     ever(notes, (_) {
       GetStorage().write("notes", notes.toList());
