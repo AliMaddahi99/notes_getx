@@ -55,7 +55,7 @@ class FolderController extends GetxController {
     // Save and read folders
     var storedFolders = GetStorage().read<List>("folders");
     if (storedFolders != null) {
-      folders = storedFolders.map((e) => FolderModel.fromJson(e)).toList().obs;
+      folders = storedFolders.map((e) => FolderModel.fromMap(e)).toList().obs;
     }
     ever(folders, (_) {
       GetStorage().write("folders", folders.toList());

@@ -6,7 +6,7 @@ class FolderModel {
 
   FolderModel({required this.name, required this.notes});
 
-  factory FolderModel.fromJson(Map<String, dynamic> json) {
+  factory FolderModel.fromMap(Map<String, dynamic> json) {
     return FolderModel(
       name: json["name"],
       notes:
@@ -14,7 +14,7 @@ class FolderModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       "name": name,
       "notes": notes,
