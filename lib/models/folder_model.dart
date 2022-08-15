@@ -6,11 +6,11 @@ class FolderModel {
 
   FolderModel({required this.name, required this.notes});
 
-  factory FolderModel.fromMap(Map<String, dynamic> json) {
+  factory FolderModel.fromMap(Map<String, dynamic> folderAsMap) {
     return FolderModel(
-      name: json["name"],
-      notes:
-          List<NoteModel>.from(json['notes'].map((n) => NoteModel.fromMap(n))),
+      name: folderAsMap["name"],
+      notes: List<NoteModel>.from(
+          folderAsMap['notes'].map((n) => NoteModel.fromMap(n))),
     );
   }
 
