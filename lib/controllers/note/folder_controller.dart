@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
-import 'package:notes_getx/models/folder_model.dart';
+import 'package:notes_getx/models/folder.dart';
 import 'package:notes_getx/models/note.dart';
 
 class FolderController extends GetxController {
   final TextEditingController folderTextController = TextEditingController();
   final NoteController _noteController = Get.find();
 
-  var folders = <FolderModel>[].obs;
+  var folders = <Folder>[].obs;
   var isTextFieldEmpty = true.obs;
 
   void createFolder(String folderName, List<Note> notes) {
@@ -17,7 +17,7 @@ class FolderController extends GetxController {
       note.folderName = folderName;
     }
 
-    folders.insert(0, FolderModel(name: folderName, notes: notes));
+    folders.insert(0, Folder(name: folderName, notes: notes));
 
     _noteController.notes.insert(
       0,
@@ -55,7 +55,7 @@ class FolderController extends GetxController {
     // Save and read folders
     var storedFolders = GetStorage().read<List>("folders");
     if (storedFolders != null) {
-      folders = storedFolders.map((e) => FolderModel.fromMap(e)).toList().obs;
+      folders = storedFolders.map((e) => Folder.fromMap(e)).toList().obs;
     }
     ever(folders, (_) {
       GetStorage().write("folders", folders.toList());

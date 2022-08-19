@@ -1,13 +1,13 @@
 import 'package:notes_getx/models/note.dart';
 
-class FolderModel {
+class Folder {
   final String name;
   final List<Note> notes;
 
-  FolderModel({required this.name, required this.notes});
+  Folder({required this.name, required this.notes});
 
-  factory FolderModel.fromMap(Map<String, dynamic> folderAsMap) {
-    return FolderModel(
+  factory Folder.fromMap(Map<String, dynamic> folderAsMap) {
+    return Folder(
       name: folderAsMap["name"],
       notes: List<Note>.from(folderAsMap['notes'].map((n) => Note.fromMap(n))),
     );
