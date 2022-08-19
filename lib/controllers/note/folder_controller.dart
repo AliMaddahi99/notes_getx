@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/folder_model.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/models/note.dart';
 
 class FolderController extends GetxController {
   final TextEditingController folderTextController = TextEditingController();
@@ -12,7 +12,7 @@ class FolderController extends GetxController {
   var folders = <FolderModel>[].obs;
   var isTextFieldEmpty = true.obs;
 
-  void createFolder(String folderName, List<NoteModel> notes) {
+  void createFolder(String folderName, List<Note> notes) {
     for (var note in notes) {
       note.folderName = folderName;
     }
@@ -21,7 +21,7 @@ class FolderController extends GetxController {
 
     _noteController.notes.insert(
       0,
-      NoteModel(
+      Note(
         id: DateTime.now().microsecondsSinceEpoch,
         title: "",
         note: "",
@@ -40,7 +40,7 @@ class FolderController extends GetxController {
     }
   }
 
-  void addNoteToExistingFolder(String folderName, NoteModel note) {
+  void addNoteToExistingFolder(String folderName, Note note) {
     for (var folder in folders) {
       if (folder.name == folderName) {
         note.folderName = folderName;

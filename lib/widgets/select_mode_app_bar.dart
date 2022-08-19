@@ -4,7 +4,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/models/note.dart';
 
 class SelectModeAppBar extends StatelessWidget {
   final String folderName;
@@ -18,8 +18,8 @@ class SelectModeAppBar extends StatelessWidget {
   final TaskController _taskController = Get.find();
   final FolderController _folderController = Get.find();
 
-  List<NoteModel> getFolderNotes() {
-    List<NoteModel> notes = [];
+  List<Note> getFolderNotes() {
+    List<Note> notes = [];
     for (var folder in _folderController.folders) {
       if (folder.name == folderName) {
         notes = folder.notes;

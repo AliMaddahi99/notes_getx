@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/models/note.dart';
 
 class AddEditNoteController extends GetxController {
   final TextEditingController titleTextController = TextEditingController();
@@ -10,7 +10,7 @@ class AddEditNoteController extends GetxController {
   final FocusNode noteFocusNode = FocusNode();
 
   // var args = Get.arguments;
-  NoteModel? args = Get.arguments;
+  Note? args = Get.arguments;
   var isSaveButtonVisible = false.obs;
 
   final NoteController _noteController = Get.find();
@@ -24,7 +24,7 @@ class AddEditNoteController extends GetxController {
   //   if (title.isNotEmpty || note.isNotEmpty) {
   //     _noteController.notes.insert(
   //       0,
-  //       NoteModel(
+  //       Note(
   //         id: DateTime.now().microsecondsSinceEpoch,
   //         note: note,
   //         title: title,
@@ -47,7 +47,7 @@ class AddEditNoteController extends GetxController {
     required String folderName,
   }) {
     if (title.isNotEmpty || note.isNotEmpty) {
-      var noteModel = NoteModel(
+      var noteModel = Note(
         id: DateTime.now().microsecondsSinceEpoch,
         note: note,
         title: title,

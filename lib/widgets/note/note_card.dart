@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
 
 class NoteCard extends StatelessWidget {
-  final NoteModel note;
+  final Note note;
   final int index;
   final bool highlighted;
   NoteCard({

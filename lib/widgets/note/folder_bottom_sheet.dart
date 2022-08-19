@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/models/note.dart';
 
 class FolderBottomSheet extends StatelessWidget {
   final String title;
@@ -102,7 +102,7 @@ class FolderBottomSheet extends StatelessWidget {
                                 padding: const EdgeInsets.all(20.0),
                               );
                             } else {
-                              List<NoteModel> notes = [
+                              List<Note> notes = [
                                 _noteController.notes.firstWhere(
                                     (note) => note.id == draggingNoteId),
                                 _noteController.notes.firstWhere(

@@ -1,13 +1,13 @@
-class NoteModel {
-  int id;
+class Note {
+  int? id;
   String title;
   String note;
   String dateTime;
   String folderName;
   bool isFolder;
 
-  NoteModel({
-    required this.id,
+  Note({
+    this.id,
     required this.title,
     required this.note,
     required this.dateTime,
@@ -15,14 +15,14 @@ class NoteModel {
     required this.isFolder,
   });
 
-  factory NoteModel.fromMap(Map<String, dynamic> json) {
-    return NoteModel(
-      id: json["id"],
-      title: json["title"],
-      note: json["note"],
-      dateTime: json["dateTime"],
-      folderName: json["folderName"],
-      isFolder: json["isFolder"],
+  factory Note.fromMap(Map<String, dynamic> noteAsMap) {
+    return Note(
+      id: noteAsMap["id"],
+      title: noteAsMap["title"],
+      note: noteAsMap["note"],
+      dateTime: noteAsMap["dateTime"],
+      folderName: noteAsMap["folderName"],
+      isFolder: noteAsMap["isFolder"] == 1,
     );
   }
 
@@ -33,7 +33,7 @@ class NoteModel {
       "note": note,
       "dateTime": dateTime,
       "folderName": folderName,
-      "isFolder": isFolder,
+      "isFolder": isFolder ? 1 : 0,
     };
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:notes_getx/models/note_model.dart';
+import 'package:notes_getx/models/note.dart';
 
 class NoteController extends GetxController {
-  var notes = <NoteModel>[].obs;
+  var notes = <Note>[].obs;
   var isGridView = false.obs;
 
   ScrollController scrollController = ScrollController();
@@ -18,7 +18,7 @@ class NoteController extends GetxController {
     // Save and read notes
     var storedNotes = GetStorage().read<List>("notes");
     if (storedNotes != null) {
-      notes = storedNotes.map((e) => NoteModel.fromMap(e)).toList().obs;
+      notes = storedNotes.map((e) => Note.fromMap(e)).toList().obs;
     }
     ever(notes, (_) {
       GetStorage().write("notes", notes.toList());
