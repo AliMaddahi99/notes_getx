@@ -41,10 +41,10 @@ class NoteCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
                 onTap: () {
                   if (_appController.isSelectMode.value) {
-                    _appController.selectItem(note.id);
+                    _appController.selectItem(note.id!);
                   } else {
                     _appController.selectedItems.clear();
-                    _appController.selectItem(note.id);
+                    _appController.selectItem(note.id!);
                     Get.to(
                       () => AddEditNote(
                         folderName: note.folderName,
@@ -57,7 +57,7 @@ class NoteCard extends StatelessWidget {
                 onLongPress: note.folderName != "parent"
                     ? () {
                         _appController.isSelectMode.value = true;
-                        _appController.selectItem(note.id);
+                        _appController.selectItem(note.id!);
                       }
                     : null,
                 child: Padding(
@@ -137,7 +137,7 @@ class NoteCard extends StatelessWidget {
                     ),
                     value: _appController.selectedItems.contains(note.id),
                     onChanged: (checked) {
-                      _appController.selectItem(note.id);
+                      _appController.selectItem(note.id!);
                     },
                   ),
                 ),

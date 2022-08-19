@@ -46,7 +46,7 @@ class FolderCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
                 onTap: () {
                   if (_appController.isSelectMode.value) {
-                    _appController.selectItem(_noteController.notes[index].id);
+                    _appController.selectItem(_noteController.notes[index].id!);
                   } else {
                     Get.to(
                       () => FolderScreen(
@@ -58,7 +58,7 @@ class FolderCard extends StatelessWidget {
                 },
                 onLongPress: () {
                   _appController.isSelectMode.value = true;
-                  _appController.selectItem(_noteController.notes[index].id);
+                  _appController.selectItem(_noteController.notes[index].id!);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -144,7 +144,7 @@ class FolderCard extends StatelessWidget {
                         .contains(_noteController.notes[index].id),
                     onChanged: (checked) {
                       _appController
-                          .selectItem(_noteController.notes[index].id);
+                          .selectItem(_noteController.notes[index].id!);
                     },
                   ),
                 ),

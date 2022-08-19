@@ -58,7 +58,7 @@ class ViewNoteCard extends StatelessWidget {
                               onDragStarted: () {
                                 _appController.isSelectMode.value = true;
                                 _appController.selectItem(
-                                    _noteController.notes[index].id);
+                                    _noteController.notes[index].id!);
                               },
                               onDragUpdate: (details) {
                                 _appController.selectedItems.clear();
@@ -120,7 +120,7 @@ class ViewNoteCard extends StatelessWidget {
                         Get.bottomSheet(
                           FolderBottomSheet(
                             title: "New Folder",
-                            targetNoteId: _noteController.notes[index].id,
+                            targetNoteId: _noteController.notes[index].id!,
                             draggingNoteId: data as int,
                           ),
                           backgroundColor: Colors.white,

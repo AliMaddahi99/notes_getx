@@ -92,7 +92,7 @@ class AddEditNoteController extends GetxController {
 
   void editNote() {
     if (titleTextController.text.isEmpty && noteTextController.text.isEmpty) {
-      _noteController.deleteNote(args!.id);
+      _noteController.deleteNote(args!.id!);
     } else {
       var edited = args!;
       edited.title = titleTextController.text;
