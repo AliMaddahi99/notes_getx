@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
-import 'package:notes_getx/models/task_model.dart';
+import 'package:notes_getx/models/task.dart';
 
 class AddEditTaskController extends GetxController {
   final TextEditingController taskTextController = TextEditingController();
@@ -16,8 +16,8 @@ class AddEditTaskController extends GetxController {
       taskTextController.clear();
       isTextFieldNotEmpty.value = false;
 
-      _taskController.tasks.insert(0,
-          TaskModel(id: DateTime.now().microsecondsSinceEpoch, title: title));
+      _taskController.tasks.insert(
+          0, Task(id: DateTime.now().microsecondsSinceEpoch, title: title));
     }
   }
 
