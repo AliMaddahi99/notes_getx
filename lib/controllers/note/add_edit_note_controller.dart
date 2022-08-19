@@ -41,6 +41,18 @@ class AddEditNoteController extends GetxController {
   //   }
   // }
 
+  // void editNote() {
+  //   if (titleTextController.text.isEmpty && noteTextController.text.isEmpty) {
+  //     _noteController.deleteNote(_noteController.notes[args].id);
+  //   } else {
+  //     var edited = _noteController.notes[args];
+  //     edited.title = titleTextController.text;
+  //     edited.note = noteTextController.text;
+  //     edited.dateTime = dateTimeNowStringify();
+  //     _noteController.notes[args] = edited;
+  //   }
+  // }
+
   void addNote({
     required String title,
     required String note,
@@ -77,18 +89,6 @@ class AddEditNoteController extends GetxController {
       args = noteModel;
     }
   }
-
-  // void editNote() {
-  //   if (titleTextController.text.isEmpty && noteTextController.text.isEmpty) {
-  //     _noteController.deleteNote(_noteController.notes[args].id);
-  //   } else {
-  //     var edited = _noteController.notes[args];
-  //     edited.title = titleTextController.text;
-  //     edited.note = noteTextController.text;
-  //     edited.dateTime = dateTimeNowStringify();
-  //     _noteController.notes[args] = edited;
-  //   }
-  // }
 
   void editNote() {
     if (titleTextController.text.isEmpty && noteTextController.text.isEmpty) {
