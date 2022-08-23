@@ -44,9 +44,7 @@ class NoteCard extends StatelessWidget {
                     _appController.selectedItems.clear();
                     _appController.selectItem(note.id);
                     Get.to(
-                      () => AddEditNote(
-                        note: note,
-                      ),
+                      () => AddEditNote(),
                       arguments: note,
                       transition: Transition.cupertino,
                     );
