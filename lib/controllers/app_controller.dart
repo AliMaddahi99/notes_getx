@@ -6,7 +6,7 @@ class AppController extends GetxController {
   PageController pageController = PageController();
   var pageViewId = 0.obs;
   var isSelectMode = false.obs;
-  var selectedItems = [].obs;
+  var selectedItems = <int>[].obs;
   late Isar db;
 
   void selectItem(int id) {
