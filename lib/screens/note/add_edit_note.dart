@@ -6,15 +6,11 @@ import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
-  final String folderName;
-  AddEditNote({
-    Key? key,
-    required this.folderName,
-  }) : super(key: key);
+  AddEditNote({Key? key}) : super(key: key);
 
+  final AppController _appController = Get.find();
   final AddEditNoteController _addEditNoteController =
       Get.put(AddEditNoteController());
-  final AppController _appController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +18,6 @@ class AddEditNote extends StatelessWidget {
       onWillPop: () async {
         if (_addEditNoteController.args == null) {
           _addEditNoteController.addNote(
-              folderName: folderName,
               title: _addEditNoteController.titleTextController.text,
               note: _addEditNoteController.noteTextController.text);
         } else {
@@ -43,7 +38,6 @@ class AddEditNote extends StatelessWidget {
                     onPressed: () {
                       if (_addEditNoteController.args == null) {
                         _addEditNoteController.addNote(
-                            folderName: folderName,
                             title:
                                 _addEditNoteController.titleTextController.text,
                             note:
