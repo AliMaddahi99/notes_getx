@@ -92,6 +92,9 @@ class AddEditNoteController extends GetxController {
       // after adding the note
       // because args = null would run addNote() again
       args = noteModel;
+      // select the added note, so it can be delete
+      // right after adding it by add button in AddEditNote()
+      _appController.selectItem(noteModel.id);
     }
   }
 
