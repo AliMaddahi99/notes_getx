@@ -32,7 +32,6 @@ dependencies:
   get:
   get_storage:
   flutter_staggered_grid_view:
-  flutter_staggered_animations:
   isar: 2.5.0
   isar_flutter_libs: 2.5.0
   path_provider:
