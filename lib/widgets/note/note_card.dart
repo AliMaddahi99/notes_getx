@@ -7,12 +7,10 @@ import 'package:notes_getx/screens/note/add_edit_note.dart';
 
 class NoteCard extends StatelessWidget {
   final Note note;
-  final int index;
   final bool highlighted;
   NoteCard({
     Key? key,
     required this.note,
-    required this.index,
     this.highlighted = false,
   }) : super(key: key);
 
