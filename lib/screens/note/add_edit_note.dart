@@ -17,11 +17,11 @@ class AddEditNote extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         if (_addEditNoteController.args == null) {
-          _addEditNoteController.addNote(
+          await _addEditNoteController.addNote(
               title: _addEditNoteController.titleTextController.text,
               note: _addEditNoteController.noteTextController.text);
         } else {
-          _addEditNoteController.editNote();
+          await _addEditNoteController.editNote();
         }
         _appController.selectedItems.clear();
         return true;
@@ -35,9 +35,9 @@ class AddEditNote extends StatelessWidget {
                 () => Visibility(
                   visible: _addEditNoteController.isSaveButtonVisible.value,
                   child: IconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_addEditNoteController.args == null) {
-                        _addEditNoteController.addNote(
+                        await _addEditNoteController.addNote(
                             title:
                                 _addEditNoteController.titleTextController.text,
                             note:
@@ -55,7 +55,7 @@ class AddEditNote extends StatelessWidget {
                           padding: const EdgeInsets.all(20.0),
                         );
                       } else {
-                        _addEditNoteController.editNote();
+                        await _addEditNoteController.editNote();
                         Get.snackbar(
                           "Note edited",
                           "This note has been edited",

@@ -63,11 +63,11 @@ class AddEditNoteController extends GetxController {
   //   }
   // }
 
-  void addNote({
+  Future<void> addNote({
     required String title,
     required String note,
     String folderName = "parent",
-  }) {
+  }) async {
     if (title.isNotEmpty || note.isNotEmpty) {
       var noteModel = Note()
         ..title = title
@@ -77,9 +77,10 @@ class AddEditNoteController extends GetxController {
         ..isFolder = false;
 
       if (folderName == "parent") {
-        _appController.db.writeTxn((isar) => isar.notes.put(noteModel));
+        await _appController.db
+            .writeTxn((isar) async => await isar.notes.put(noteModel));
       } else {
-        _appController.db.folders
+        await _appController.db.folders
             .filter()
             .nameEqualTo(folderName)
             .findFirst()
@@ -94,15 +95,17 @@ class AddEditNoteController extends GetxController {
     }
   }
 
-  void editNote() {
+  Future<void> editNote() async {
     if (titleTextController.text.isEmpty && noteTextController.text.isEmpty) {
-      _appController.db.writeTxn((isar) => isar.notes.delete(args!.id));
+      await _appController.db
+          .writeTxn((isar) async => await isar.notes.delete(args!.id));
     } else {
       Note newNote = args!
         ..title = titleTextController.text
         ..note = noteTextController.text
         ..dateTime = dateTimeNowStringify();
-      _appController.db.writeTxn((isar) => isar.notes.put(newNote));
+      await _appController.db
+          .writeTxn((isar) async => await isar.notes.put(newNote));
     }
   }
 
