@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:get_storage/get_storage.dart';
+import 'package:isar/isar.dart';
 
 class AppController extends GetxController {
   PageController pageController = PageController();
   var pageViewId = 0.obs;
   var isSelectMode = false.obs;
   var selectedItems = [].obs;
+  late Isar db;
 
   void selectItem(int id) {
     selectedItems.contains(id)
@@ -19,18 +20,4 @@ class AppController extends GetxController {
         ? "${selectedItems.length} $message"
         : "${selectedItems.length} ${message}s";
   }
-
-  // @override
-  // void onInit() {
-  //   // Save and read PageView
-  //   var pageView = GetStorage().read("page");
-  //   if (pageView != null) {
-  //     pageViewId.value = pageView;
-  //   }
-  //   ever(pageViewId, (_) {
-  //     GetStorage().write("page", pageViewId.value);
-  //   });
-
-  // super.onInit();
-  // }
 }
