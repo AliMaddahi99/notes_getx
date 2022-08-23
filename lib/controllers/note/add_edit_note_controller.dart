@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/models/folder.dart';
 import 'package:notes_getx/models/note.dart';
 
 class AddEditNoteController extends GetxController {
@@ -76,16 +74,8 @@ class AddEditNoteController extends GetxController {
         ..folderName = folderName
         ..isFolder = false;
 
-      if (folderName == "parent") {
-        await _appController.db
-            .writeTxn((isar) async => await isar.notes.put(noteModel));
-      } else {
-        await _appController.db.folders
-            .filter()
-            .nameEqualTo(folderName)
-            .findFirst()
-            .then((folder) => folder!.notes.insert(0, noteModel));
-      }
+      await _appController.db
+          .writeTxn((isar) async => await isar.notes.put(noteModel));
 
       // args is the note in the list
       // so make args = noteModel; make it possible to be editable
