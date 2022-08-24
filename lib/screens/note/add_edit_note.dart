@@ -92,6 +92,7 @@ class AddEditNote extends StatelessWidget {
                       DeleteBottomSheet(
                         title: "Delete note",
                         message: "Delete this note?",
+                        deleteFromAddEditNoteScreen: true,
                       ),
                       backgroundColor: Colors.white,
                       shape: const RoundedRectangleBorder(
