@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
+import 'package:notes_getx/widgets/no_item.dart';
 import 'package:notes_getx/widgets/note/folder_screen_main_app_bar.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 import 'package:notes_getx/widgets/select_mode_app_bar.dart';
@@ -20,7 +21,6 @@ class FolderScreen extends StatelessWidget {
 
   final AppController _appController = Get.find();
   final NoteController _noteController = Get.find();
-  final FolderController _folderController = Get.find();
 
   int gridCrossAxisCount(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -35,15 +35,15 @@ class FolderScreen extends StatelessWidget {
     return count;
   }
 
-  List<Note> getNotesFromFolder() {
-    List<Note> notes = [];
-    for (var folder in _folderController.folders) {
-      if (folder.name == folderName) {
-        notes = folder.notes;
-      }
-    }
-
-    return notes;
+  Stream<List<Note>> getFolderNotes() {
+    return _appController.db.notes
+        .where()
+        .filter()
+        .folderNameEqualTo(folderName)
+        .and()
+        .isFolderEqualTo(false)
+        .build()
+        .watch(initialReturn: true);
   }
 
   @override
@@ -61,21 +61,25 @@ class FolderScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Obx(
-        () => MasonryGridView.count(
-          padding: const EdgeInsets.all(8.0),
-          crossAxisCount: gridCrossAxisCount(context),
-          itemCount: _folderController.folders
-              .firstWhere((folder) => folder.name == folderName)
-              .notes
-              .length,
-          itemBuilder: (context, index) {
-            return NoteCard(
-              index: index,
-              note: getNotesFromFolder()[index],
-            );
-          },
-        ),
+      body: StreamBuilder<List<Note>>(
+        initialData: const [],
+        stream: getFolderNotes(),
+        builder: (BuildContext context, AsyncSnapshot<List<Note>> snapshot) {
+          return snapshot.data!.isEmpty
+              ? NoItem()
+              : Obx(
+                  () => MasonryGridView.count(
+                    padding: const EdgeInsets.all(8.0),
+                    crossAxisCount: gridCrossAxisCount(context),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return NoteCard(
+                        note: snapshot.data![index],
+                      );
+                    },
+                  ),
+                );
+        },
       ),
       floatingActionButton: Obx(
         () => Container(
@@ -83,9 +87,7 @@ class FolderScreen extends StatelessWidget {
               ? FloatingActionButton(
                   onPressed: () => {
                     Get.to(
-                      () => AddEditNote(
-                        folderName: folderName,
-                      ),
+                      () => AddEditNote(),
                       transition: Transition.cupertino,
                     ),
                   },
