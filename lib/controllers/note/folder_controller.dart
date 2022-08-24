@@ -1,66 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/folder.dart';
 import 'package:notes_getx/models/note.dart';
 
 class FolderController extends GetxController {
+  final AppController _appController = Get.find();
   final TextEditingController folderTextController = TextEditingController();
-  final NoteController _noteController = Get.find();
 
-  var folders = <Folder>[].obs;
   var isTextFieldEmpty = true.obs;
 
-  void createFolder(String folderName, List<Note> notes) {
+  Future<void> createFolder(String folderName, List<Note> notes) async {
     for (var note in notes) {
       note.folderName = folderName;
     }
+    await _appController.db.writeTxn((isar) async {
+      return await isar.notes.putAll(notes);
+    });
 
-    folders.insert(0, Folder(name: folderName, notes: notes));
+    var folderModel = Folder()..folderName = folderName;
 
-    _noteController.notes.insert(
-      0,
-      Note(
-        id: DateTime.now().microsecondsSinceEpoch,
-        title: "",
-        note: "",
-        dateTime:
-            DateTime.now().toString().substring(0, 16).replaceAll("-", "/"),
-        folderName: folderTextController.text,
-        isFolder: true,
-      ),
-    );
+    await _appController.db
+        .writeTxn((isar) async => await isar.folders.put(folderModel));
+
+    var noteModel = Note()
+      ..title = ""
+      ..note = ""
+      ..dateTime =
+          DateTime.now().toString().substring(0, 16).replaceAll("-", "/")
+      ..folderName = folderName
+      ..isFolder = true;
+
+    await _appController.db
+        .writeTxn((isar) async => await isar.notes.put(noteModel));
 
     folderTextController.clear();
     isTextFieldEmpty.value = true;
-
-    for (var n in notes) {
-      _noteController.notes.removeWhere((note) => note.id == n.id);
-    }
   }
 
-  void addNoteToExistingFolder(String folderName, Note note) {
-    for (var folder in folders) {
-      if (folder.name == folderName) {
-        note.folderName = folderName;
-        folder.notes.insert(0, note);
-        _noteController.notes.removeWhere((n) => n.id == note.id);
-      }
-    }
-  }
-
-  @override
-  void onInit() {
-    // Save and read folders
-    var storedFolders = GetStorage().read<List>("folders");
-    if (storedFolders != null) {
-      folders = storedFolders.map((e) => Folder.fromMap(e)).toList().obs;
-    }
-    ever(folders, (_) {
-      GetStorage().write("folders", folders.toList());
-    });
-
-    super.onInit();
+  void addNoteToExistingFolder(String folderName, Note note) async {
+    note.folderName = folderName;
+    await _appController.db
+        .writeTxn((isar) async => await isar.notes.put(note));
   }
 }
