@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isar/isar.dart';
+import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
-import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/models/folder.dart';
 import 'package:notes_getx/models/note.dart';
 
 class FolderBottomSheet extends StatelessWidget {
   final String title;
-  final int targetNoteId;
-  final int draggingNoteId;
+  final Note targetNote;
+  final Note draggingNote;
   FolderBottomSheet({
     Key? key,
     required this.title,
-    required this.targetNoteId,
-    required this.draggingNoteId,
+    required this.targetNote,
+    required this.draggingNote,
   }) : super(key: key);
 
+  final AppController _appController = Get.find();
   final FolderController _folderController = Get.find();
-  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    final Size buttonSize =
+        Size(MediaQuery.of(context).size.width / 2 - 22, 50);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SizedBox(
@@ -54,8 +59,7 @@ class FolderBottomSheet extends StatelessWidget {
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize:
-                        Size(MediaQuery.of(context).size.width / 2 - 22, 50),
+                    minimumSize: buttonSize,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0),
                     ),
@@ -64,6 +68,7 @@ class FolderBottomSheet extends StatelessWidget {
                     _folderController.folderTextController.clear();
                     _folderController.isTextFieldEmpty.value = true;
                     Get.back();
+                    _appController.isSelectMode.value = false;
                   },
                   child: const Text(
                     "Cancel",
@@ -78,20 +83,24 @@ class FolderBottomSheet extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
                       onPrimary: Colors.white,
-                      minimumSize:
-                          Size(MediaQuery.of(context).size.width / 2 - 22, 50),
+                      minimumSize: buttonSize,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
                     onPressed: !_folderController.isTextFieldEmpty.value
-                        ? () {
+                        ? () async {
                             var enteredFolderName =
                                 _folderController.folderTextController.text;
 
-                            var foldersName = _folderController.folders
-                                .map((folder) => folder.name);
-                            if (foldersName.contains(enteredFolderName)) {
+                            Folder? existFolderName = await _appController
+                                .db.folders
+                                .where()
+                                .filter()
+                                .folderNameEqualTo(enteredFolderName)
+                                .findFirst();
+
+                            if (existFolderName != null) {
                               Get.snackbar(
                                 "Folder exists",
                                 "This folder is already exist",
@@ -102,17 +111,13 @@ class FolderBottomSheet extends StatelessWidget {
                                 padding: const EdgeInsets.all(20.0),
                               );
                             } else {
-                              List<Note> notes = [
-                                _noteController.notes.firstWhere(
-                                    (note) => note.id == draggingNoteId),
-                                _noteController.notes.firstWhere(
-                                    (note) => note.id == targetNoteId),
-                              ];
-
                               _folderController.createFolder(
-                                  enteredFolderName, notes);
+                                enteredFolderName,
+                                [draggingNote, targetNote],
+                              );
 
                               Get.back();
+                              _appController.isSelectMode.value = false;
                             }
                           }
                         : null,
