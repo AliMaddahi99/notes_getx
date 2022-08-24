@@ -6,7 +6,8 @@ import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
-  AddEditNote({Key? key}) : super(key: key);
+  final String? folderName;
+  AddEditNote({Key? key, this.folderName}) : super(key: key);
 
   final AppController _appController = Get.find();
   final AddEditNoteController _addEditNoteController =
@@ -18,8 +19,10 @@ class AddEditNote extends StatelessWidget {
       onWillPop: () async {
         if (_addEditNoteController.args == null) {
           await _addEditNoteController.addNote(
-              title: _addEditNoteController.titleTextController.text,
-              note: _addEditNoteController.noteTextController.text);
+            title: _addEditNoteController.titleTextController.text,
+            note: _addEditNoteController.noteTextController.text,
+            folderName: folderName!,
+          );
         } else {
           await _addEditNoteController.editNote();
         }
@@ -38,10 +41,11 @@ class AddEditNote extends StatelessWidget {
                     onPressed: () async {
                       if (_addEditNoteController.args == null) {
                         await _addEditNoteController.addNote(
-                            title:
-                                _addEditNoteController.titleTextController.text,
-                            note:
-                                _addEditNoteController.noteTextController.text);
+                          title:
+                              _addEditNoteController.titleTextController.text,
+                          note: _addEditNoteController.noteTextController.text,
+                          folderName: folderName!,
+                        );
                         Get.snackbar(
                           "Note added",
                           "This note has been added to your notes",

@@ -64,7 +64,7 @@ class AddEditNoteController extends GetxController {
   Future<void> addNote({
     required String title,
     required String note,
-    String folderName = "parent",
+    required String folderName,
   }) async {
     if (title.isNotEmpty || note.isNotEmpty) {
       var noteModel = Note()

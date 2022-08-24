@@ -87,7 +87,9 @@ class FolderScreen extends StatelessWidget {
               ? FloatingActionButton(
                   onPressed: () => {
                     Get.to(
-                      () => AddEditNote(),
+                      () => AddEditNote(
+                        folderName: folderName,
+                      ),
                       transition: Transition.cupertino,
                     ),
                   },
