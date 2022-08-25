@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
+import 'package:notes_getx/services/note_service.dart';
 
 class AddEditNoteController extends GetxController {
   final AppController _appController = Get.find();
@@ -25,8 +26,7 @@ class AddEditNoteController extends GetxController {
         ..folderName = folderName
         ..isFolder = false;
 
-      await _appController.db
-          .writeTxn((isar) async => await isar.notes.put(noteModel));
+      await NoteService().addNoteToDb(noteModel);
 
       // args is the note in the list
       // so make args = noteModel; make it possible to be editable
@@ -41,15 +41,14 @@ class AddEditNoteController extends GetxController {
 
   Future<void> editNote() async {
     if (titleTextController.text.isEmpty && noteTextController.text.isEmpty) {
-      await _appController.db
-          .writeTxn((isar) async => await isar.notes.delete(args!.id));
+      await NoteService().deleteNotesFromDb([args!.id]);
     } else {
       Note newNote = args!
         ..title = titleTextController.text
         ..note = noteTextController.text
         ..dateTime = dateTimeNowStringify();
-      await _appController.db
-          .writeTxn((isar) async => await isar.notes.put(newNote));
+
+      await NoteService().updateNoteInDb(newNote);
     }
   }
 

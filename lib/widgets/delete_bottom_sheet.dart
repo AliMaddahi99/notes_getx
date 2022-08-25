@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
-import 'package:notes_getx/models/note.dart';
+import 'package:notes_getx/services/note_service.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
   final String title;
@@ -74,32 +74,33 @@ class DeleteBottomSheet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                 ),
-                onPressed: () async {
-                  _appController.pageViewId.value == 0
-                      ? {
-                          await _appController.db.writeTxn((isar) async {
-                            await isar.notes.deleteAll(
-                                _appController.selectedItems.toList());
+                onPressed: _appController.pageViewId.value == 0
+                    ? () async {
+                        await NoteService().deleteNotesFromDb(
+                            _appController.selectedItems.toList());
 
-                            // while delete from add_edit_note
-                            // it need to Get.back() twice,
-                            // one for closing bottomSheet
-                            // and antother for go back to list of notes
-                            // this one will close bottomsheet in add_edit_note
-                            if (deleteFromAddEditNoteScreen) {
-                              Get.back();
-                            }
-                          })
+                        // while delete from add_edit_note
+                        // it need to Get.back() twice,
+                        // one for closing bottomSheet
+                        // and antother for go back to list of notes
+                        // this one will close bottomsheet in add_edit_note
+                        if (deleteFromAddEditNoteScreen) {
+                          Get.back();
                         }
-                      : {
-                          for (var t in _appController.selectedItems)
-                            _taskController.deleteTask(t)
-                        };
 
-                  _appController.selectedItems.clear();
-                  _appController.isSelectMode.value = false;
-                  Get.back();
-                },
+                        _appController.selectedItems.clear();
+                        _appController.isSelectMode.value = false;
+                        Get.back();
+                      }
+                    : () {
+                        for (var t in _appController.selectedItems) {
+                          _taskController.deleteTask(t);
+                        }
+
+                        _appController.selectedItems.clear();
+                        _appController.isSelectMode.value = false;
+                        Get.back();
+                      },
                 child: const Text(
                   "Delete",
                   style: TextStyle(
