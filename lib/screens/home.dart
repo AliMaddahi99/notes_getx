@@ -13,6 +13,7 @@ import 'package:notes_getx/widgets/select_mode_bottom_navigation_bar.dart';
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
 
+  // AppController is Get.find() because it's Get.put() in database.dart
   final AppController _appController = Get.find();
   final NoteController _noteController = Get.put(NoteController());
   final TaskController _taskController = Get.put(TaskController());
