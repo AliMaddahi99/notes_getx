@@ -21,13 +21,18 @@ class NoteDatabaseService {
         .writeTxn((isar) async => await isar.notes.put(note));
   }
 
-  Future<void> updateNoteInDb(Note note) async {
-    await _appController.db
+  Future<int> updateNoteInDb(Note note) async {
+    return await _appController.db
         .writeTxn((isar) async => await isar.notes.put(note));
   }
 
-  Future<void> deleteNotesFromDb(List<int> ids) async {
-    await _appController.db
+  Future<List<int>> updateNotesInDb(List<Note> notes) async {
+    return await _appController.db
+        .writeTxn((isar) async => await isar.notes.putAll(notes));
+  }
+
+  Future<int> deleteNotesFromDb(List<int> ids) async {
+    return await _appController.db
         .writeTxn((isar) async => await isar.notes.deleteAll(ids));
   }
 }
