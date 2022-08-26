@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
 
-class NoteService {
-  NoteService();
+class NoteDatabaseService {
+  NoteDatabaseService();
   final AppController _appController = Get.find();
 
   Future<Note?> getNoteFromDb(int id) async {

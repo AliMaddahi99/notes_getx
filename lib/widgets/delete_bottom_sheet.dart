@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
-import 'package:notes_getx/services/database/note_service.dart';
+import 'package:notes_getx/services/database/note_database_service.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
   final String title;
@@ -76,7 +76,7 @@ class DeleteBottomSheet extends StatelessWidget {
                 ),
                 onPressed: _appController.pageViewId.value == 0
                     ? () async {
-                        await NoteService().deleteNotesFromDb(
+                        await NoteDatabaseService().deleteNotesFromDb(
                             _appController.selectedItems.toList());
 
                         // while delete from add_edit_note
