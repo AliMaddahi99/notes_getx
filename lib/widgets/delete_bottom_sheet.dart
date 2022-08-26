@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
-import 'package:notes_getx/services/note_service.dart';
+import 'package:notes_getx/services/database/note_service.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
   final String title;

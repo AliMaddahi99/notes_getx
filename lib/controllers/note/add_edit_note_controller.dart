@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
-import 'package:notes_getx/services/note_service.dart';
+import 'package:notes_getx/services/database/note_service.dart';
 
 class AddEditNoteController extends GetxController {
   final AppController _appController = Get.find();
