@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/folder.dart';
 import 'package:notes_getx/models/note.dart';
+import 'package:notes_getx/services/database/folder_database_service.dart';
+import 'package:notes_getx/services/database/note_database_service.dart';
 
 class FolderController extends GetxController {
-  final AppController _appController = Get.find();
   final TextEditingController folderTextController = TextEditingController();
 
   var isTextFieldEmpty = true.obs;
@@ -14,16 +14,13 @@ class FolderController extends GetxController {
     for (var note in notes) {
       note.folderName = folderName;
     }
-    await _appController.db.writeTxn((isar) async {
-      return await isar.notes.putAll(notes);
-    });
+    await NoteDatabaseService().updateNotesInDb(notes);
 
-    var folderModel = Folder()..folderName = folderName;
+    var folder = Folder()..folderName = folderName;
 
-    await _appController.db
-        .writeTxn((isar) async => await isar.folders.put(folderModel));
+    await FolderDatabaseService().addFolderToDb(folder);
 
-    var noteModel = Note()
+    var noteAsFolder = Note()
       ..title = ""
       ..note = ""
       ..dateTime =
@@ -31,8 +28,7 @@ class FolderController extends GetxController {
       ..folderName = folderName
       ..isFolder = true;
 
-    await _appController.db
-        .writeTxn((isar) async => await isar.notes.put(noteModel));
+    await NoteDatabaseService().addNoteToDb(noteAsFolder);
 
     folderTextController.clear();
     isTextFieldEmpty.value = true;
@@ -40,7 +36,7 @@ class FolderController extends GetxController {
 
   void addNoteToExistingFolder(String folderName, Note note) async {
     note.folderName = folderName;
-    await _appController.db
-        .writeTxn((isar) async => await isar.notes.put(note));
+
+    await NoteDatabaseService().updateNoteInDb(note);
   }
 }
