@@ -73,8 +73,13 @@ class FolderScreen extends StatelessWidget {
                     crossAxisCount: gridCrossAxisCount(context),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
+                      // show the list in reverse order,
+                      // so the last item that is added,
+                      // placed at index 0 in MasonryGridView
+                      int reversedIndex = snapshot.data!.length - 1 - index;
+
                       return NoteCard(
-                        note: snapshot.data![index],
+                        note: snapshot.data![reversedIndex],
                       );
                     },
                   ),
