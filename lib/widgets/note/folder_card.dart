@@ -55,6 +55,9 @@ class FolderCard extends StatelessWidget {
                     onTap: () {
                       if (_appController.isSelectMode.value) {
                         _appController.selectItem(note.id);
+                        for (var noteInFolder in snapshot.data!) {
+                          _appController.selectFolderNotes(noteInFolder.id);
+                        }
                       } else {
                         Get.to(
                           () => FolderScreen(
