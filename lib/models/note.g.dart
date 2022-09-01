@@ -65,8 +65,11 @@ void _noteSerializeNative(IsarCollection<Note> collection, IsarRawObject rawObj,
   final _dateTime = IsarBinaryWriter.utf8Encoder.convert(value0);
   dynamicSize += (_dateTime.length) as int;
   final value1 = object.folderName;
-  final _folderName = IsarBinaryWriter.utf8Encoder.convert(value1);
-  dynamicSize += (_folderName.length) as int;
+  IsarUint8List? _folderName;
+  if (value1 != null) {
+    _folderName = IsarBinaryWriter.utf8Encoder.convert(value1);
+  }
+  dynamicSize += (_folderName?.length ?? 0) as int;
   final value2 = object.isFolder;
   final _isFolder = value2;
   final value3 = object.note;
@@ -92,7 +95,7 @@ Note _noteDeserializeNative(IsarCollection<Note> collection, int id,
     IsarBinaryReader reader, List<int> offsets) {
   final object = Note();
   object.dateTime = reader.readString(offsets[0]);
-  object.folderName = reader.readString(offsets[1]);
+  object.folderName = reader.readStringOrNull(offsets[1]);
   object.id = id;
   object.isFolder = reader.readBool(offsets[2]);
   object.note = reader.readString(offsets[3]);
@@ -108,7 +111,7 @@ P _noteDeserializePropNative<P>(
     case 0:
       return (reader.readString(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readBool(offset)) as P;
     case 3:
@@ -134,7 +137,7 @@ dynamic _noteSerializeWeb(IsarCollection<Note> collection, Note object) {
 Note _noteDeserializeWeb(IsarCollection<Note> collection, dynamic jsObj) {
   final object = Note();
   object.dateTime = IsarNative.jsObjectGet(jsObj, 'dateTime') ?? '';
-  object.folderName = IsarNative.jsObjectGet(jsObj, 'folderName') ?? '';
+  object.folderName = IsarNative.jsObjectGet(jsObj, 'folderName');
   object.id = IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity;
   object.isFolder = IsarNative.jsObjectGet(jsObj, 'isFolder') ?? false;
   object.note = IsarNative.jsObjectGet(jsObj, 'note') ?? '';
@@ -147,7 +150,7 @@ P _noteDeserializePropWeb<P>(Object jsObj, String propertyName) {
     case 'dateTime':
       return (IsarNative.jsObjectGet(jsObj, 'dateTime') ?? '') as P;
     case 'folderName':
-      return (IsarNative.jsObjectGet(jsObj, 'folderName') ?? '') as P;
+      return (IsarNative.jsObjectGet(jsObj, 'folderName')) as P;
     case 'id':
       return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
           as P;
@@ -328,8 +331,16 @@ extension NoteQueryFilter on QueryBuilder<Note, Note, QFilterCondition> {
     ));
   }
 
+  QueryBuilder<Note, Note, QAfterFilterCondition> folderNameIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'folderName',
+      value: null,
+    ));
+  }
+
   QueryBuilder<Note, Note, QAfterFilterCondition> folderNameEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -341,7 +352,7 @@ extension NoteQueryFilter on QueryBuilder<Note, Note, QFilterCondition> {
   }
 
   QueryBuilder<Note, Note, QAfterFilterCondition> folderNameGreaterThan(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
     bool include = false,
   }) {
@@ -355,7 +366,7 @@ extension NoteQueryFilter on QueryBuilder<Note, Note, QFilterCondition> {
   }
 
   QueryBuilder<Note, Note, QAfterFilterCondition> folderNameLessThan(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
     bool include = false,
   }) {
@@ -369,8 +380,8 @@ extension NoteQueryFilter on QueryBuilder<Note, Note, QFilterCondition> {
   }
 
   QueryBuilder<Note, Note, QAfterFilterCondition> folderNameBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
@@ -826,7 +837,7 @@ extension NoteQueryProperty on QueryBuilder<Note, Note, QQueryProperty> {
     return addPropertyNameInternal('dateTime');
   }
 
-  QueryBuilder<Note, String, QQueryOperations> folderNameProperty() {
+  QueryBuilder<Note, String?, QQueryOperations> folderNameProperty() {
     return addPropertyNameInternal('folderName');
   }
 

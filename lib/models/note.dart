@@ -10,5 +10,5 @@ class Note {
   late String note;
   late String dateTime;
   late bool isFolder;
-  late String folderName;
+  late String? folderName;
 }
