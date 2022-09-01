@@ -50,7 +50,7 @@ class NoteCard extends StatelessWidget {
                     );
                   }
                 },
-                onLongPress: note.folderName != "parent"
+                onLongPress: note.folderName != null
                     ? () {
                         _appController.isSelectMode.value = true;
                         _appController.selectItem(note.id);
