@@ -22,7 +22,7 @@ class FolderCard extends StatelessWidget {
     return _appController.db.notes
         .where()
         .filter()
-        .folderNameEqualTo(note.folderName)
+        .folderNameEqualTo(note.folderName!)
         .and()
         .isFolderEqualTo(false)
         .watch(initialReturn: true);
@@ -55,13 +55,14 @@ class FolderCard extends StatelessWidget {
                     onTap: () {
                       if (_appController.isSelectMode.value) {
                         _appController.selectItem(note.id);
+
                         for (var noteInFolder in snapshot.data!) {
                           _appController.selectFolderNotes(noteInFolder.id);
                         }
                       } else {
                         Get.to(
                           () => FolderScreen(
-                            folderName: note.folderName,
+                            folderName: note.folderName!,
                           ),
                           transition: Transition.cupertino,
                         );
@@ -70,6 +71,10 @@ class FolderCard extends StatelessWidget {
                     onLongPress: () {
                       _appController.isSelectMode.value = true;
                       _appController.selectItem(note.id);
+
+                      for (var noteInFolder in snapshot.data!) {
+                        _appController.selectFolderNotes(noteInFolder.id);
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -91,7 +96,7 @@ class FolderCard extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          note.folderName,
+                                          note.folderName!,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: const TextStyle(
@@ -108,7 +113,7 @@ class FolderCard extends StatelessWidget {
                                       ],
                                     )
                                   : Text(
-                                      note.folderName,
+                                      note.folderName!,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
