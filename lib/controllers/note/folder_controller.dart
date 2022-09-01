@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_getx/models/folder.dart';
 import 'package:notes_getx/models/note.dart';
-import 'package:notes_getx/services/database/folder_database_service.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
 
 class FolderController extends GetxController {
@@ -15,10 +13,6 @@ class FolderController extends GetxController {
       note.folderName = folderName;
     }
     await NoteDatabaseService().updateNotesInDb(notes);
-
-    var folder = Folder()..folderName = folderName;
-
-    await FolderDatabaseService().addFolderToDb(folder);
 
     var noteAsFolder = Note()
       ..title = ""
