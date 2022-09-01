@@ -6,21 +6,21 @@ import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/models/note.dart';
 
 class SelectModeAppBar extends StatelessWidget {
-  final String folderName;
+  final String? folderName;
   SelectModeAppBar({
     Key? key,
-    this.folderName = "parent",
+    this.folderName,
   }) : super(key: key);
 
   final AppController _appController = Get.find();
   final TaskController _taskController = Get.find();
 
   Stream<List<Note>> getNotes() {
-    if (folderName == "parent") {
+    if (folderName == null) {
       return _appController.db.notes
           .where()
           .filter()
-          .folderNameEqualTo(folderName)
+          .folderNameIsNull()
           .or()
           .isFolderEqualTo(true)
           .build()
@@ -29,7 +29,7 @@ class SelectModeAppBar extends StatelessWidget {
       return _appController.db.notes
           .where()
           .filter()
-          .folderNameEqualTo(folderName)
+          .folderNameEqualTo(folderName!)
           .and()
           .isFolderEqualTo(false)
           .build()
@@ -53,6 +53,7 @@ class SelectModeAppBar extends StatelessWidget {
         onPressed: () {
           _appController.isSelectMode.value = false;
           _appController.selectedItems.clear();
+          _appController.selectedFolderNotes.clear();
         },
       ),
       actions: [
@@ -64,15 +65,33 @@ class SelectModeAppBar extends StatelessWidget {
                   stream: getNotes(),
                   builder: (context, snapshot) {
                     return IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_appController.selectedItems.length <
                             snapshot.data!.length) {
                           _appController.selectedItems.clear();
+                          _appController.selectedFolderNotes.clear();
+
                           for (var note in snapshot.data!) {
                             _appController.selectedItems.add(note.id);
+
+                            if (note.isFolder) {
+                              var folderNotes = await _appController.db.notes
+                                  .where()
+                                  .filter()
+                                  .folderNameEqualTo(note.folderName)
+                                  .and()
+                                  .isFolderEqualTo(false)
+                                  .findAll();
+
+                              for (var noteInFolder in folderNotes) {
+                                _appController
+                                    .selectFolderNotes(noteInFolder.id);
+                              }
+                            }
                           }
                         } else {
                           _appController.selectedItems.clear();
+                          _appController.selectedFolderNotes.clear();
                         }
                       },
                       icon: const Icon(Icons.checklist_rounded),
