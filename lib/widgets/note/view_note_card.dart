@@ -35,7 +35,7 @@ class ViewNoteCard extends StatelessWidget {
     return _appController.db.notes
         .where()
         .filter()
-        .folderNameEqualTo("parent")
+        .folderNameIsNull()
         .or()
         .isFolderEqualTo(true)
         .build()
@@ -130,7 +130,7 @@ class ViewNoteCard extends StatelessWidget {
                       onAccept: (data) {
                         if (snapshot.data![reversedIndex].isFolder) {
                           _folderController.addNoteToExistingFolder(
-                            snapshot.data![reversedIndex].folderName,
+                            snapshot.data![reversedIndex].folderName!,
                             data as Note,
                           );
                           _appController.isSelectMode.value = false;
