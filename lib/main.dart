@@ -6,8 +6,6 @@ import 'notes_app.dart';
 void main() async {
   await GetStorage.init();
   await Database().initIsar();
-  // await appController.db.writeTxn((isar) async => await isar.notes.clear());
-  // await appController.db.writeTxn((isar) async => await isar.folders.clear());
 
   runApp(const NotesApp());
 }
