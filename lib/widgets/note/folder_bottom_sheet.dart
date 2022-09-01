@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
-import 'package:notes_getx/models/folder.dart';
 import 'package:notes_getx/models/note.dart';
 
 class FolderBottomSheet extends StatelessWidget {
@@ -81,8 +80,8 @@ class FolderBottomSheet extends StatelessWidget {
                 Obx(
                   () => ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                      onPrimary: Colors.white,
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
                       minimumSize: buttonSize,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50.0),
@@ -93,11 +92,13 @@ class FolderBottomSheet extends StatelessWidget {
                             var enteredFolderName =
                                 _folderController.folderTextController.text;
 
-                            Folder? existFolderName = await _appController
-                                .db.folders
+                            Note? existFolderName = await _appController
+                                .db.notes
                                 .where()
                                 .filter()
                                 .folderNameEqualTo(enteredFolderName)
+                                .and()
+                                .isFolderEqualTo(true)
                                 .findFirst();
 
                             if (existFolderName != null) {
