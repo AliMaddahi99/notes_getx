@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
+import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
   final String title;
   final String message;
   final bool deleteFromAddEditNoteScreen;
+  final bool deleteFromFolderScreen;
+  final String? folderName;
   DeleteBottomSheet({
     Key? key,
     required this.title,
     required this.message,
     this.deleteFromAddEditNoteScreen = false,
+    this.deleteFromFolderScreen = false,
+    this.folderName,
   }) : super(key: key);
 
   final AppController _appController = Get.find();
@@ -64,8 +70,8 @@ class DeleteBottomSheet extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  onPrimary: Colors.white,
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 50.0,
                     vertical: 15.0,
@@ -76,19 +82,61 @@ class DeleteBottomSheet extends StatelessWidget {
                 ),
                 onPressed: _appController.pageViewId.value == 0
                     ? () async {
-                        await NoteDatabaseService().deleteNotesFromDb(
-                            _appController.selectedItems.toList());
-
-                        // while delete from add_edit_note
-                        // it need to Get.back() twice,
-                        // one for closing bottomSheet
-                        // and antother for go back to list of notes
-                        // this one will close bottomsheet in add_edit_note
                         if (deleteFromAddEditNoteScreen) {
+                          var deletingNote = await NoteDatabaseService()
+                              .getNoteFromDb(
+                                  _appController.selectedItems.first);
+
+                          var notesWithFolder = await _appController.db.notes
+                              .where()
+                              .filter()
+                              .folderNameEqualTo(deletingNote!.folderName)
+                              .findAll();
+
+                          if (deletingNote.folderName != null &&
+                              notesWithFolder.length <= 2) {
+                            NoteDatabaseService().deleteNotesFromDb([
+                              notesWithFolder[0].id,
+                              notesWithFolder[1].id,
+                            ]);
+
+                            // back to FolderScreen()
+                            Get.back();
+                          }
+
+                          // while delete from add_edit_note
+                          // it need to Get.back() twice,
+                          // one for closing bottomSheet
+                          // and antother for go back to list of notes
+                          // this one will close bottomsheet in add_edit_note
                           Get.back();
                         }
 
+                        if (deleteFromFolderScreen) {
+                          var notesWithFolder = await _appController.db.notes
+                              .where()
+                              .filter()
+                              .folderNameEqualTo(folderName)
+                              .findAll();
+
+                          var ids = notesWithFolder.map((e) => e.id).toList();
+
+                          if (_appController.selectedItems.length + 1 ==
+                              notesWithFolder.length) {
+                            NoteDatabaseService().deleteNotesFromDb(ids);
+
+                            // back to NoteHome()
+                            Get.back();
+                          }
+                        }
+
+                        await NoteDatabaseService().deleteNotesFromDb([
+                          ..._appController.selectedItems.toList(),
+                          ..._appController.selectedFolderNotes.toList(),
+                        ]);
+
                         _appController.selectedItems.clear();
+                        _appController.selectedFolderNotes.clear();
                         _appController.isSelectMode.value = false;
                         Get.back();
                       }
