@@ -21,7 +21,7 @@ class AddEditNote extends StatelessWidget {
           await _addEditNoteController.addNote(
             title: _addEditNoteController.titleTextController.text,
             note: _addEditNoteController.noteTextController.text,
-            folderName: folderName!,
+            folderName: folderName,
           );
         } else {
           await _addEditNoteController.editNote();
@@ -44,7 +44,7 @@ class AddEditNote extends StatelessWidget {
                           title:
                               _addEditNoteController.titleTextController.text,
                           note: _addEditNoteController.noteTextController.text,
-                          folderName: folderName!,
+                          folderName: folderName,
                         );
                         Get.snackbar(
                           "Note added",
