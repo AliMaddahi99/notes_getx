@@ -6,7 +6,13 @@ import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
 
 class SelectModeBottomNavigationBar extends StatelessWidget {
-  SelectModeBottomNavigationBar({Key? key}) : super(key: key);
+  final String? folderName;
+  final bool deleteFromFolderScreen;
+  SelectModeBottomNavigationBar({
+    Key? key,
+    this.folderName,
+    this.deleteFromFolderScreen = false,
+  }) : super(key: key);
 
   final AppController _appController = Get.find();
 
@@ -49,6 +55,9 @@ class SelectModeBottomNavigationBar extends StatelessWidget {
                                         : "Delete task",
                                     message:
                                         "Delete ${_appController.getSelectedItemsCount(_appController.pageViewId.value == 0 ? "item" : "task")}?",
+                                    deleteFromFolderScreen:
+                                        deleteFromFolderScreen,
+                                    folderName: folderName,
                                   ),
                                   backgroundColor: Colors.white,
                                   shape: const RoundedRectangleBorder(

@@ -107,7 +107,10 @@ class FolderScreen extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => Container(
           child: _appController.isSelectMode.value
-              ? SelectModeBottomNavigationBar()
+              ? SelectModeBottomNavigationBar(
+                  deleteFromFolderScreen: true,
+                  folderName: folderName,
+                )
               : const SizedBox.shrink(),
         ),
       ),
