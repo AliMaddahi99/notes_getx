@@ -10,7 +10,7 @@ import 'package:notes_getx/widgets/app/no_item.dart';
 import 'package:notes_getx/widgets/note/folder_screen_main_app_bar.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_app_bar.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_navigation_bar.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_navigation_bar/select_mode_bottom_navigation_bar.dart';
 
 class FolderScreen extends StatelessWidget {
   final String folderName;

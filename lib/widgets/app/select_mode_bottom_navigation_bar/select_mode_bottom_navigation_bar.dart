@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
-import 'package:notes_getx/widgets/app/delete_icon_button.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_navigation_bar/delete_icon_button.dart';
 
 class SelectModeBottomNavigationBar extends StatelessWidget {
   final String? folderName;
