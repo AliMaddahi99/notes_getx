@@ -48,70 +48,81 @@ class FolderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Obx(
-          () => Container(
-            child: _appController.isSelectMode.value
-                ? SelectModeAppBar(
-                    folderName: folderName,
-                  )
-                : FolderScreenMainAppBar(folderName: folderName),
+    return WillPopScope(
+      onWillPop: () async {
+        if (_appController.isSelectMode.value) {
+          _appController.selectedItems.clear();
+          _appController.selectedFolderNotes.clear();
+          _appController.isSelectMode.value = false;
+          return false;
+        }
+        return true;
+      },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: Obx(
+            () => Container(
+              child: _appController.isSelectMode.value
+                  ? SelectModeAppBar(
+                      folderName: folderName,
+                    )
+                  : FolderScreenMainAppBar(folderName: folderName),
+            ),
           ),
         ),
-      ),
-      body: StreamBuilder<List<Note>>(
-        initialData: const [],
-        stream: getFolderNotes(),
-        builder: (BuildContext context, AsyncSnapshot<List<Note>> snapshot) {
-          return snapshot.data!.isEmpty
-              ? NoItem()
-              : Obx(
-                  () => MasonryGridView.count(
-                    padding: const EdgeInsets.all(8.0),
-                    crossAxisCount: gridCrossAxisCount(context),
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      // show the list in reverse order,
-                      // so the last item that is added,
-                      // placed at index 0 in MasonryGridView
-                      int reversedIndex = snapshot.data!.length - 1 - index;
+        body: StreamBuilder<List<Note>>(
+          initialData: const [],
+          stream: getFolderNotes(),
+          builder: (BuildContext context, AsyncSnapshot<List<Note>> snapshot) {
+            return snapshot.data!.isEmpty
+                ? NoItem()
+                : Obx(
+                    () => MasonryGridView.count(
+                      padding: const EdgeInsets.all(8.0),
+                      crossAxisCount: gridCrossAxisCount(context),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        // show the list in reverse order,
+                        // so the last item that is added,
+                        // placed at index 0 in MasonryGridView
+                        int reversedIndex = snapshot.data!.length - 1 - index;
 
-                      return NoteCard(
-                        note: snapshot.data![reversedIndex],
-                      );
-                    },
-                  ),
-                );
-        },
-      ),
-      floatingActionButton: Obx(
-        () => Container(
-          child: !_appController.isSelectMode.value
-              ? FloatingActionButton(
-                  onPressed: () => {
-                    Get.to(
-                      () => AddEditNote(
-                        folderName: folderName,
-                      ),
-                      transition: Transition.cupertino,
+                        return NoteCard(
+                          note: snapshot.data![reversedIndex],
+                        );
+                      },
                     ),
-                  },
-                  tooltip: "Add note",
-                  child: const Icon(Icons.add_rounded),
-                )
-              : const SizedBox.shrink(),
+                  );
+          },
         ),
-      ),
-      bottomNavigationBar: Obx(
-        () => Container(
-          child: _appController.isSelectMode.value
-              ? SelectModeBottomNavigationBar(
-                  deleteFromFolderScreen: true,
-                  folderName: folderName,
-                )
-              : const SizedBox.shrink(),
+        floatingActionButton: Obx(
+          () => Container(
+            child: !_appController.isSelectMode.value
+                ? FloatingActionButton(
+                    onPressed: () => {
+                      Get.to(
+                        () => AddEditNote(
+                          folderName: folderName,
+                        ),
+                        transition: Transition.cupertino,
+                      ),
+                    },
+                    tooltip: "Add note",
+                    child: const Icon(Icons.add_rounded),
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ),
+        bottomNavigationBar: Obx(
+          () => Container(
+            child: _appController.isSelectMode.value
+                ? SelectModeBottomNavigationBar(
+                    deleteFromFolderScreen: true,
+                    folderName: folderName,
+                  )
+                : const SizedBox.shrink(),
+          ),
         ),
       ),
     );
