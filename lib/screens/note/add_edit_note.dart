@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/add_edit_note_controller.dart';
-import 'package:notes_getx/widgets/note/add_edit_note_app_bar.dart';
+import 'package:notes_getx/widgets/note/add_edit_note_icon_button.dart';
+import 'package:notes_getx/widgets/note/add_edit_note_popup_menu_button.dart';
 import 'package:notes_getx/widgets/note/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
@@ -30,9 +31,16 @@ class AddEditNote extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: AddEditNoteAppBar(folderName: folderName),
+        appBar: AppBar(
+          actions: [
+            AddEditNoteIconButton(folderName: folderName),
+            const AddEditNotePopupMenuButton(),
+          ],
+          title: Text(
+            _addEditNoteController.args == null
+                ? "Insert your note"
+                : "Edit note",
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
