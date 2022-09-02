@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 
 class FolderScreenMainAppBar extends StatelessWidget {
@@ -13,7 +12,6 @@ class FolderScreenMainAppBar extends StatelessWidget {
 
   final AppController _appController = Get.find();
   final NoteController _noteController = Get.find();
-  final FolderController _folderController = Get.find();
 
   @override
   Widget build(BuildContext context) {
