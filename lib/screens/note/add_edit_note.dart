@@ -34,7 +34,7 @@ class AddEditNote extends StatelessWidget {
         appBar: AppBar(
           actions: [
             AddEditNoteIconButton(folderName: folderName),
-            const AddEditNotePopupMenuButton(),
+            AddEditNotePopupMenuButton(),
           ],
           title: Text(
             _addEditNoteController.args == null
