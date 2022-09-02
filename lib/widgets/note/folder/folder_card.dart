@@ -5,6 +5,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/folder_screen.dart';
+import 'package:notes_getx/widgets/app/card_checkbox.dart';
 
 class FolderCard extends StatelessWidget {
   final Note note;
@@ -142,30 +143,7 @@ class FolderCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Obx(
-                () => Visibility(
-                  visible: _appController.isSelectMode.value,
-                  child: Transform.scale(
-                    scale: 1.3,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: 5.0,
-                      ),
-                      child: Checkbox(
-                        splashRadius: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        value: _appController.selectedItems.contains(note.id),
-                        onChanged: (checked) {
-                          _appController.selectItem(note.id);
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              CardCheckbox(itemId: note.id, isNoteOrFolderCard: true),
             ],
           );
         },

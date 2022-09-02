@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/screens/task/add_edit_task.dart';
+import 'package:notes_getx/widgets/app/card_checkbox.dart';
 
 class TaskItemCard extends StatelessWidget {
   final int index;
@@ -76,23 +77,9 @@ class TaskItemCard extends StatelessWidget {
                           ),
                   ),
                 ),
-                Visibility(
-                  visible: _appController.isSelectMode.value,
-                  child: Transform.scale(
-                    scale: 1.3,
-                    child: Checkbox(
-                      splashRadius: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      value: _appController.selectedItems
-                          .contains(_taskController.tasks[index].id),
-                      onChanged: (checked) {
-                        _appController
-                            .selectItem(_taskController.tasks[index].id);
-                      },
-                    ),
-                  ),
+                CardCheckbox(
+                  itemId: _taskController.tasks[index].id,
+                  isNoteOrFolderCard: false,
                 ),
               ],
             ),
