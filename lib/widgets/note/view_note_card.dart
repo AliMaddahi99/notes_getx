@@ -141,12 +141,6 @@ class ViewNoteCard extends StatelessWidget {
                               targetNote: snapshot.data![reversedIndex],
                               draggingNote: data as Note,
                             ),
-                            backgroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(20.0),
-                              ),
-                            ),
                             enableDrag: false,
                             isDismissible: false,
                           );
