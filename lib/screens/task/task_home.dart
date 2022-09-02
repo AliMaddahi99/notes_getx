@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/screens/task/add_edit_task.dart';
-import 'package:notes_getx/widgets/no_item.dart';
+import 'package:notes_getx/widgets/app/no_item.dart';
 import 'package:notes_getx/widgets/task/dismissible_card_listview.dart';
 
 class TaskHome extends StatelessWidget {

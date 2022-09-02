@@ -6,7 +6,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
-import 'package:notes_getx/widgets/no_item.dart';
+import 'package:notes_getx/widgets/app/no_item.dart';
 import 'package:notes_getx/widgets/note/folder_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/folder_card.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';

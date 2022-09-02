@@ -6,9 +6,9 @@ import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/screens/note/note_home.dart';
 import 'package:notes_getx/screens/task/task_home.dart';
-import 'package:notes_getx/widgets/main_appbar.dart';
-import 'package:notes_getx/widgets/select_mode_app_bar.dart';
-import 'package:notes_getx/widgets/select_mode_bottom_navigation_bar.dart';
+import 'package:notes_getx/widgets/app/main_appbar.dart';
+import 'package:notes_getx/widgets/app/select_mode_app_bar.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_navigation_bar.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
