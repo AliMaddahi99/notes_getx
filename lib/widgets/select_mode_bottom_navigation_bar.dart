@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
-import 'package:notes_getx/widgets/delete_bottom_sheet.dart';
+import 'package:notes_getx/widgets/delete_icon_button.dart';
 
 class SelectModeBottomNavigationBar extends StatelessWidget {
   final String? folderName;
@@ -44,33 +44,17 @@ class SelectModeBottomNavigationBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                snapshot.data!
-                    ? IconButton(
-                        onPressed: _appController.selectedItems.isNotEmpty
-                            ? () {
-                                Get.bottomSheet(
-                                  DeleteBottomSheet(
-                                    title: _appController.pageViewId.value == 0
-                                        ? "Delete note"
-                                        : "Delete task",
-                                    message:
-                                        "Delete ${_appController.getSelectedItemsCount(_appController.pageViewId.value == 0 ? "item" : "task")}?",
-                                    deleteFromFolderScreen:
-                                        deleteFromFolderScreen,
-                                    folderName: folderName,
-                                  ),
-                                  backgroundColor: Colors.white,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20.0),
-                                    ),
-                                  ),
-                                );
-                              }
-                            : null,
-                        icon: const Icon(Icons.delete_rounded),
+                _appController.pageViewId.value == 0
+                    ? snapshot.data!
+                        ? DeleteIconButton(
+                            deleteFromFolderScreen: deleteFromFolderScreen,
+                            folderName: folderName,
+                          )
+                        : const SizedBox.shrink()
+                    : DeleteIconButton(
+                        deleteFromFolderScreen: deleteFromFolderScreen,
+                        folderName: folderName,
                       )
-                    : const SizedBox.shrink(),
               ],
             ),
           );
