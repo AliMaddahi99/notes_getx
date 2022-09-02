@@ -7,7 +7,7 @@ import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
 import 'package:notes_getx/widgets/app/no_item.dart';
-import 'package:notes_getx/widgets/note/folder_screen_main_app_bar.dart';
+import 'package:notes_getx/widgets/note/folder/folder_screen_main_app_bar.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_app_bar.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_navigation_bar/select_mode_bottom_navigation_bar.dart';
