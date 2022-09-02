@@ -26,6 +26,7 @@ class Home extends StatelessWidget {
         onWillPop: () async {
           if (_appController.isSelectMode.value) {
             _appController.selectedItems.clear();
+            _appController.selectedFolderNotes.clear();
             _appController.isSelectMode.value = false;
             return false;
           }
