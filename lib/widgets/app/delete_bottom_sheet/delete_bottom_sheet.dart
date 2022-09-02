@@ -5,6 +5,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
+import 'package:notes_getx/widgets/app/bottom_sheet_elevated_button.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
   final String title;
@@ -47,39 +48,11 @@ class DeleteBottomSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 50.0,
-                    vertical: 15.0,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text(
-                  "Cancel",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              BottomSheetElevatedButton(
+                onPressed: () => Get.back(),
+                buttonText: "Cancel",
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 50.0,
-                    vertical: 15.0,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
+              BottomSheetElevatedButton(
                 onPressed: _appController.pageViewId.value == 0
                     ? () async {
                         if (deleteFromAddEditNoteScreen) {
@@ -149,12 +122,9 @@ class DeleteBottomSheet extends StatelessWidget {
                         _appController.isSelectMode.value = false;
                         Get.back();
                       },
-                child: const Text(
-                  "Delete",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
+                buttonText: "Delete",
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
               ),
             ],
           ),

@@ -4,6 +4,7 @@ import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/models/note.dart';
+import 'package:notes_getx/widgets/app/bottom_sheet_elevated_button.dart';
 
 class FolderBottomSheet extends StatelessWidget {
   final String title;
@@ -21,9 +22,6 @@ class FolderBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size buttonSize =
-        Size(MediaQuery.of(context).size.width / 2 - 22, 50);
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SizedBox(
@@ -56,37 +54,17 @@ class FolderBottomSheet extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: buttonSize,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  ),
+                BottomSheetElevatedButton(
                   onPressed: () {
                     _folderController.folderTextController.clear();
                     _folderController.isTextFieldEmpty.value = true;
                     Get.back();
                     _appController.isSelectMode.value = false;
                   },
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  buttonText: "Cancel",
                 ),
                 Obx(
-                  () => ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      minimumSize: buttonSize,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                    ),
+                  () => BottomSheetElevatedButton(
                     onPressed: !_folderController.isTextFieldEmpty.value
                         ? () async {
                             var enteredFolderName =
@@ -122,12 +100,9 @@ class FolderBottomSheet extends StatelessWidget {
                             }
                           }
                         : null,
-                    child: const Text(
-                      "OK",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
+                    buttonText: "OK",
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
                   ),
                 ),
               ],
