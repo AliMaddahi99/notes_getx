@@ -22,99 +22,96 @@ class FolderBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        height: 200.0,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(20.0),
+      height: 200.0,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20.0),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextField(
-              autofocus: true,
-              controller: _folderController.folderTextController,
-              decoration: const InputDecoration(
-                hintText: "Please enter text...",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(16.0),
-                  ),
+          TextField(
+            autofocus: true,
+            controller: _folderController.folderTextController,
+            decoration: const InputDecoration(
+              hintText: "Please enter text...",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(16.0),
                 ),
               ),
-              onChanged: (value) {
-                _folderController.isTextFieldEmpty.value = value.isEmpty;
-              },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BottomSheetElevatedButton(
-                  onPressed: () {
-                    _folderController.folderTextController.clear();
-                    _folderController.isTextFieldEmpty.value = true;
-                    Get.back();
-                    _appController.isSelectMode.value = false;
-                  },
-                  buttonText: "Cancel",
-                ),
-                Obx(
-                  () => BottomSheetElevatedButton(
-                    onPressed: !_folderController.isTextFieldEmpty.value
-                        ? () async {
-                            var enteredFolderName =
-                                _folderController.folderTextController.text;
+            onChanged: (value) {
+              _folderController.isTextFieldEmpty.value = value.isEmpty;
+            },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BottomSheetElevatedButton(
+                onPressed: () {
+                  _folderController.folderTextController.clear();
+                  _folderController.isTextFieldEmpty.value = true;
+                  Get.back();
+                  _appController.isSelectMode.value = false;
+                },
+                buttonText: "Cancel",
+              ),
+              Obx(
+                () => BottomSheetElevatedButton(
+                  onPressed: !_folderController.isTextFieldEmpty.value
+                      ? () async {
+                          var enteredFolderName =
+                              _folderController.folderTextController.text;
 
-                            Note? existFolderName = await _appController
-                                .db.notes
-                                .where()
-                                .filter()
-                                .folderNameEqualTo(enteredFolderName)
-                                .and()
-                                .isFolderEqualTo(true)
-                                .findFirst();
+                          Note? existFolderName = await _appController.db.notes
+                              .where()
+                              .filter()
+                              .folderNameEqualTo(enteredFolderName)
+                              .and()
+                              .isFolderEqualTo(true)
+                              .findFirst();
 
-                            if (existFolderName != null) {
-                              Get.snackbar(
-                                "Folder exists",
-                                "This folder is already exist",
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration:
-                                    const Duration(milliseconds: 300),
-                                margin: const EdgeInsets.all(10.0),
-                                padding: const EdgeInsets.all(20.0),
-                              );
-                            } else {
-                              _folderController.createFolder(
-                                enteredFolderName,
-                                [draggingNote, targetNote],
-                              );
+                          if (existFolderName != null) {
+                            Get.snackbar(
+                              "Folder exists",
+                              "This folder is already exist",
+                              snackPosition: SnackPosition.BOTTOM,
+                              animationDuration:
+                                  const Duration(milliseconds: 300),
+                              margin: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(20.0),
+                            );
+                          } else {
+                            _folderController.createFolder(
+                              enteredFolderName,
+                              [draggingNote, targetNote],
+                            );
 
-                              Get.back();
-                              _appController.isSelectMode.value = false;
-                            }
+                            Get.back();
+                            _appController.isSelectMode.value = false;
                           }
-                        : null,
-                    buttonText: "OK",
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                  ),
+                        }
+                      : null,
+                  buttonText: "OK",
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
