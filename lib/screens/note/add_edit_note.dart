@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/add_edit_note_controller.dart';
-import 'package:notes_getx/widgets/note/add_edit_note_icon_button.dart';
-import 'package:notes_getx/widgets/note/add_edit_note_popup_menu_button.dart';
+import 'package:notes_getx/widgets/note/add_edit_note/add_edit_note_icon_button.dart';
+import 'package:notes_getx/widgets/note/add_edit_note/add_edit_note_popup_menu_button.dart';
 import 'package:notes_getx/widgets/note/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
