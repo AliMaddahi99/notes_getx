@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/widgets/app/delete_bottom_sheet/delete_bottom_sheet.dart';
+import 'package:notes_getx/widgets/app/delete_bottom_sheet.dart';
 
 class DeleteIconButton extends StatelessWidget {
   final String? folderName;

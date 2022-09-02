@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/add_edit_note_controller.dart';
-import 'package:notes_getx/widgets/app/delete_bottom_sheet/delete_bottom_sheet.dart';
+import 'package:notes_getx/widgets/app/delete_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/title_note_text_field.dart';
 
 class AddEditNote extends StatelessWidget {
