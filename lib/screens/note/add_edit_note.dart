@@ -94,12 +94,6 @@ class AddEditNote extends StatelessWidget {
                         message: "Delete this note?",
                         deleteFromAddEditNoteScreen: true,
                       ),
-                      backgroundColor: Colors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(20.0),
-                        ),
-                      ),
                     );
                     break;
                 }
