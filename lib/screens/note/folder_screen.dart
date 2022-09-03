@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
 import 'package:notes_getx/widgets/app/add_fab.dart';
-import 'package:notes_getx/widgets/app/no_item.dart';
 import 'package:notes_getx/widgets/note/folder/folder_screen_main_app_bar.dart';
-import 'package:notes_getx/widgets/note/note_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_app_bar.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_navigation_bar/select_mode_bottom_navigation_bar.dart';
+import 'package:notes_getx/widgets/note/stream_builder_masonry_grid_view.dart';
 
 class FolderScreen extends StatelessWidget {
   final String folderName;
@@ -21,20 +18,6 @@ class FolderScreen extends StatelessWidget {
   }) : super(key: key);
 
   final AppController _appController = Get.find();
-  final NoteController _noteController = Get.find();
-
-  int gridCrossAxisCount(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var count = 1;
-
-    if (_noteController.isGridView.value) {
-      count = width > 768 ? 4 : 2;
-    } else {
-      count = 1;
-    }
-
-    return count;
-  }
 
   Stream<List<Note>> getFolderNotes() {
     return _appController.db.notes
@@ -70,28 +53,9 @@ class FolderScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: StreamBuilder<List<Note>>(
-          initialData: const [],
+        body: StreamBuilderMasonryGridView(
           stream: getFolderNotes(),
-          builder: (BuildContext context, AsyncSnapshot<List<Note>> snapshot) {
-            return snapshot.data!.isEmpty
-                ? NoItem()
-                : Obx(
-                    () => MasonryGridView.count(
-                      padding: const EdgeInsets.all(8.0),
-                      crossAxisCount: gridCrossAxisCount(context),
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        // show the list in reverse order,
-                        // so the last item that is added,
-                        // placed at index 0 in MasonryGridView
-                        int reversedIndex = snapshot.data!.length - 1 - index;
-
-                        return NoteCard(note: snapshot.data![reversedIndex]);
-                      },
-                    ),
-                  );
-          },
+          returnCard: ReturnCard.noteCard,
         ),
         floatingActionButton: AddFAB(
           onPressed: () => {
