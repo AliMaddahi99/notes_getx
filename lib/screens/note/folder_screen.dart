@@ -6,6 +6,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
+import 'package:notes_getx/widgets/app/add_fab.dart';
 import 'package:notes_getx/widgets/app/no_item.dart';
 import 'package:notes_getx/widgets/note/folder/folder_screen_main_app_bar.dart';
 import 'package:notes_getx/widgets/note/note_card.dart';
@@ -64,9 +65,7 @@ class FolderScreen extends StatelessWidget {
           child: Obx(
             () => Container(
               child: _appController.isSelectMode.value
-                  ? SelectModeAppBar(
-                      folderName: folderName,
-                    )
+                  ? SelectModeAppBar(folderName: folderName)
                   : FolderScreenMainAppBar(folderName: folderName),
             ),
           ),
@@ -88,31 +87,20 @@ class FolderScreen extends StatelessWidget {
                         // placed at index 0 in MasonryGridView
                         int reversedIndex = snapshot.data!.length - 1 - index;
 
-                        return NoteCard(
-                          note: snapshot.data![reversedIndex],
-                        );
+                        return NoteCard(note: snapshot.data![reversedIndex]);
                       },
                     ),
                   );
           },
         ),
-        floatingActionButton: Obx(
-          () => Container(
-            child: !_appController.isSelectMode.value
-                ? FloatingActionButton(
-                    onPressed: () => {
-                      Get.to(
-                        () => AddEditNote(
-                          folderName: folderName,
-                        ),
-                        transition: Transition.cupertino,
-                      ),
-                    },
-                    tooltip: "Add note",
-                    child: const Icon(Icons.add_rounded),
-                  )
-                : const SizedBox.shrink(),
-          ),
+        floatingActionButton: AddFAB(
+          onPressed: () => {
+            Get.to(
+              () => AddEditNote(folderName: folderName),
+              transition: Transition.cupertino,
+            ),
+          },
+          tooltip: "Add note",
         ),
         bottomNavigationBar: Obx(
           () => Container(
