@@ -9,7 +9,7 @@ import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/widgets/app/no_item.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/folder/folder_card.dart';
-import 'package:notes_getx/widgets/note/note_card.dart';
+import 'package:notes_getx/widgets/note/long_press_draggable_note_card.dart';
 
 class ViewNoteCard extends StatelessWidget {
   ViewNoteCard({Key? key}) : super(key: key);
@@ -70,57 +70,9 @@ class ViewNoteCard extends StatelessWidget {
                                 note: snapshot.data![reversedIndex],
                                 highlighted: candidateData.isNotEmpty,
                               )
-                            : LongPressDraggable(
-                                onDragStarted: () {
-                                  _appController.isSelectMode.value = true;
-                                  _appController.selectItem(
-                                      snapshot.data![reversedIndex].id);
-                                },
-                                onDragUpdate: (details) {
-                                  _appController.selectedItems.clear();
-
-                                  if (details.globalPosition.dy < 100) {
-                                    _noteController.scrollController.animateTo(
-                                      _noteController.scrollController.offset -
-                                          50,
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.linear,
-                                    );
-                                  } else if (details.globalPosition.dy >
-                                      MediaQuery.of(context).size.height -
-                                          100) {
-                                    _noteController.scrollController.animateTo(
-                                      _noteController.scrollController.offset +
-                                          50,
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.linear,
-                                    );
-                                  }
-                                },
-                                data: snapshot.data![reversedIndex],
-                                childWhenDragging: Opacity(
-                                  opacity: 0.0,
-                                  child: NoteCard(
-                                    note: snapshot.data![reversedIndex],
-                                  ),
-                                ),
-                                feedback: SizedBox(
-                                  // using MediaQuery to set NoteCard width, otherwise,
-                                  // it's width would be as long as NoteCard content
-                                  width: _noteController.isGridView.value
-                                      ? MediaQuery.of(context).size.width / 2 -
-                                          8
-                                      : MediaQuery.of(context).size.width - 16,
-                                  child: NoteCard(
-                                    note: snapshot.data![reversedIndex],
-                                  ),
-                                ),
-                                child: NoteCard(
-                                  note: snapshot.data![reversedIndex],
-                                  highlighted: candidateData.isNotEmpty,
-                                ),
+                            : LongPressDraggableNoteCard(
+                                note: snapshot.data![reversedIndex],
+                                highlighted: candidateData.isNotEmpty,
                               );
                       },
                       onWillAccept: (data) {
