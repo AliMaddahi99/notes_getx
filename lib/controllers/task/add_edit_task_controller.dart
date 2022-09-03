@@ -5,7 +5,6 @@ import 'package:notes_getx/models/task.dart';
 
 class AddEditTaskController extends GetxController {
   final TextEditingController taskTextController = TextEditingController();
-  final FocusNode taskFocusNode = FocusNode();
   var isTextFieldNotEmpty = false.obs;
   var args = Get.arguments;
 
@@ -46,10 +45,7 @@ class AddEditTaskController extends GetxController {
   void onInit() {
     if (args != null) {
       taskTextController.text = _taskController.tasks[args].title;
-      taskFocusNode.requestFocus();
       isTextFieldNotEmpty.value = true;
-    } else {
-      taskFocusNode.requestFocus();
     }
     super.onInit();
   }

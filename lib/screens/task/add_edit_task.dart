@@ -46,7 +46,7 @@ class AddEditTask extends StatelessWidget {
                             hintText: "What todo?",
                           ),
                           controller: _addEditTaskController.taskTextController,
-                          focusNode: _addEditTaskController.taskFocusNode,
+                          autofocus: true,
                           toolbarOptions: const ToolbarOptions(
                             copy: true,
                             cut: true,
