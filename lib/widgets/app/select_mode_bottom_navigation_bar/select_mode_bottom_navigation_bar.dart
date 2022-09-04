@@ -43,19 +43,21 @@ class SelectModeBottomNavigationBar extends StatelessWidget {
             color: Colors.amber,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _appController.pageViewId.value == 0
-                    ? snapshot.data!
-                        ? DeleteIconButton(
-                            deleteFromFolderScreen: deleteFromFolderScreen,
-                            folderName: folderName,
-                          )
-                        : const SizedBox.shrink()
-                    : DeleteIconButton(
+              children: _appController.pageViewId.value == 0
+                  ? [
+                      snapshot.data!
+                          ? DeleteIconButton(
+                              deleteFromFolderScreen: deleteFromFolderScreen,
+                              folderName: folderName,
+                            )
+                          : const SizedBox.shrink(),
+                    ]
+                  : [
+                      DeleteIconButton(
                         deleteFromFolderScreen: deleteFromFolderScreen,
                         folderName: folderName,
-                      )
-              ],
+                      ),
+                    ],
             ),
           );
         },
