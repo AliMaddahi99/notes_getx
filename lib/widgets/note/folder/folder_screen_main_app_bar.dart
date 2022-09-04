@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/models/note.dart';
+import 'package:notes_getx/widgets/app/delete_bottom_sheet.dart';
 
 class FolderScreenMainAppBar extends StatelessWidget {
   final String folderName;
@@ -12,6 +15,14 @@ class FolderScreenMainAppBar extends StatelessWidget {
 
   final AppController _appController = Get.find();
   final NoteController _noteController = Get.find();
+
+  Stream<List<Note>> getNotesInFolder() {
+    return _appController.db.notes
+        .where()
+        .filter()
+        .folderNameEqualTo(folderName)
+        .watch(initialReturn: true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,26 +45,47 @@ class FolderScreenMainAppBar extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
         ),
-        PopupMenuButton<String>(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          tooltip: "Options",
-          onSelected: (value) {
-            switch (value) {
-              case "Rename":
-                break;
-              case "Delete":
-                break;
-            }
-          },
-          itemBuilder: (BuildContext context) {
-            return {"Rename", "Delete"}.map((choice) {
-              return PopupMenuItem<String>(
-                value: choice,
-                child: Text(choice),
-              );
-            }).toList();
+        StreamBuilder<List<Note>>(
+          initialData: const [],
+          stream: getNotesInFolder(),
+          builder: (context, snapshot) {
+            return PopupMenuButton<String>(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              tooltip: "Options",
+              onSelected: (value) {
+                switch (value) {
+                  case "Rename":
+                    break;
+                  case "Delete":
+                    // select the folder and it's notes
+                    _appController.selectedItems.clear();
+                    for (var note in snapshot.data!) {
+                      _appController.selectItem(note.id);
+                    }
+
+                    Get.bottomSheet(
+                      DeleteBottomSheet(
+                        title: "Delete folder",
+                        message:
+                            "Delete ${_appController.getSelectedItemsCount("item")}?",
+                        folderName: folderName,
+                        deleteFromFolderScreen: true,
+                      ),
+                    );
+                    break;
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return {"Rename", "Delete"}.map((choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            );
           },
         ),
       ],
