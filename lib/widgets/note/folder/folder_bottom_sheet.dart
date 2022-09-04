@@ -8,13 +8,12 @@ import 'package:notes_getx/widgets/app/bottom_sheet_elevated_button.dart';
 
 class FolderBottomSheet extends StatelessWidget {
   final String title;
-  final Note targetNote;
-  final Note draggingNote;
+  final List<Note>? notes;
+
   FolderBottomSheet({
     Key? key,
     required this.title,
-    required this.targetNote,
-    required this.draggingNote,
+    required this.notes,
   }) : super(key: key);
 
   final AppController _appController = Get.find();
@@ -96,7 +95,7 @@ class FolderBottomSheet extends StatelessWidget {
                           } else {
                             _folderController.createFolder(
                               enteredFolderName,
-                              [draggingNote, targetNote],
+                              notes,
                             );
 
                             Get.back();

@@ -8,11 +8,13 @@ class FolderController extends GetxController {
 
   var isTextFieldEmpty = true.obs;
 
-  Future<void> createFolder(String folderName, List<Note> notes) async {
-    for (var note in notes) {
-      note.folderName = folderName;
+  Future<void> createFolder(String folderName, List<Note>? notes) async {
+    if (notes != null) {
+      for (var note in notes) {
+        note.folderName = folderName;
+      }
+      await NoteDatabaseService().updateNotesInDb(notes);
     }
-    await NoteDatabaseService().updateNotesInDb(notes);
 
     var noteAsFolder = Note()
       ..title = ""
