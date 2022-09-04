@@ -66,17 +66,17 @@ class DeleteBottomSheet extends StatelessWidget {
                               .getNoteFromDb(
                                   _appController.selectedItems.first);
 
-                          var notesWithFolder = await _appController.db.notes
+                          var notesInFolder = await _appController.db.notes
                               .where()
                               .filter()
                               .folderNameEqualTo(deletingNote!.folderName)
                               .findAll();
 
                           if (deletingNote.folderName != null &&
-                              notesWithFolder.length <= 2) {
+                              notesInFolder.length <= 2) {
                             NoteDatabaseService().deleteNotesFromDb([
-                              notesWithFolder[0].id,
-                              notesWithFolder[1].id,
+                              notesInFolder[0].id,
+                              notesInFolder[1].id,
                             ]);
 
                             // back to FolderScreen()
@@ -92,16 +92,27 @@ class DeleteBottomSheet extends StatelessWidget {
                         }
 
                         if (deleteFromFolderScreen) {
-                          var notesWithFolder = await _appController.db.notes
+                          var notesInFolder = await _appController.db.notes
                               .where()
                               .filter()
                               .folderNameEqualTo(folderName)
                               .findAll();
 
-                          var ids = notesWithFolder.map((e) => e.id).toList();
+                          var ids = notesInFolder.map((n) => n.id).toList();
 
-                          if (_appController.selectedItems.length + 1 ==
-                              notesWithFolder.length) {
+                          // using +1, means that by selecting all notes of folder,
+                          // the folder itself is selected too,
+                          // (actually it's selected above, in notesInFolder)
+                          // [ notesInFolder.length < selectedItem.length
+                          // notesInFolder.length +1 == selectedItem.length ]
+                          // and
+                          // using >=, is because the folder is selected in
+                          // folder_screen_main_app_bar -> PopupMenuButton -> Delete
+                          // so selectedItems already has the folder in itself
+                          // [ notesInFolder.length == selectedItem.length
+                          // notesInFolder.length +1 > selectedItem.length ]
+                          if (_appController.selectedItems.length + 1 >=
+                              notesInFolder.length) {
                             NoteDatabaseService().deleteNotesFromDb(ids);
 
                             // back to NoteHome()
