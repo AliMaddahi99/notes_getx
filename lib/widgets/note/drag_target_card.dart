@@ -32,9 +32,9 @@ class DragTargetCard extends StatelessWidget {
       onWillAccept: (data) {
         return (data as Note).id != note.id;
       },
-      onAccept: (data) {
+      onAccept: (data) async {
         if (note.isFolder) {
-          _folderController.addNoteToExistingFolder(
+          await _folderController.addNoteToExistingFolder(
             note.folderName!,
             data as Note,
           );
