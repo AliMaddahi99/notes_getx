@@ -30,9 +30,16 @@ class FolderController extends GetxController {
     isTextFieldEmpty.value = true;
   }
 
-  void addNoteToExistingFolder(String folderName, Note note) async {
+  Future<void> addNoteToExistingFolder(String folderName, Note note) async {
     note.folderName = folderName;
 
     await NoteDatabaseService().updateNoteInDb(note);
+  }
+
+  Future<void> renameFolder(String newFolderName, List<Note> notes) async {
+    for (var note in notes) {
+      note.folderName = newFolderName;
+    }
+    await NoteDatabaseService().updateNotesInDb(notes);
   }
 }
