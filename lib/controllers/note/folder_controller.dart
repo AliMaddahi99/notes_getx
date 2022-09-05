@@ -7,6 +7,7 @@ class FolderController extends GetxController {
   final TextEditingController folderTextController = TextEditingController();
 
   var isTextFieldEmpty = true.obs;
+  var isFolderScreenOpen = false.obs;
 
   Future<void> createFolder(String folderName, List<Note>? notes) async {
     if (notes != null) {
