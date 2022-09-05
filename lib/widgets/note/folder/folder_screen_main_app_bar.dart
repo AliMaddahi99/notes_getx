@@ -5,6 +5,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/widgets/app/delete_bottom_sheet.dart';
+import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet.dart';
 
 class FolderScreenMainAppBar extends StatelessWidget {
   final String folderName;
@@ -21,6 +22,7 @@ class FolderScreenMainAppBar extends StatelessWidget {
         .where()
         .filter()
         .folderNameEqualTo(folderName)
+        .build()
         .watch(initialReturn: true);
   }
 
@@ -57,6 +59,15 @@ class FolderScreenMainAppBar extends StatelessWidget {
               onSelected: (value) {
                 switch (value) {
                   case "Rename":
+                    Get.bottomSheet(
+                      FolderBottomSheet(
+                        title: "Rename folder",
+                        notes: snapshot.data!,
+                        isRename: true,
+                      ),
+                      enableDrag: false,
+                      isDismissible: false,
+                    );
                     break;
                   case "Delete":
                     // select the folder and it's notes
