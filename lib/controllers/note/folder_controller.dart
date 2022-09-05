@@ -41,5 +41,8 @@ class FolderController extends GetxController {
       note.folderName = newFolderName;
     }
     await NoteDatabaseService().updateNotesInDb(notes);
+
+    folderTextController.clear();
+    isTextFieldEmpty.value = true;
   }
 }
