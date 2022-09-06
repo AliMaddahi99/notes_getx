@@ -6,6 +6,9 @@ class NoteController extends GetxController {
   ScrollController scrollController = ScrollController();
 
   var isGridView = false.obs;
+  var isMoveToVisible = false.obs;
+  var isRenameVisible = false.obs;
+  var isDeleteVisible = false.obs;
 
   @override
   void onInit() {
