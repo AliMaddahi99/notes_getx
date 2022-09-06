@@ -4,7 +4,9 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_bar/delete_icon_button.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/delete_button.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/move_to_button.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/rename_button.dart';
 
 class SelectModeBottomBar extends StatelessWidget {
   final String? folderName;
@@ -55,32 +57,20 @@ class SelectModeBottomBar extends StatelessWidget {
                 children: _appController.pageViewId.value == 0
                     ? [
                         _noteController.isDeleteVisible.value
-                            ? DeleteIconButton(
+                            ? DeleteButton(
                                 deleteFromFolderScreen: deleteFromFolderScreen,
                                 folderName: folderName,
                               )
                             : const SizedBox.shrink(),
                         _noteController.isRenameVisible.value
-                            ? IconButton(
-                                onPressed:
-                                    _appController.selectedItems.isNotEmpty
-                                        ? () {}
-                                        : null,
-                                icon: Icon(Icons.edit),
-                              )
+                            ? RenameButton()
                             : const SizedBox.shrink(),
                         _noteController.isMoveToVisible.value
-                            ? IconButton(
-                                onPressed:
-                                    _appController.selectedItems.isNotEmpty
-                                        ? () {}
-                                        : null,
-                                icon: Icon(Icons.drive_file_move_rounded),
-                              )
+                            ? MoveToButton()
                             : const SizedBox.shrink(),
                       ]
                     : [
-                        DeleteIconButton(
+                        DeleteButton(
                           deleteFromFolderScreen: deleteFromFolderScreen,
                           folderName: folderName,
                         ),
