@@ -7,7 +7,7 @@ import 'package:notes_getx/screens/note/add_edit_note.dart';
 import 'package:notes_getx/widgets/app/add_fab.dart';
 import 'package:notes_getx/widgets/note/folder/folder_screen_main_app_bar.dart';
 import 'package:notes_getx/widgets/app/select_mode_app_bar.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_navigation_bar/select_mode_bottom_navigation_bar.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/select_mode_bottom_bar.dart';
 import 'package:notes_getx/widgets/note/stream_builder_masonry_grid_view.dart';
 
 class FolderScreen extends StatelessWidget {
@@ -69,7 +69,7 @@ class FolderScreen extends StatelessWidget {
         bottomNavigationBar: Obx(
           () => Container(
             child: _appController.isSelectMode.value
-                ? SelectModeBottomNavigationBar(
+                ? SelectModeBottomBar(
                     deleteFromFolderScreen: true,
                     folderName: folderName,
                   )
