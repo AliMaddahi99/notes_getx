@@ -4,13 +4,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/select_mode_bottom_bar_button.dart';
 
 class MoveToButton extends StatelessWidget {
-  final String? folderName;
-  final bool deleteFromFolderScreen;
-  MoveToButton({
-    super.key,
-    this.folderName,
-    this.deleteFromFolderScreen = false,
-  });
+  MoveToButton({super.key});
 
   final AppController _appController = Get.find();
 
