@@ -64,6 +64,7 @@ class FolderScreenMainAppBar extends StatelessWidget {
                         title: "Rename folder",
                         notes: snapshot.data!,
                         isRename: true,
+                        renameFromFolderScreen: true,
                       ),
                       enableDrag: false,
                       isDismissible: false,
