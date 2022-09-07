@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
-import 'package:notes_getx/screens/note/add_edit_note.dart';
-import 'package:notes_getx/widgets/app/add_fab.dart';
+import 'package:notes_getx/widgets/note/fab_options_menu/fab_options_menu.dart';
 import 'package:notes_getx/widgets/note/stream_builder_masonry_grid_view.dart';
 
 class NoteHome extends StatelessWidget {
@@ -31,14 +30,10 @@ class NoteHome extends StatelessWidget {
         returnCard: ReturnCard.dragTargetCard,
         isViewNoteCard: true,
       ),
-      floatingActionButton: AddFAB(
-        onPressed: () => {
-          Get.to(
-            () => AddEditNote(),
-            transition: Transition.cupertino,
-          ),
-        },
-        tooltip: "Add note",
+      floatingActionButton: Obx(
+        () => !_appController.isSelectMode.value
+            ? const FABOptionsMenu()
+            : const SizedBox.shrink(),
       ),
     );
   }
