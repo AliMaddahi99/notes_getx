@@ -5,8 +5,8 @@ import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/delete_button.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_bar/move_to_button.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_bar/rename_button.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_button.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/rename_button.dart';
 
 class SelectModeBottomBar extends StatelessWidget {
   final String? folderName;
