@@ -11,12 +11,14 @@ class FolderBottomSheet extends StatelessWidget {
   final String title;
   final List<Note>? notes;
   final bool isRename;
+  final bool renameFromFolderScreen;
 
   FolderBottomSheet({
     Key? key,
     required this.title,
     required this.notes,
     this.isRename = false,
+    this.renameFromFolderScreen = false,
   }) : super(key: key);
 
   final AppController _appController = Get.find();
@@ -79,6 +81,9 @@ class FolderBottomSheet extends StatelessWidget {
                     _folderController.folderTextController.clear();
                     _folderController.isTextFieldEmpty.value = true;
                     _folderController.isFolderScreenOpen.value = false;
+                    _appController.isSelectMode.value = false;
+                    _appController.selectedItems.clear();
+                    _appController.selectedFolderNotes.clear();
                     Get.back();
                     _appController.isSelectMode.value = false;
                   },
@@ -104,7 +109,13 @@ class FolderBottomSheet extends StatelessWidget {
                               isRename &&
                                       existFolderName.folderName ==
                                           notes!.first.folderName
-                                  ? Get.back()
+                                  ? {
+                                      Get.back(),
+                                      _appController.isSelectMode.value = false,
+                                      _appController.selectedItems.clear(),
+                                      _appController.selectedFolderNotes
+                                          .clear(),
+                                    }
                                   : Get.snackbar(
                                       "Folder exists",
                                       "This folder is already exist",
@@ -119,14 +130,19 @@ class FolderBottomSheet extends StatelessWidget {
                                   enteredFolderName, notes!);
                               // Close FolderBottomSheet
                               Get.back();
-                              // Go back out of folder
-                              Get.back();
-                              // Go to selected folder with new name
-                              Get.to(
-                                () =>
-                                    FolderScreen(folderName: enteredFolderName),
-                                transition: Transition.noTransition,
-                              );
+                              _appController.isSelectMode.value = false;
+                              _appController.selectedItems.clear();
+                              _appController.selectedFolderNotes.clear();
+                              if (renameFromFolderScreen) {
+                                // Go back out of folder
+                                Get.back();
+                                // Go to selected folder with new name
+                                Get.to(
+                                  () => FolderScreen(
+                                      folderName: enteredFolderName),
+                                  transition: Transition.noTransition,
+                                );
+                              }
                             } else {
                               await _folderController.createFolder(
                                 enteredFolderName,
