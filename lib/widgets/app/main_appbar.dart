@@ -33,6 +33,7 @@ class MainAppBar extends StatelessWidget {
                         ? Icons.book_rounded
                         : Icons.book_outlined,
                   ),
+                  tooltip: "Notes",
                 ),
                 IconButton(
                   onPressed: () {
@@ -48,6 +49,7 @@ class MainAppBar extends StatelessWidget {
                         ? Icons.check_box_rounded
                         : Icons.check_box_outlined,
                   ),
+                  tooltip: "Tasks",
                 ),
               ],
             ),

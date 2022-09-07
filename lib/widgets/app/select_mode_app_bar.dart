@@ -49,12 +49,13 @@ class SelectModeAppBar extends StatelessWidget {
       ),
       centerTitle: true,
       leading: IconButton(
-        icon: const Icon(Icons.clear_rounded),
         onPressed: () {
           _appController.isSelectMode.value = false;
           _appController.selectedItems.clear();
           _appController.selectedFolderNotes.clear();
         },
+        icon: const Icon(Icons.clear_rounded),
+        tooltip: "Close",
       ),
       actions: [
         Padding(
@@ -95,6 +96,7 @@ class SelectModeAppBar extends StatelessWidget {
                         }
                       },
                       icon: const Icon(Icons.checklist_rounded),
+                      tooltip: "Select/Unselect all",
                     );
                   },
                 )
@@ -111,6 +113,7 @@ class SelectModeAppBar extends StatelessWidget {
                     }
                   },
                   icon: const Icon(Icons.checklist_rounded),
+                  tooltip: "Select/Unselect all",
                 ),
         ),
       ],
