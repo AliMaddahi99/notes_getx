@@ -36,7 +36,7 @@ class DragTargetCard extends StatelessWidget {
         if (note.isFolder) {
           await _folderController.addNoteToExistingFolder(
             note.folderName!,
-            data as Note,
+            [data as Note],
           );
           _appController.isSelectMode.value = false;
         } else {

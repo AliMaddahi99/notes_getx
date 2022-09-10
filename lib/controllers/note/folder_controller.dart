@@ -31,10 +31,13 @@ class FolderController extends GetxController {
     isTextFieldEmpty.value = true;
   }
 
-  Future<void> addNoteToExistingFolder(String folderName, Note note) async {
-    note.folderName = folderName;
+  Future<void> addNoteToExistingFolder(
+      String folderName, List<Note> notes) async {
+    for (var note in notes) {
+      note.folderName = folderName;
+    }
 
-    await NoteDatabaseService().updateNoteInDb(note);
+    await NoteDatabaseService().updateNotesInDb(notes);
   }
 
   Future<void> renameFolder(String newFolderName, List<Note> notes) async {
