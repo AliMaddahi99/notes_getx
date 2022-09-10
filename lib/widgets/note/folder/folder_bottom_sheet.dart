@@ -5,6 +5,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/folder_screen.dart';
+import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/app/bottom_sheet_elevated_button.dart';
 
 class FolderBottomSheet extends StatelessWidget {
@@ -12,6 +13,8 @@ class FolderBottomSheet extends StatelessWidget {
   final List<Note>? notes;
   final bool isRename;
   final bool renameFromFolderScreen;
+  final bool fromMoveToBottomSheet;
+  final String? folderName;
 
   FolderBottomSheet({
     Key? key,
@@ -19,6 +22,8 @@ class FolderBottomSheet extends StatelessWidget {
     required this.notes,
     this.isRename = false,
     this.renameFromFolderScreen = false,
+    this.fromMoveToBottomSheet = false,
+    this.folderName,
   }) : super(key: key);
 
   final AppController _appController = Get.find();
@@ -78,14 +83,18 @@ class FolderBottomSheet extends StatelessWidget {
               children: [
                 BottomSheetElevatedButton(
                   onPressed: () {
-                    _folderController.folderTextController.clear();
-                    _folderController.isTextFieldEmpty.value = true;
-                    _folderController.isFolderScreenOpen.value = false;
-                    _appController.isSelectMode.value = false;
-                    _appController.selectedItems.clear();
-                    _appController.selectedFolderNotes.clear();
-                    Get.back();
-                    _appController.isSelectMode.value = false;
+                    if (fromMoveToBottomSheet) {
+                      Get.back();
+                    } else {
+                      _folderController.folderTextController.clear();
+                      _folderController.isTextFieldEmpty.value = true;
+                      _folderController.isFolderScreenOpen.value = false;
+                      _appController.isSelectMode.value = false;
+                      _appController.selectedItems.clear();
+                      _appController.selectedFolderNotes.clear();
+                      Get.back();
+                      _appController.isSelectMode.value = false;
+                    }
                   },
                   buttonText: "Cancel",
                 ),
@@ -153,6 +162,28 @@ class FolderBottomSheet extends StatelessWidget {
                               _appController.isSelectMode.value = false;
                               _folderController.isFolderScreenOpen.value =
                                   false;
+
+                              if (fromMoveToBottomSheet) {
+                                // Get notes in the folder, if there isn't any note, delete the folder
+                                var notesInFolder = await _appController
+                                    .db.notes
+                                    .where()
+                                    .filter()
+                                    .folderNameEqualTo(folderName)
+                                    .findAll();
+
+                                if (notesInFolder.length < 2) {
+                                  await NoteDatabaseService()
+                                      .deleteNotesFromDb([
+                                    notesInFolder.first.id,
+                                  ]);
+                                  Get.back();
+                                }
+
+                                _appController.selectedItems.clear();
+                                _appController.selectedFolderNotes.clear();
+                                Get.back();
+                              }
                             }
                           }
                         : null,
