@@ -67,7 +67,7 @@ class SelectModeBottomBar extends StatelessWidget {
                             : const SizedBox.shrink(),
                         _noteController.isMoveToVisible.value
                             ? MoveToButton(
-                                deleteFromFolderScreen: deleteFromFolderScreen,
+                                moveToFromFolderScreen: deleteFromFolderScreen,
                                 folderName: folderName,
                               )
                             : const SizedBox.shrink(),

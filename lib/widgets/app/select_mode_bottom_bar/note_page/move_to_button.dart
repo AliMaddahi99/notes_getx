@@ -4,12 +4,12 @@ import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/select_mode_bottom_bar_button.dart';
 
 class MoveToButton extends StatelessWidget {
-  final bool deleteFromFolderScreen;
+  final bool moveToFromFolderScreen;
   final String? folderName;
 
   const MoveToButton({
     super.key,
-    required this.deleteFromFolderScreen,
+    required this.moveToFromFolderScreen,
     required this.folderName,
   });
 
@@ -19,7 +19,7 @@ class MoveToButton extends StatelessWidget {
       onPressed: () {
         Get.bottomSheet(
           MoveToBottomSheet(
-            deleteFromFolderScreen: deleteFromFolderScreen,
+            moveToFromFolderScreen: moveToFromFolderScreen,
             folderName: folderName,
           ),
         );

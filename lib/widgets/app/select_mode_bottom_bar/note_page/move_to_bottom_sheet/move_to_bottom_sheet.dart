@@ -9,12 +9,12 @@ import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet.dart';
 
 class MoveToBottomSheet extends StatelessWidget {
-  final bool deleteFromFolderScreen;
+  final bool moveToFromFolderScreen;
   final String? folderName;
 
   MoveToBottomSheet({
     super.key,
-    required this.deleteFromFolderScreen,
+    required this.moveToFromFolderScreen,
     required this.folderName,
   });
 
@@ -102,7 +102,7 @@ class MoveToBottomSheet extends StatelessWidget {
                         );
                       case 1:
                         return Visibility(
-                          visible: deleteFromFolderScreen,
+                          visible: moveToFromFolderScreen,
                           child: MoveToCard(
                             icon: Icons.turn_left_rounded,
                             title: "Parent folder",
