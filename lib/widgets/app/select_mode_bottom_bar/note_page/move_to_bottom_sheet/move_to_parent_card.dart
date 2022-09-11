@@ -6,11 +6,11 @@ import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_card.dart';
 
-class ParentCard extends StatelessWidget {
+class MoveToParentCard extends StatelessWidget {
   final bool moveToFromFolderScreen;
   final String? folderName;
 
-  ParentCard({
+  MoveToParentCard({
     super.key,
     required this.moveToFromFolderScreen,
     required this.folderName,

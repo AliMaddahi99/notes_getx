@@ -5,10 +5,10 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/folder_card.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_folder_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_card.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/new_folder_card.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/parent_card.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_new_folder_card.dart';
+import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_parent_card.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_bottom_sheet.dart';
 
 class MoveToBottomSheet extends StatelessWidget {
@@ -79,9 +79,9 @@ class MoveToBottomSheet extends StatelessWidget {
                   itemBuilder: (context, index) {
                     switch (index) {
                       case 0:
-                        return NewFolderCard(folderName: folderName);
+                        return MoveToNewFolderCard(folderName: folderName);
                       case 1:
-                        return ParentCard(
+                        return MoveToParentCard(
                           moveToFromFolderScreen: moveToFromFolderScreen,
                           folderName: folderName,
                         );

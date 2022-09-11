@@ -6,10 +6,10 @@ import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_card.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_bottom_sheet.dart';
 
-class NewFolderCard extends StatelessWidget {
+class MoveToNewFolderCard extends StatelessWidget {
   final String? folderName;
 
-  NewFolderCard({
+  MoveToNewFolderCard({
     super.key,
     required this.folderName,
   });
