@@ -7,6 +7,7 @@ import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/screens/note/folder_screen.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/app/bottom_sheet_elevated_button.dart';
+import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/cancel_button.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/ok_button.dart';
 
 class FolderBottomSheet extends StatelessWidget {
@@ -82,23 +83,7 @@ class FolderBottomSheet extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BottomSheetElevatedButton(
-                  onPressed: () {
-                    if (fromMoveToBottomSheet) {
-                      Get.back();
-                    } else {
-                      _folderController.folderTextController.clear();
-                      _folderController.isTextFieldEmpty.value = true;
-                      _folderController.isFolderScreenOpen.value = false;
-                      _appController.isSelectMode.value = false;
-                      _appController.selectedItems.clear();
-                      _appController.selectedFolderNotes.clear();
-                      Get.back();
-                      _appController.isSelectMode.value = false;
-                    }
-                  },
-                  buttonText: "Cancel",
-                ),
+                CancelButton(fromMoveToBottomSheet: fromMoveToBottomSheet),
                 OKButton(
                   notes: notes,
                   isRename: isRename,
