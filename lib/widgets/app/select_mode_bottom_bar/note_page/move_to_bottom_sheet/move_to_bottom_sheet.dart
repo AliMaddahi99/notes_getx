@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/models/note.dart';
-import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_folder_card.dart';
-import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_new_folder_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_parent_card.dart';
-import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_bottom_sheet.dart';
 
 class MoveToBottomSheet extends StatelessWidget {
   final bool moveToFromFolderScreen;
@@ -22,13 +18,10 @@ class MoveToBottomSheet extends StatelessWidget {
   });
 
   final AppController _appController = Get.find();
-  final FolderController _folderController = Get.find();
 
   int gridCrossAxisCount(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var count = width > 768 ? 4 : 2;
-
-    return count;
+    return width > 768 ? 4 : 2;
   }
 
   Stream<List<Note>> getFolders() {
@@ -60,10 +53,7 @@ class MoveToBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.all(24.0),
                 child: Text(
                   "Select folder",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
@@ -75,6 +65,8 @@ class MoveToBottomSheet extends StatelessWidget {
                     crossAxisSpacing: 16.0,
                     mainAxisExtent: 180.0,
                   ),
+
+                  // 2 is because of MoveToNewFolderCard and MoveToFolderCard
                   itemCount: 2 + snapshot.data!.length,
                   itemBuilder: (context, index) {
                     switch (index) {
@@ -87,9 +79,10 @@ class MoveToBottomSheet extends StatelessWidget {
                         );
                       default:
                         return MoveToFolderCard(
-                            snapshotDataFolderName:
-                                snapshot.data![index - 2].folderName,
-                            folderName: folderName);
+                          snapshotDataFolderName:
+                              snapshot.data![index - 2].folderName,
+                          folderName: folderName,
+                        );
                     }
                   },
                 ),
