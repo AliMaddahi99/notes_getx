@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:isar/isar.dart';
-import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/models/note.dart';
-import 'package:notes_getx/screens/note/folder_screen.dart';
-import 'package:notes_getx/services/database/note_database_service.dart';
-import 'package:notes_getx/widgets/app/bottom_sheet_elevated_button.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/cancel_button.dart';
+import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_name_text_field.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/ok_button.dart';
 
 class FolderBottomSheet extends StatelessWidget {
@@ -28,7 +24,6 @@ class FolderBottomSheet extends StatelessWidget {
     this.folderName,
   }) : super(key: key);
 
-  final AppController _appController = Get.find();
   final FolderController _folderController = Get.find();
 
   @override
@@ -60,26 +55,7 @@ class FolderBottomSheet extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            TextField(
-              autofocus: true,
-              controller: _folderController.folderTextController
-                ..text = isRename ? notes!.first.folderName! : ""
-                ..selection = TextSelection(
-                    baseOffset: 0,
-                    extentOffset:
-                        _folderController.folderTextController.text.length),
-              decoration: const InputDecoration(
-                hintText: "Please enter text...",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(16.0),
-                  ),
-                ),
-              ),
-              onChanged: (value) {
-                _folderController.isTextFieldEmpty.value = value.isEmpty;
-              },
-            ),
+            FolderNameTextField(notes: notes, isRename: isRename),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
