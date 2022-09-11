@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/models/note.dart';
-import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet.dart';
+import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/folder/folder_card.dart';
 import 'package:notes_getx/widgets/note/long_press_draggable_note_card.dart';
 

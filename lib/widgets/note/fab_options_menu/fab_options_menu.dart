@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/screens/note/add_edit_note.dart';
 import 'package:notes_getx/widgets/note/fab_options_menu/fab_options_menu_delegate.dart';
-import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet.dart';
+import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_bottom_sheet.dart';
 
 class FABOptionsMenu extends StatefulWidget {
   const FABOptionsMenu({super.key});

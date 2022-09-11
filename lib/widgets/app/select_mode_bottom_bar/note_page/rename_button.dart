@@ -5,7 +5,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/select_mode_bottom_bar_button.dart';
-import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet.dart';
+import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_bottom_sheet.dart';
 
 class RenameButton extends StatelessWidget {
   RenameButton({super.key});
