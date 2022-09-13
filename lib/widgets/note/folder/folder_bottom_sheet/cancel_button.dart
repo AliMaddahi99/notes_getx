@@ -20,6 +20,8 @@ class CancelButton extends StatelessWidget {
     return BottomSheetElevatedButton(
       onPressed: () {
         if (fromMoveToBottomSheet) {
+          _folderController.folderTextController.clear();
+          _folderController.isTextFieldEmpty.value = true;
           Get.back();
         } else {
           _folderController.folderTextController.clear();
