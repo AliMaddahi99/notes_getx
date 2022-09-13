@@ -94,9 +94,12 @@ class OKButton extends StatelessWidget {
                         .where()
                         .filter()
                         .folderNameEqualTo(folderName)
+                        .and()
+                        .not()
+                        .folderNameIsNull()
                         .findAll();
 
-                    if (notesInFolder.length < 2) {
+                    if (notesInFolder.length == 1) {
                       await NoteDatabaseService().deleteNotesFromDb([
                         notesInFolder.first.id,
                       ]);
