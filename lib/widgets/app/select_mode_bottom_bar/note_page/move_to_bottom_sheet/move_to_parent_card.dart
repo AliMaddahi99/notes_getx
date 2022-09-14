@@ -46,7 +46,7 @@ class MoveToParentCard extends StatelessWidget {
               .folderNameEqualTo(folderName)
               .findAll();
 
-          if (notesInFolder.length < 2) {
+          if (notesInFolder.length == 1) {
             await NoteDatabaseService().deleteNotesFromDb([
               notesInFolder.first.id,
             ]);
