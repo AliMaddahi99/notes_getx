@@ -39,7 +39,6 @@ class _FABOptionsMenuState extends State<FABOptionsMenu>
         btnSize: btnSize,
       ),
       children: <IconData>[
-        Icons.delete_rounded,
         Icons.create_new_folder_rounded,
         Icons.note_add_rounded,
         Icons.more_vert_rounded,

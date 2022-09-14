@@ -15,17 +15,14 @@ class FABOptionsMenuDelegate extends FlowDelegate {
     final xStart = size.width - btnSize;
     final yStart = size.height - btnSize;
 
-    final int n = context.childCount;
+    for (int i = 0; i < context.childCount; i++) {
+      final bool isLastItem = i == context.childCount - 1;
+      double setValue(double value) => isLastItem ? 0.0 : value;
 
-    for (int i = 0; i < n; i++) {
-      final isLastItem = i == n - 1;
-      double setValue(value) => isLastItem ? 0.0 : value;
-
-      final double radius = 90.0 * animation.value;
-      final double theta = i * pi * 0.5 / (n - 2);
-
-      final double x = xStart - setValue(radius * cos(theta));
-      final double y = yStart - setValue(radius * sin(theta));
+      const double margin = 10.0;
+      final double x = xStart;
+      final double y =
+          yStart - setValue(animation.value * (btnSize + margin) * (i + 1));
 
       context.paintChild(i,
           transform: Matrix4.identity()
