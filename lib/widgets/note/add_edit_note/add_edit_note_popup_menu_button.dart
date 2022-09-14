@@ -17,8 +17,6 @@ class AddEditNotePopupMenuButton extends StatelessWidget {
       tooltip: "Options",
       onSelected: (value) {
         switch (value) {
-          case "Move to":
-            break;
           case "Delete":
             _addEditNoteController.args != null
                 ? Get.bottomSheet(
@@ -34,7 +32,6 @@ class AddEditNotePopupMenuButton extends StatelessWidget {
       },
       itemBuilder: (BuildContext context) {
         return {
-          "Move to",
           "Delete",
         }.map((choice) {
           return PopupMenuItem<String>(
