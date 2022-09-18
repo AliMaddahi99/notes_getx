@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
-import 'package:notes_getx/widgets/task/dismissible_tast_item_card.dart';
+import 'package:notes_getx/widgets/task/dismissible_task_item_card.dart';
 
 class ReorderableTaskCardListView extends StatelessWidget {
   ReorderableTaskCardListView({Key? key}) : super(key: key);
