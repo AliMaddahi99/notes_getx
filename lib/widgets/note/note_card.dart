@@ -92,7 +92,9 @@ class NoteCard extends StatelessWidget {
                                   fontSize: _noteController.isGridView.value
                                       ? 16.0
                                       : 18.0,
-                                  color: Colors.black54,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black54,
                                 ),
                               ),
                             )
@@ -103,9 +105,10 @@ class NoteCard extends StatelessWidget {
                         ),
                         child: Text(
                           note.dateTime,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12.0,
-                            color: Colors.black45,
+                            color:
+                                Get.isDarkMode ? Colors.grey : Colors.black45,
                           ),
                         ),
                       ),
