@@ -47,11 +47,7 @@ class _FABOptionsMenuState extends State<FABOptionsMenu>
   }
 
   Widget buildButton(IconData icon) {
-    return RawMaterialButton(
-      constraints: BoxConstraints(minWidth: btnSize, minHeight: btnSize),
-      fillColor: Colors.amber,
-      elevation: 0,
-      shape: const CircleBorder(),
+    return FloatingActionButton(
       child: Icon(icon),
       onPressed: () {
         animationController.status == AnimationStatus.completed
