@@ -14,10 +14,7 @@ class ReorderableTaskCardListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Colors.transparent,
-          shadowColor: Colors.white,
-        ),
+        data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
         child: ReorderableListView.builder(
           key: const PageStorageKey<String>("tasksPage"),
           onReorder: (oldIndex, newIndex) {
