@@ -48,6 +48,7 @@ class _FABOptionsMenuState extends State<FABOptionsMenu>
 
   Widget buildButton(IconData icon) {
     return FloatingActionButton(
+      heroTag: null,
       child: Icon(icon),
       onPressed: () {
         animationController.status == AnimationStatus.completed
