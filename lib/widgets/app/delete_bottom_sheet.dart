@@ -5,6 +5,7 @@ import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/controllers/task/task_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/services/database/note_database_service.dart';
+import 'package:notes_getx/styles/colors.dart';
 import 'package:notes_getx/widgets/app/bottom_sheet_elevated_button.dart';
 
 class DeleteBottomSheet extends StatelessWidget {
@@ -29,9 +30,9 @@ class DeleteBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200.0,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
+      decoration: BoxDecoration(
+        color: Get.isDarkMode ? darkBottomSheet : Colors.white,
+        borderRadius: const BorderRadius.vertical(
           top: Radius.circular(20.0),
         ),
       ),

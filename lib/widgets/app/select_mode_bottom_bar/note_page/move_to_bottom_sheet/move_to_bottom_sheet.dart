@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
 import 'package:notes_getx/models/note.dart';
+import 'package:notes_getx/styles/colors.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_folder_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_new_folder_card.dart';
 import 'package:notes_getx/widgets/app/select_mode_bottom_bar/note_page/move_to_bottom_sheet/move_to_parent_card.dart';
@@ -41,9 +42,9 @@ class MoveToBottomSheet extends StatelessWidget {
       builder: (context, snapshot) {
         return Container(
           height: 400,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(
+          decoration: BoxDecoration(
+            color: Get.isDarkMode ? darkBottomSheet : Colors.white,
+            borderRadius: const BorderRadius.vertical(
               top: Radius.circular(20.0),
             ),
           ),

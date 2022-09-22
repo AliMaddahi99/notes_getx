@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/note/folder_controller.dart';
 import 'package:notes_getx/models/note.dart';
+import 'package:notes_getx/styles/colors.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/cancel_button.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_name_text_field.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/ok_button.dart';
@@ -39,9 +40,9 @@ class FolderBottomSheet extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         height: 200.0,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(
+        decoration: BoxDecoration(
+          color: Get.isDarkMode ? darkBottomSheet : Colors.white,
+          borderRadius: const BorderRadius.vertical(
             top: Radius.circular(20.0),
           ),
         ),
