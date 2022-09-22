@@ -76,15 +76,12 @@ class AddEditTask extends StatelessWidget {
                                   ? () {
                                       _addEditTaskController.addOrEdit();
                                     }
-                                  : () {},
-                              child: Text(
+                                  : null,
+                              child: const Text(
                                 "Done",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: _addEditTaskController
-                                            .isTextFieldNotEmpty.value
-                                        ? Colors.amber
-                                        : Colors.grey),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ],
