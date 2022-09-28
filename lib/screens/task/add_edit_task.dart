@@ -42,7 +42,7 @@ class AddEditTask extends StatelessWidget {
                           maxLines: 12,
                           maxLength: 2000,
                           decoration: const InputDecoration(
-                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
                             hintText: "What todo?",
                           ),
                           controller: _addEditTaskController.taskTextController,
