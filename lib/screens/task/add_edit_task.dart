@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/task/add_edit_task_controller.dart';
+import 'package:notes_getx/styles/colors.dart';
 
 class AddEditTask extends StatelessWidget {
   AddEditTask({Key? key}) : super(key: key);
@@ -25,9 +26,9 @@ class AddEditTask extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
+                decoration: BoxDecoration(
+                  color: Get.isDarkMode ? darkBottomSheet : Colors.white,
+                  borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16.0),
                   ),
                 ),
@@ -66,7 +67,7 @@ class AddEditTask extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        color: Colors.white,
+                        color: Get.isDarkMode ? darkBottomSheet : Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
