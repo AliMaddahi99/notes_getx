@@ -33,6 +33,7 @@ class TitleNoteTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         border: InputBorder.none,
+        focusedBorder: InputBorder.none,
       ),
       style: TextStyle(fontSize: fontSize),
       controller: controller,
