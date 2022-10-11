@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_getx/styles/colors.dart';
 
 ThemeData dark = ThemeData(
@@ -11,12 +10,8 @@ ThemeData dark = ThemeData(
     secondary: darkPrimaryColor,
   ),
 
-  // TEXT THEME
-  textTheme: GoogleFonts.capriolaTextTheme(
-    const TextTheme(
-      bodyText2: TextStyle(color: Colors.white),
-    ),
-  ),
+  // FONT FAMILY
+  fontFamily: "Capriola",
 
   // APP BAR
   appBarTheme: AppBarTheme(
