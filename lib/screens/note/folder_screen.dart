@@ -27,7 +27,7 @@ class FolderScreen extends StatelessWidget {
         .and()
         .isFolderEqualTo(false)
         .build()
-        .watch(initialReturn: true);
+        .watch(fireImmediately: true);
   }
 
   @override

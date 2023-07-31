@@ -19,7 +19,7 @@ class NoteHome extends StatelessWidget {
         .or()
         .isFolderEqualTo(true)
         .build()
-        .watch(initialReturn: true);
+        .watch(fireImmediately: true);
   }
 
   @override

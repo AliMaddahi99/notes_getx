@@ -12,7 +12,7 @@ class Database {
     WidgetsFlutterBinding.ensureInitialized();
 
     return _appController.db = await Isar.open(
-      schemas: [
+      [
         NoteSchema,
       ],
       directory: (await getApplicationDocumentsDirectory()).path,

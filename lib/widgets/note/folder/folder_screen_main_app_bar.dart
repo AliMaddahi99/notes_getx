@@ -23,7 +23,7 @@ class FolderScreenMainAppBar extends StatelessWidget {
         .filter()
         .folderNameEqualTo(folderName)
         .build()
-        .watch(initialReturn: true);
+        .watch(fireImmediately: true);
   }
 
   @override

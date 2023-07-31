@@ -8,31 +8,31 @@ class NoteDatabaseService {
 
   Future<Note?> getNoteFromDb(int id) async {
     return await _appController.db
-        .writeTxn((isar) async => await isar.notes.get(id));
+        .writeTxn(() async => await _appController.db.notes.get(id));
   }
 
   Future<List<Note?>> getNotesFromDb(List<int> ids) async {
     return await _appController.db
-        .writeTxn((isar) async => await isar.notes.getAll(ids));
+        .writeTxn(() async => await _appController.db.notes.getAll(ids));
   }
 
   Future<int> addNoteToDb(Note note) async {
     return await _appController.db
-        .writeTxn((isar) async => await isar.notes.put(note));
+        .writeTxn(() async => await _appController.db.notes.put(note));
   }
 
   Future<int> updateNoteInDb(Note note) async {
     return await _appController.db
-        .writeTxn((isar) async => await isar.notes.put(note));
+        .writeTxn(() async => await _appController.db.notes.put(note));
   }
 
   Future<List<int>> updateNotesInDb(List<Note> notes) async {
     return await _appController.db
-        .writeTxn((isar) async => await isar.notes.putAll(notes));
+        .writeTxn(() async => await _appController.db.notes.putAll(notes));
   }
 
   Future<int> deleteNotesFromDb(List<int> ids) async {
     return await _appController.db
-        .writeTxn((isar) async => await isar.notes.deleteAll(ids));
+        .writeTxn(() async => await _appController.db.notes.deleteAll(ids));
   }
 }

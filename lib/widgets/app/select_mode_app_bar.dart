@@ -24,7 +24,7 @@ class SelectModeAppBar extends StatelessWidget {
           .or()
           .isFolderEqualTo(true)
           .build()
-          .watch(initialReturn: true);
+          .watch(fireImmediately: true);
     } else {
       return _appController.db.notes
           .where()
@@ -33,7 +33,7 @@ class SelectModeAppBar extends StatelessWidget {
           .and()
           .isFolderEqualTo(false)
           .build()
-          .watch(initialReturn: true);
+          .watch(fireImmediately: true);
     }
   }
 

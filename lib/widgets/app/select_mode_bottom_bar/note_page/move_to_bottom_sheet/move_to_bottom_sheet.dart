@@ -31,7 +31,7 @@ class MoveToBottomSheet extends StatelessWidget {
         .filter()
         .isFolderEqualTo(true)
         .build()
-        .watch(initialReturn: true);
+        .watch(fireImmediately: true);
   }
 
   @override

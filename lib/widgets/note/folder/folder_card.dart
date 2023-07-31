@@ -26,7 +26,7 @@ class FolderCard extends StatelessWidget {
         .folderNameEqualTo(note.folderName!)
         .and()
         .isFolderEqualTo(false)
-        .watch(initialReturn: true);
+        .watch(fireImmediately: true);
   }
 
   @override
