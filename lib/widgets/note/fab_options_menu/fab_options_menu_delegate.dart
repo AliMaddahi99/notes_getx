@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 
 class FABOptionsMenuDelegate extends FlowDelegate {
   final Animation<double> animation;
@@ -12,7 +13,8 @@ class FABOptionsMenuDelegate extends FlowDelegate {
   @override
   void paintChildren(FlowPaintingContext context) {
     final size = context.size;
-    final xStart = size.width - btnSize;
+    final xStart =
+        Get.locale == const Locale('en', 'US') ? size.width - btnSize : 0.0;
     final yStart = size.height - btnSize;
 
     for (int i = 0; i < context.childCount; i++) {
