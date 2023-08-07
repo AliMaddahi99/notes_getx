@@ -56,7 +56,12 @@ class DeleteBottomSheet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               BottomSheetElevatedButton(
-                onPressed: () => Get.back(),
+                onPressed: () {
+                  if (deleteFromFolderScreen) {
+                    _appController.selectedItems.clear();
+                  }
+                  Get.back();
+                },
                 buttonText: "cancel".tr,
               ),
               BottomSheetElevatedButton(

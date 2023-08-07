@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/controllers/note/note_controller.dart';
 import 'package:notes_getx/models/note.dart';
 import 'package:notes_getx/widgets/app/delete_bottom_sheet.dart';
 import 'package:notes_getx/widgets/note/folder/folder_bottom_sheet/folder_bottom_sheet.dart';
@@ -15,7 +14,6 @@ class FolderScreenMainAppBar extends StatelessWidget {
   }) : super(key: key);
 
   final AppController _appController = Get.find();
-  final NoteController _noteController = Get.find();
 
   Stream<List<Note>> getNotesInFolder() {
     return _appController.db.notes
@@ -83,7 +81,7 @@ class FolderScreenMainAppBar extends StatelessWidget {
                         folderName: folderName,
                         deleteFromFolderScreen: true,
                       ),
-                    );
+                    ).whenComplete(() => _appController.selectedItems.clear());
                     break;
                 }
               },
