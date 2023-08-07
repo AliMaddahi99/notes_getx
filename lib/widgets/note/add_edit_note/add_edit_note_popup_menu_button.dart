@@ -10,35 +10,29 @@ class AddEditNotePopupMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
+    return PopupMenuButton<int>(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
-      tooltip: "Options",
+      tooltip: "options".tr,
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          value: 1,
+          child: Text("delete".tr),
+        ),
+      ],
       onSelected: (value) {
-        switch (value) {
-          case "Delete":
-            _addEditNoteController.args != null
-                ? Get.bottomSheet(
-                    DeleteBottomSheet(
-                      title: "Delete note",
-                      message: "Delete this note?",
-                      deleteFromAddEditNoteScreen: true,
-                    ),
-                  )
-                : null;
-            break;
+        if (value == 1) {
+          _addEditNoteController.args != null
+              ? Get.bottomSheet(
+                  DeleteBottomSheet(
+                    title: "delete_note".tr,
+                    message: "delete_note_message".tr,
+                    deleteFromAddEditNoteScreen: true,
+                  ),
+                )
+              : null;
         }
-      },
-      itemBuilder: (BuildContext context) {
-        return {
-          "Delete",
-        }.map((choice) {
-          return PopupMenuItem<String>(
-            value: choice,
-            child: Text(choice),
-          );
-        }).toList();
       },
     );
   }

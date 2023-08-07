@@ -42,18 +42,12 @@ class AddEditTask extends StatelessWidget {
                           minLines: 1,
                           maxLines: 12,
                           maxLength: 2000,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             focusedBorder: InputBorder.none,
-                            hintText: "What todo?",
+                            hintText: "what_todo".tr,
                           ),
                           controller: _addEditTaskController.taskTextController,
                           autofocus: true,
-                          toolbarOptions: const ToolbarOptions(
-                            copy: true,
-                            cut: true,
-                            paste: true,
-                            selectAll: true,
-                          ),
                           onChanged: (text) {
                             _addEditTaskController.isTextFieldNotEmpty.value =
                                 text.isNotEmpty;
@@ -78,9 +72,9 @@ class AddEditTask extends StatelessWidget {
                                       _addEditTaskController.addOrEdit();
                                     }
                                   : null,
-                              child: const Text(
-                                "Done",
-                                style: TextStyle(
+                              child: Text(
+                                "done".tr,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

@@ -7,5 +7,5 @@ void main() async {
   await GetStorage.init();
   await Database().initIsar();
 
-  runApp(const NotesApp());
+  runApp(NotesApp());
 }

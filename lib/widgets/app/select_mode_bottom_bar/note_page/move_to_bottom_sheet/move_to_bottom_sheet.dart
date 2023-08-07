@@ -50,11 +50,12 @@ class MoveToBottomSheet extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.all(24.0),
+              Padding(
+                padding: const EdgeInsets.all(24.0),
                 child: Text(
-                  "Select folder",
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  "select_folder".tr,
+                  style: const TextStyle(
+                      fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(

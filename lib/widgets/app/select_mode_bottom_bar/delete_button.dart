@@ -22,17 +22,30 @@ class DeleteButton extends StatelessWidget {
         Get.bottomSheet(
           DeleteBottomSheet(
             title: _appController.pageViewId.value == 0
-                ? "Delete note"
-                : "Delete task",
-            message:
-                "Delete ${_appController.getSelectedItemsCount(_appController.pageViewId.value == 0 ? "item" : "task")}?",
+                ? "delete_note".tr
+                : "delete_task".tr,
+            message: "delete_bottom_sheet_message".trPluralParams(
+              "delete_bottom_sheet_message_plural".tr,
+              _appController.selectedItems.length,
+              {
+                "count": _appController.selectedItems.length.toString(),
+                "what": _appController.pageViewId.value == 0
+                    ? "item".tr
+                    : "task".tr,
+                "whaat": _appController.pageViewId.value == 0
+                    ? "itemp".tr
+                    : "taskp".tr,
+              },
+              // message:
+              //     "Delete ${_appController.getSelectedItemsCount(_appController.pageViewId.value == 0 ? "item" : "task")}?",
+            ),
             deleteFromFolderScreen: deleteFromFolderScreen,
             folderName: folderName,
           ),
         );
       },
       icon: Icons.delete_rounded,
-      lable: "Delete",
+      lable: "delete".tr,
     );
   }
 }

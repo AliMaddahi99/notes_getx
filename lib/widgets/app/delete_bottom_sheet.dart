@@ -57,7 +57,7 @@ class DeleteBottomSheet extends StatelessWidget {
             children: [
               BottomSheetElevatedButton(
                 onPressed: () => Get.back(),
-                buttonText: "Cancel",
+                buttonText: "cancel".tr,
               ),
               BottomSheetElevatedButton(
                 onPressed: _appController.pageViewId.value == 0
@@ -140,7 +140,7 @@ class DeleteBottomSheet extends StatelessWidget {
                         _appController.isSelectMode.value = false;
                         Get.back();
                       },
-                buttonText: "Delete",
+                buttonText: "delete".tr,
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
               ),

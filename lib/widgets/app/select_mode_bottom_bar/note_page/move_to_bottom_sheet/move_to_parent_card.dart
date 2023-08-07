@@ -24,7 +24,7 @@ class MoveToParentCard extends StatelessWidget {
       visible: moveToFromFolderScreen,
       child: MoveToCard(
         icon: Icons.turn_left_rounded,
-        title: "Parent folder",
+        title: "parent_folder".tr,
         onTap: () async {
           List<Note?> selectedNotes = await NoteDatabaseService()
               .getNotesFromDb(_appController.selectedItems().toList());

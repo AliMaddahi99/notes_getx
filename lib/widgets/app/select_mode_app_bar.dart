@@ -43,8 +43,13 @@ class SelectModeAppBar extends StatelessWidget {
       title: Obx(
         () => Text(
           _appController.selectedItems.isEmpty
-              ? "Select items"
-              : "${_appController.getSelectedItemsCount("item")} selected",
+              ? "select_items".tr
+              : "selected_items".trPluralParams(
+                  'plural_selected_items'.tr,
+                  _appController.selectedItems.length,
+                  {'item': _appController.selectedItems.length.toString()},
+                ),
+          // : "${_appController.getSelectedItemsCount("item")} selected",
         ),
       ),
       centerTitle: true,
@@ -55,7 +60,7 @@ class SelectModeAppBar extends StatelessWidget {
           _appController.selectedFolderNotes.clear();
         },
         icon: const Icon(Icons.clear_rounded),
-        tooltip: "Close",
+        tooltip: "close".tr,
       ),
       actions: [
         Padding(
@@ -96,7 +101,7 @@ class SelectModeAppBar extends StatelessWidget {
                         }
                       },
                       icon: const Icon(Icons.checklist_rounded),
-                      tooltip: "Select/Unselect all",
+                      tooltip: "select_unselect_all".tr,
                     );
                   },
                 )
@@ -113,7 +118,7 @@ class SelectModeAppBar extends StatelessWidget {
                     }
                   },
                   icon: const Icon(Icons.checklist_rounded),
-                  tooltip: "Select/Unselect all",
+                  tooltip: "select_unselect_all".tr,
                 ),
         ),
       ],

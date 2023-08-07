@@ -42,7 +42,7 @@ class DragTargetCard extends StatelessWidget {
         } else {
           Get.bottomSheet(
             FolderBottomSheet(
-              title: "New Folder",
+              title: "new_folder".tr,
               notes: [note, data as Note],
             ),
             enableDrag: false,

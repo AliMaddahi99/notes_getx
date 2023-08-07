@@ -33,7 +33,7 @@ class RenameButton extends StatelessWidget {
           onPressed: () {
             Get.bottomSheet(
               FolderBottomSheet(
-                title: "Rename folder",
+                title: "rename_folder".tr,
                 notes: snapshot.data!,
                 isRename: true,
               ),
@@ -42,7 +42,7 @@ class RenameButton extends StatelessWidget {
             );
           },
           icon: Icons.drive_file_rename_outline_rounded,
-          lable: "Rename",
+          lable: "rename".tr,
         );
       },
     );

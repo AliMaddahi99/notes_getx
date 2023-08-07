@@ -68,7 +68,7 @@ class _FABOptionsMenuState extends State<FABOptionsMenu>
           );
         } else if (icon == Icons.create_new_folder_rounded) {
           Get.bottomSheet(
-            FolderBottomSheet(title: "New folder", notes: null),
+            FolderBottomSheet(title: "new_folder".tr, notes: null),
             enableDrag: false,
             isDismissible: false,
           );

@@ -38,12 +38,6 @@ class TitleNoteTextField extends StatelessWidget {
       style: TextStyle(fontSize: fontSize),
       controller: controller,
       focusNode: focusNode,
-      toolbarOptions: const ToolbarOptions(
-        copy: true,
-        cut: true,
-        paste: true,
-        selectAll: true,
-      ),
       onChanged: (text) {
         toggleSaveButtonVisibility();
       },

@@ -26,8 +26,8 @@ class NoItem extends StatelessWidget {
             ),
             Text(
               _appController.pageViewId.value == 0
-                  ? "No notes here yet"
-                  : "No tasks here yet",
+                  ? "no_notes".tr
+                  : "no_tasks".tr,
               style: const TextStyle(
                 color: Colors.grey,
               ),

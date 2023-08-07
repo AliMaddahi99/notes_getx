@@ -24,8 +24,8 @@ class AddEditNoteIconButton extends StatelessWidget {
                   folderName: folderName,
                 );
                 Get.snackbar(
-                  "Note added",
-                  "This note has been added to your notes",
+                  "note_added".tr,
+                  "note_added_message".tr,
                   icon: const Icon(
                     Icons.note_add_rounded,
                     size: 32.0,
@@ -38,8 +38,8 @@ class AddEditNoteIconButton extends StatelessWidget {
               } else {
                 await _addEditNoteController.editNote();
                 Get.snackbar(
-                  "Note edited",
-                  "This note has been edited",
+                  "note_edited".tr,
+                  "note_edited_message".tr,
                   icon: const Icon(
                     Icons.edit_note_rounded,
                     size: 32.0,
@@ -52,7 +52,7 @@ class AddEditNoteIconButton extends StatelessWidget {
               }
             },
             icon: const Icon(Icons.done),
-            tooltip: "Save",
+            tooltip: "save".tr,
           ),
         ),
       ),

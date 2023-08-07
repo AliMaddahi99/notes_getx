@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_getx/controllers/app_controller.dart';
-import 'package:notes_getx/controllers/note/note_controller.dart';
+import 'package:notes_getx/screens/settings.dart';
 
 class MainAppBar extends StatelessWidget {
   MainAppBar({Key? key}) : super(key: key);
 
   final AppController _appController = Get.find();
-  final NoteController _noteController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class MainAppBar extends StatelessWidget {
                         ? Icons.book_rounded
                         : Icons.book_outlined,
                   ),
-                  tooltip: "Notes",
+                  tooltip: "notes".tr,
                 ),
                 IconButton(
                   onPressed: () {
@@ -49,26 +48,15 @@ class MainAppBar extends StatelessWidget {
                         ? Icons.check_box_rounded
                         : Icons.check_box_outlined,
                   ),
-                  tooltip: "Tasks",
+                  tooltip: "tasks".tr,
                 ),
               ],
             ),
           ),
-          Obx(
-            () => _appController.pageViewId.value == 0
-                ? IconButton(
-                    onPressed: () {
-                      _noteController.isGridView.value =
-                          !_noteController.isGridView.value;
-                    },
-                    icon: _noteController.isGridView.value
-                        ? const Icon(Icons.view_list_rounded)
-                        : const Icon(Icons.grid_view_rounded),
-                    tooltip: _noteController.isGridView.value
-                        ? "List view"
-                        : "Grid view",
-                  )
-                : const SizedBox.shrink(),
+          IconButton(
+            onPressed: () => Get.to(() => Settings()),
+            icon: const Icon(Icons.settings_rounded),
+            tooltip: "settings".tr,
           ),
         ],
       ),

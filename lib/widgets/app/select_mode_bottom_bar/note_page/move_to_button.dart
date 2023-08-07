@@ -25,7 +25,7 @@ class MoveToButton extends StatelessWidget {
         );
       },
       icon: Icons.drive_file_move_rounded,
-      lable: "Move to",
+      lable: "move_to".tr,
     );
   }
 }

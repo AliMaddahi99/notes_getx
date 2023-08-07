@@ -24,8 +24,8 @@ class FolderNameTextField extends StatelessWidget {
         ..selection = TextSelection(
             baseOffset: 0,
             extentOffset: _folderController.folderTextController.text.length),
-      decoration: const InputDecoration(
-        hintText: "Please enter text...",
+      decoration: InputDecoration(
+        hintText: "folder_name_hint".tr,
       ),
       onChanged: (value) {
         _folderController.isTextFieldEmpty.value = value.isEmpty;

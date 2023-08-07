@@ -20,7 +20,7 @@ class MoveToNewFolderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return MoveToCard(
       icon: Icons.create_new_folder_rounded,
-      title: "New folder",
+      title: "new_folder".tr,
       onTap: () async {
         var selectedNotes = await NoteDatabaseService()
             .getNotesFromDb(_appController.selectedItems.toList());
@@ -31,7 +31,7 @@ class MoveToNewFolderCard extends StatelessWidget {
 
         Get.bottomSheet(
           FolderBottomSheet(
-            title: "New folder",
+            title: "new_folder".tr,
             notes: selectedNotesWithoutNull,
             fromMoveToBottomSheet: true,
             folderName: folderName,

@@ -64,7 +64,7 @@ class FolderScreen extends StatelessWidget {
               transition: Transition.cupertino,
             ),
           },
-          tooltip: "Add note",
+          tooltip: "add_note".tr,
         ),
         bottomNavigationBar: Obx(
           () => Container(

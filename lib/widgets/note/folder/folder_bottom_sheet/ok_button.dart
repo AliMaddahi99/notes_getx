@@ -54,8 +54,8 @@ class OKButton extends StatelessWidget {
                           _appController.selectedFolderNotes.clear(),
                         }
                       : Get.snackbar(
-                          "Folder exists",
-                          "This folder is already exist",
+                          "folder_exists".tr,
+                          "folder_exists_message".tr,
                           snackPosition: SnackPosition.BOTTOM,
                           animationDuration: const Duration(milliseconds: 300),
                           margin: const EdgeInsets.all(10.0),
@@ -113,7 +113,7 @@ class OKButton extends StatelessWidget {
                 }
               }
             : null,
-        buttonText: "OK",
+        buttonText: "ok".tr,
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),

@@ -31,37 +31,31 @@ class FolderScreenMainAppBar extends StatelessWidget {
     return AppBar(
       title: Text(folderName),
       actions: [
-        Obx(
-          () => _appController.pageViewId.value == 0
-              ? IconButton(
-                  onPressed: () {
-                    _noteController.isGridView.value =
-                        !_noteController.isGridView.value;
-                  },
-                  icon: _noteController.isGridView.value
-                      ? const Icon(Icons.view_list_rounded)
-                      : const Icon(Icons.grid_view_rounded),
-                  tooltip: _noteController.isGridView.value
-                      ? "List view"
-                      : "Grid view",
-                )
-              : const SizedBox.shrink(),
-        ),
         StreamBuilder<List<Note>>(
           initialData: const [],
           stream: getNotesInFolder(),
           builder: (context, snapshot) {
-            return PopupMenuButton<String>(
+            return PopupMenuButton<int>(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
-              tooltip: "Options",
+              tooltip: "options".tr,
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 1,
+                  child: Text("rename".tr),
+                ),
+                PopupMenuItem(
+                  value: 2,
+                  child: Text("delete".tr),
+                ),
+              ],
               onSelected: (value) {
                 switch (value) {
-                  case "Rename":
+                  case 1:
                     Get.bottomSheet(
                       FolderBottomSheet(
-                        title: "Rename folder",
+                        title: "rename_folder".tr,
                         notes: snapshot.data!,
                         isRename: true,
                         renameFromFolderScreen: true,
@@ -70,7 +64,7 @@ class FolderScreenMainAppBar extends StatelessWidget {
                       isDismissible: false,
                     );
                     break;
-                  case "Delete":
+                  case 2:
                     // select the folder and it's notes
                     _appController.selectedItems.clear();
                     for (var note in snapshot.data!) {
@@ -79,23 +73,19 @@ class FolderScreenMainAppBar extends StatelessWidget {
 
                     Get.bottomSheet(
                       DeleteBottomSheet(
-                        title: "Delete folder",
-                        message:
-                            "Delete ${_appController.getSelectedItemsCount("item")}?",
+                        title: "delete_folder".tr,
+                        message: "delete_item".trPluralParams("delete_items",
+                            _appController.selectedItems.length, {
+                          "item": _appController.selectedItems.length.toString()
+                        }),
+                        // message:
+                        //     "Delete ${_appController.getSelectedItemsCount("item")}?",
                         folderName: folderName,
                         deleteFromFolderScreen: true,
                       ),
                     );
                     break;
                 }
-              },
-              itemBuilder: (BuildContext context) {
-                return {"Rename", "Delete"}.map((choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
               },
             );
           },

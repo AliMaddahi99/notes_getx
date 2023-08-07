@@ -28,7 +28,7 @@ class TaskHome extends StatelessWidget {
               );
               _taskController.isAddEditTaskScreen.value = true;
             },
-            tooltip: "Add task",
+            tooltip: "add_task".tr,
           ),
         ),
       ),

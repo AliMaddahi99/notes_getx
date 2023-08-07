@@ -34,7 +34,7 @@ class CancelButton extends StatelessWidget {
           _appController.isSelectMode.value = false;
         }
       },
-      buttonText: "Cancel",
+      buttonText: "cancel".tr,
     );
   }
 }

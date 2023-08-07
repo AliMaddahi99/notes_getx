@@ -38,8 +38,8 @@ class AddEditNote extends StatelessWidget {
           ],
           title: Text(
             _addEditNoteController.args == null
-                ? "Insert your note"
-                : "Edit note",
+                ? "insert_your_note".tr
+                : "edit_note".tr,
           ),
         ),
         body: Padding(
@@ -47,12 +47,12 @@ class AddEditNote extends StatelessWidget {
           child: ListView(
             children: [
               TitleNoteTextField(
-                hintText: "Title",
+                hintText: "title_hint".tr,
                 fontSize: 24.0,
                 controller: _addEditNoteController.titleTextController,
               ),
               TitleNoteTextField(
-                hintText: "Type your note...",
+                hintText: "note_hint".tr,
                 controller: _addEditNoteController.noteTextController,
                 focusNode: _addEditNoteController.noteFocusNode,
               ),
